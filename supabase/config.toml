@@ -1,0 +1,4 @@
+project_id = "uaanrumgtafqvqonodem"
+
+[functions.fetch-scholar-publications]
+verify_jwt = false
