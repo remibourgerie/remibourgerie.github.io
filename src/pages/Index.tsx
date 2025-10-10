@@ -335,11 +335,24 @@ const Index = () => {
 
             <div className="grid md:grid-cols-[300px_1fr] gap-12 items-start">
               {/* Left Sidebar - Interactive Graph (Sticky) */}
-              <div className="sticky top-24">
-                <ResearchGraph
-                  onNodeClick={setActiveResearchNode}
-                  activeNodeId={activeResearchNode}
-                />
+              <div className="sticky top-24 space-y-6">
+                {/* Intro Text */}
+                <div>
+                  <p className="text-sm text-foreground/70 leading-relaxed">
+                    I teach computers to understand connections—whether they're social networks, molecules, or communication systems. My work combines machine learning with the messy, interconnected reality of the world around us.
+                  </p>
+                </div>
+
+                {/* Interactive Graph */}
+                <div>
+                  <ResearchGraph
+                    onNodeClick={setActiveResearchNode}
+                    activeNodeId={activeResearchNode}
+                  />
+                  <p className="text-xs text-foreground/50 text-center mt-3">
+                    Click to explore →
+                  </p>
+                </div>
               </div>
 
               {/* Right Content - Research Details (Scrollable) */}
