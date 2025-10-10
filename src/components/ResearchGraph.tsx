@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import ReactFlow, {
   Node,
   Edge,
@@ -276,13 +276,9 @@ const ResearchGraph = ({ onNodeClick, activeNodeId }: ResearchGraphProps) => {
   }, []);
 
   // Update styles when active node or hovered node changes
-  useState(() => {
+  useEffect(() => {
     updateNodeStyles(activeNodeId, hoveredNode);
-  });
-
-  // Re-run effect when activeNodeId or hoveredNode changes
-  const _ = [activeNodeId, hoveredNode]; // Dependency tracker
-  updateNodeStyles(activeNodeId, hoveredNode);
+  }, [activeNodeId, hoveredNode, updateNodeStyles]);
 
   return (
     <div className="w-full h-[600px] bg-muted/30 rounded-lg border border-border overflow-hidden">
