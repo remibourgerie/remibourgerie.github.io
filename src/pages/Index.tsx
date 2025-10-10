@@ -63,7 +63,7 @@ const Index = () => {
       
       {/* Hero Section - Side-by-Side Personal */}
       <section id="home" className="pt-24 pb-16 px-6 border-b border-border">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-[280px_1fr] gap-12 items-center">
             {/* Left: Profile Photo */}
             <div className="mx-auto md:mx-0">
@@ -136,7 +136,7 @@ const Index = () => {
 
       {/* News & Updates Section */}
       <section className="py-16 px-6 bg-muted/30">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold mb-8 text-foreground">News & Updates</h2>
 
           {newsLoading ? (
@@ -302,7 +302,7 @@ const Index = () => {
                   <h3 className="text-lg font-semibold text-foreground mb-3">Bio</h3>
                   <div className="space-y-4">
                     <p>
-                      I studied mathematics and physics in the <a href="https://en.wikipedia.org/wiki/Classe_pr%C3%A9paratoire_aux_grandes_%C3%A9coles" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Classe Préparatoire aux Grandes Écoles</a> (MP*) at Lycée Fénelon Sainte-Marie in Paris, France. Three intense years aiming for excellence. I then joined <a href="https://www.ec-lyon.fr/en" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">École Centrale de Lyon</a> in 2019, where I studied general engineering.
+                      I studied mathematics and physics in the <a href="https://en.wikipedia.org/wiki/Classe_pr%C3%A9paratoire_aux_grandes_%C3%A9coles" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Classe Préparatoire aux Grandes Écoles</a> (MP*) at Lycée Fénelon Sainte-Marie in Paris, France. I then joined <a href="https://www.ec-lyon.fr/en" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">École Centrale de Lyon</a> in 2019, where I studied general engineering.
                     </p>
 
                     <p>
