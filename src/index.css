@@ -17,36 +17,36 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 217 33% 17%;
 
-    /* Material Design Blues */
-    --primary: 207 90% 54%; /* Material Blue #2196F3 */
+    /* Indigo & Purple Theme - Distinctive ML/AI Academic */
+    --primary: 231 48% 48%; /* Indigo #3F51B5 */
     --primary-foreground: 0 0% 100%;
-    --primary-dark: 210 79% 46%; /* Deep Blue #1976D2 */
-    
+    --primary-dark: 231 48% 35%; /* Deep Indigo #283593 */
+
     --secondary: 0 0% 96%;
     --secondary-foreground: 217 33% 17%;
 
-    --muted: 210 40% 98%;
+    --muted: 231 20% 98%;
     --muted-foreground: 217 19% 50%;
 
-    --accent: 206 100% 70%; /* Light Blue #64B5F6 */
-    --accent-foreground: 217 33% 17%;
+    --accent: 262 52% 47%; /* Purple Accent #673AB7 */
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 207 90% 54%;
+    --ring: 262 52% 47%;
 
     /* Graph Theme Colors */
-    --graph-node: 207 90% 54%;
+    --graph-node: 231 48% 48%;
     --graph-edge: 220 13% 91%;
-    --graph-highlight: 206 100% 70%;
-    
+    --graph-highlight: 280 50% 60%; /* Purple highlights */
+
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(207 90% 54%), hsl(210 79% 46%));
-    --gradient-hero: linear-gradient(135deg, hsl(207 90% 54% / 0.05), hsl(210 79% 46% / 0.1));
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(220 13% 97%));
+    --gradient-primary: linear-gradient(135deg, hsl(231 48% 48%), hsl(262 52% 47%));
+    --gradient-hero: linear-gradient(135deg, hsl(231 48% 48% / 0.05), hsl(262 52% 47% / 0.1));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(231 20% 97%));
     
     /* Shadows */
     --shadow-material-1: 0 2px 4px hsl(217 33% 17% / 0.1);
@@ -58,7 +58,7 @@ All colors MUST be HSL.
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-    --radius: 0.5rem;
+    --radius: 0.75rem; /* Slightly more rounded for friendlier feel */
 
     --sidebar-background: 0 0% 98%;
 
@@ -123,5 +123,107 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-size: 1.0625rem; /* 17px - slightly larger for better readability */
+    line-height: 1.7; /* Generous line height for academic content */
+    letter-spacing: -0.011em; /* Subtle tightening for Inter */
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11'; /* Inter's best alternative characters */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em; /* Tighter for headings */
+    font-feature-settings: 'ss01'; /* Inter stylistic set for headings */
+  }
+
+  h1 {
+    font-weight: 800;
+    letter-spacing: -0.025em;
+  }
+
+  h2 {
+    font-weight: 700;
+  }
+
+  /* Improve paragraph spacing */
+  p {
+    margin-bottom: 1em;
+  }
+
+  /* Better link styling */
+  a {
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+
+  /* Ensure HTML links in content are styled properly */
+  .prose-a\:text-primary a {
+    @apply text-primary;
+  }
+
+  .prose-a\:hover\:underline a:hover {
+    @apply underline;
+  }
+
+  /* Code and technical text */
+  code, pre {
+    font-feature-settings: normal; /* Disable ligatures in code */
+  }
+}
+
+/* Additional style enhancements */
+@layer components {
+  /* Improve button styles */
+  .btn-primary {
+    @apply rounded-xl; /* More rounded than default */
+  }
+
+  /* Better card hover effects */
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Improved focus states for accessibility */
+  button:focus-visible,
+  a:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  /* Better badge spacing */
+  .badge-group {
+    @apply flex flex-wrap gap-2;
+  }
+
+  /* Smoother section transitions */
+  section {
+    scroll-margin-top: 80px; /* Account for fixed header */
+  }
+
+  /* Coffee cup shake animation */
+  @keyframes coffee-shake {
+    0%, 100% { transform: rotate(0deg); }
+    10% { transform: rotate(-10deg); }
+    20% { transform: rotate(10deg); }
+    30% { transform: rotate(-10deg); }
+    40% { transform: rotate(10deg); }
+    50% { transform: rotate(-5deg); }
+    60% { transform: rotate(5deg); }
+    70% { transform: rotate(0deg); }
+  }
+
+  .coffee-icon {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+
+  /* Handle both direct button and asChild pattern */
+  .coffee-button:hover .coffee-icon,
+  .coffee-button a:hover .coffee-icon {
+    animation: coffee-shake 0.8s ease-in-out;
   }
 }

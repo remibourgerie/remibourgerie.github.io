@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import ResearchPaper from '@/components/ResearchPaper';
-import GoogleScholarIntegration from '@/components/GoogleScholarIntegration';
-import { Button } from './ui/button';
 import { RefreshCw } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
@@ -17,13 +15,19 @@ interface Publication {
   pdfUrl?: string;
   posterUrl?: string;
   codeUrl?: string;
+  proceedingUrl?: string;
+  presentationUrl?: string;
+  conferenceUrl?: string;
+  videoUrl?: string;
+  illustrationUrl?: string;
   tags: string[];
+  publicationType?: string;
 }
 
 const PublicationManager: React.FC = () => {
   const [publications, setPublications] = useState<Publication[]>([]);
-  const [showGoogleScholar, setShowGoogleScholar] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [selectedFilter, setSelectedFilter] = useState<string>('All');
   const { toast } = useToast();
 
   useEffect(() => {
@@ -51,7 +55,13 @@ const PublicationManager: React.FC = () => {
         pdfUrl: pub.pdf_url || undefined,
         posterUrl: pub.poster_url || undefined,
         codeUrl: pub.code_url || undefined,
+        proceedingUrl: pub.proceeding_url || undefined,
+        presentationUrl: pub.presentation_url || undefined,
+        conferenceUrl: pub.conference_url || undefined,
+        videoUrl: pub.video_url || undefined,
+        illustrationUrl: pub.illustration_url || undefined,
         tags: pub.tags || [],
+        publicationType: pub.publication_type || undefined,
       }));
 
       setPublications(formattedPublications);
@@ -67,30 +77,16 @@ const PublicationManager: React.FC = () => {
     }
   };
 
-  const handlePublicationsUpdate = (newPublications: Publication[]) => {
-    // Merge with existing publications, avoiding duplicates
-    const merged = [...publications];
-    
-    newPublications.forEach(newPub => {
-      const exists = merged.some(existing => 
-        existing.title.toLowerCase() === newPub.title.toLowerCase()
-      );
-      
-      if (!exists) {
-        merged.push({
-          ...newPub,
-          // Add placeholder URLs for consistent display
-          pdfUrl: newPub.url ? `${newPub.url}&output=pdf` : undefined,
-          posterUrl: undefined,
-          codeUrl: undefined
-        });
-      }
-    });
-    
-    // Sort by year (most recent first)
-    merged.sort((a, b) => b.year - a.year);
-    setPublications(merged);
-  };
+  const filterTypes = ['All', 'Journal', 'Conference', 'Workshop', 'Others'];
+
+  const filteredPublications = publications.filter(paper => {
+    if (selectedFilter === 'All') return true;
+    if (selectedFilter === 'Others') {
+      return !paper.publicationType ||
+             !['Journal', 'Conference', 'Workshop'].includes(paper.publicationType);
+    }
+    return paper.publicationType === selectedFilter;
+  });
 
   if (loading) {
     return (
@@ -104,32 +100,30 @@ const PublicationManager: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center mb-6">
-        <h3 className="text-2xl font-semibold text-foreground">Publications</h3>
-        <Button
-          variant="outline"
-          onClick={() => setShowGoogleScholar(!showGoogleScholar)}
-          className="flex items-center gap-2"
-        >
-          <RefreshCw className="w-4 h-4" />
-          {showGoogleScholar ? 'Hide' : 'Update from'} Google Scholar
-        </Button>
+      {/* Filter buttons */}
+      <div className="flex flex-wrap gap-3 pb-4 border-b border-border/50">
+        {filterTypes.map(type => (
+          <button
+            key={type}
+            onClick={() => setSelectedFilter(type)}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+              selectedFilter === type
+                ? 'bg-primary text-primary-foreground shadow-md'
+                : 'bg-secondary/50 text-foreground hover:bg-secondary'
+            }`}
+          >
+            {type}
+          </button>
+        ))}
       </div>
 
-      {showGoogleScholar && (
-        <div className="mb-6">
-          <GoogleScholarIntegration 
-            onPublicationsUpdate={handlePublicationsUpdate}
-            currentPublications={publications}
-          />
-        </div>
-      )}
-
-      <div className="grid gap-6">
-        {publications.length === 0 ? (
-          <p className="text-center text-muted-foreground py-8">No publications found.</p>
-        ) : (
-          publications.map((paper, index) => (
+      {/* Publications list */}
+      {filteredPublications.length === 0 ? (
+        <p className="text-center text-muted-foreground py-8">
+          No publications found {selectedFilter !== 'All' && `for type "${selectedFilter}"`}.
+        </p>
+      ) : (
+        filteredPublications.map((paper, index) => (
             <ResearchPaper
               key={index}
               title={paper.title}
@@ -142,12 +136,17 @@ const PublicationManager: React.FC = () => {
               pdfUrl={paper.pdfUrl}
               posterUrl={paper.posterUrl}
               codeUrl={paper.codeUrl}
+              proceedingUrl={paper.proceedingUrl}
+              presentationUrl={paper.presentationUrl}
+              conferenceUrl={paper.conferenceUrl}
+              videoUrl={paper.videoUrl}
+              illustrationUrl={paper.illustrationUrl}
+              publicationType={paper.publicationType}
               tags={paper.tags}
               delay={index * 100}
             />
           ))
         )}
-      </div>
     </div>
   );
 };

@@ -31,8 +31,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection = 'home' }) => {
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About Me' },
     { id: 'research', label: 'Research' },
-    { id: 'publications', label: 'Publications' },
-    { id: 'cv', label: 'CV' }
+    { id: 'publications', label: 'Publications' }
   ];
 
   return (
@@ -48,7 +47,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection = 'home' }) => {
           {/* Logo/Name */}
           <button
             onClick={() => scrollToSection('home')}
-            className="text-xl font-bold text-primary hover:text-primary-dark transition-colors"
+            className="text-xl font-bold text-foreground hover:text-primary transition-colors"
           >
             Rémi Bourgerie
           </button>
