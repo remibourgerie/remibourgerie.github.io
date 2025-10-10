@@ -333,7 +333,7 @@ const Index = () => {
           >
             <h2 className="text-4xl font-bold mb-12 text-foreground">About my research</h2>
 
-            <div className="grid md:grid-cols-[400px_1fr] gap-12 items-start">
+            <div className="grid md:grid-cols-[300px_1fr] gap-12 items-start">
               {/* Left Sidebar - Interactive Graph (Sticky) */}
               <div className="sticky top-24">
                 <ResearchGraph
