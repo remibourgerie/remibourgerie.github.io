@@ -20,8 +20,8 @@ const ResearchContentPanel = ({ activeNodeId, onNavigate }: ResearchContentPanel
 
   const Icon = node.icon;
 
-  // Get navigation order
-  const nodeOrder = ['overview', 'graph-ml', 'network-science', 'federated-learning', 'applications'];
+  // Get navigation order (only 4 nodes now)
+  const nodeOrder = ['overview', 'graph-ml', 'network-science', 'federated-learning'];
   const currentIndex = nodeOrder.indexOf(activeNodeId);
   const prevNode = currentIndex > 0 ? nodeOrder[currentIndex - 1] : null;
   const nextNode = currentIndex < nodeOrder.length - 1 ? nodeOrder[currentIndex + 1] : null;

@@ -1,12 +1,19 @@
-import { Brain, Network, Users, Target, Compass } from 'lucide-react';
+import { Brain, Network, Users, Compass } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
+
+export interface GraphPosition {
+  x: number;
+  y: number;
+}
 
 export interface ResearchNode {
   id: string;
   title: string;
   tagline: string;
   icon: LucideIcon;
-  category: 'overview' | 'core' | 'application';
+  category: 'overview' | 'core';
+  isCenter?: boolean;
+  position: GraphPosition;
   content: {
     paragraphs: JSX.Element[];
     personalInsight?: JSX.Element;
@@ -27,6 +34,8 @@ export const researchNodes: Record<string, ResearchNode> = {
     tagline: 'Networked Intelligence',
     icon: Compass,
     category: 'overview',
+    isCenter: true,
+    position: { x: 400, y: 250 },
     content: {
       paragraphs: [
         <>
@@ -45,6 +54,7 @@ export const researchNodes: Record<string, ResearchNode> = {
     tagline: 'When learning aided by relation data becomes non trivial',
     icon: Brain,
     category: 'core',
+    position: { x: 400, y: 50 },
     content: {
       paragraphs: [
         <>
@@ -79,6 +89,7 @@ export const researchNodes: Record<string, ResearchNode> = {
     tagline: 'Why Network Shape Matters?',
     icon: Network,
     category: 'core',
+    position: { x: 150, y: 350 },
     content: {
       paragraphs: [
         <>
@@ -105,6 +116,7 @@ export const researchNodes: Record<string, ResearchNode> = {
     tagline: 'Learning Together, Without Sharing Everything',
     icon: Users,
     category: 'core',
+    position: { x: 650, y: 350 },
     content: {
       paragraphs: [
         <>
@@ -127,92 +139,17 @@ export const researchNodes: Record<string, ResearchNode> = {
       applications: 'Privacy-preserving healthcare AI, smartphone keyboard predictions that don\'t spy on you, collaborative fraud detection across banks, or training models across IoT devices without draining their batteries.',
     },
   },
-
-  applications: {
-    id: 'applications',
-    title: 'Real-World Applications',
-    tagline: 'Where Theory Meets Practice',
-    icon: Target,
-    category: 'application',
-    content: {
-      paragraphs: [
-        <>
-          My research addresses challenges across multiple domains where networks and machine learning intersect:
-        </>,
-        <>
-          <div className="space-y-6 mt-6">
-            <div>
-              <h4 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
-                🏥 Healthcare & Medicine
-              </h4>
-              <ul className="list-disc list-inside space-y-1 text-foreground/80 ml-4">
-                <li>Privacy-preserving healthcare AI through federated learning</li>
-                <li>Drug discovery by understanding molecular graph structures</li>
-                <li>Cancer detection with collaborative learning across hospitals</li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
-                🏢 Industry & Systems
-              </h4>
-              <ul className="list-disc list-inside space-y-1 text-foreground/80 ml-4">
-                <li>Telecommunications infrastructure optimization</li>
-                <li>Fraud detection in financial networks</li>
-                <li>Supply chain vulnerability analysis</li>
-                <li>Power grid resilience and optimization</li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
-                📱 Technology & Privacy
-              </h4>
-              <ul className="list-disc list-inside space-y-1 text-foreground/80 ml-4">
-                <li>Privacy-preserving smartphone features</li>
-                <li>Social network recommendations</li>
-                <li>IoT device collaboration without data sharing</li>
-                <li>Collaborative fraud detection across organizations</li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
-                🌍 Society & Public Good
-              </h4>
-              <ul className="list-disc list-inside space-y-1 text-foreground/80 ml-4">
-                <li>Epidemic spread prediction and intervention design</li>
-                <li>Traffic pattern optimization in transportation systems</li>
-                <li>Understanding information flow in social networks</li>
-              </ul>
-            </div>
-          </div>
-        </>,
-      ],
-    },
-  },
 };
 
 // Graph structure: nodes and edges
 export interface GraphEdge {
   source: string;
   target: string;
-  label?: string;
 }
 
 export const researchEdges: GraphEdge[] = [
-  // Overview connects to all main topics
-  { source: 'overview', target: 'graph-ml', label: 'Core methodology' },
-  { source: 'overview', target: 'network-science', label: 'Theoretical foundation' },
-  { source: 'overview', target: 'federated-learning', label: 'Privacy-preserving approach' },
-
-  // Main topics interconnect
-  { source: 'graph-ml', target: 'network-science', label: 'Structure shapes learning' },
-  { source: 'graph-ml', target: 'federated-learning', label: 'Distributed graph learning' },
-  { source: 'network-science', target: 'federated-learning', label: 'Topology affects collaboration' },
-
-  // All lead to applications
-  { source: 'graph-ml', target: 'applications', label: 'Enables' },
-  { source: 'network-science', target: 'applications', label: 'Enables' },
-  { source: 'federated-learning', target: 'applications', label: 'Enables' },
+  // Center connects to all main topics
+  { source: 'overview', target: 'graph-ml' },
+  { source: 'overview', target: 'network-science' },
+  { source: 'overview', target: 'federated-learning' },
 ];
