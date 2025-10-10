@@ -1,11 +1,14 @@
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Download, Github, Linkedin, Mail, BookOpen, Briefcase, Brain, Users, Network, ArrowDown, MapPin, GraduationCap, History, Coffee } from 'lucide-react';
+import { Download, Github, Linkedin, Mail, BookOpen, Briefcase, ArrowDown, MapPin, GraduationCap, History, Coffee } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useGithubProjects } from '@/hooks/useGithubProjects';
 import { useNews } from '@/hooks/useNews';
 import Header from '@/components/Header';
 import PublicationManager from '@/components/PublicationManager';
 import ProjectCard from '@/components/ProjectCard';
+import ResearchGraph from '@/components/ResearchGraph';
+import ResearchContentPanel from '@/components/ResearchContentPanel';
 import profileImage from '@/assets/profile.jpg';
 import { getCoffeeChatMailto, CONTACT_CONFIG } from '@/config/contact';
 
@@ -13,12 +16,13 @@ import { getCoffeeChatMailto, CONTACT_CONFIG } from '@/config/contact';
 const Index = () => {
   const heroRef = useScrollAnimation();
   const aboutRef = useScrollAnimation();
-  const researchArea1Ref = useScrollAnimation();
-  const researchArea2Ref = useScrollAnimation();
-  const researchArea3Ref = useScrollAnimation();
+  const researchRef = useScrollAnimation();
   const papersRef = useScrollAnimation();
   const projectsRef = useScrollAnimation();
   const postsRef = useScrollAnimation();
+
+  // State for interactive research graph
+  const [activeResearchNode, setActiveResearchNode] = useState('overview');
 
 
   // Fetch projects from GitHub API via Supabase
@@ -316,13 +320,13 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Research Section - Vertical Timeline */}
+      {/* Research Section - Interactive Graph */}
       <section id="research" className="py-20 px-6 bg-muted/30">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div
-            ref={aboutRef.ref}
+            ref={researchRef.ref}
             className={`text-center mb-16 transition-all duration-700 ease-out ${
-              aboutRef.isVisible
+              researchRef.isVisible
                 ? 'opacity-100 translate-y-0'
                 : 'opacity-0 translate-y-8'
             }`}
@@ -333,176 +337,20 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="space-y-8 relative">
-            {/* Vertical timeline line */}
-            <div className="absolute left-[29px] top-12 bottom-12 w-0.5 bg-primary/20 hidden md:block" />
+          {/* Interactive Graph */}
+          <div className="mb-12">
+            <ResearchGraph
+              onNodeClick={setActiveResearchNode}
+              activeNodeId={activeResearchNode}
+            />
+          </div>
 
-            {/* Research Area 1: ML on Graphs */}
-            <div
-              ref={researchArea1Ref.ref}
-              className={`relative transition-all duration-700 ease-out ${
-                researchArea1Ref.isVisible
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-8'
-              }`}
-            >
-              <div className="bg-card border border-border rounded-lg p-8 shadow-sm hover:shadow-md transition-all duration-300">
-                <div className="flex items-start gap-6 mb-6">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 relative z-10 ring-4 ring-background">
-                    <Brain className="w-6 h-6 text-primary" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-foreground mb-2">
-                      Machine Learning on Graph-Structured Data
-                    </h3>
-                    <p className="text-base text-foreground/60">
-                      When learning aided by relation data becomes non trivial
-                    </p>
-                  </div>
-                </div>
-
-                <div className="space-y-4 text-foreground/80 leading-relaxed">
-                  <p>
-                    Think about your friends on social media. You know people who know people, forming a web of relationships. Or consider how molecules work—atoms bonded together in specific patterns that determine whether something is medicine or poison. These are <strong>graphs</strong>: data where connections matter as much as the data points themselves.
-                  </p>
-
-                  <p>
-                    The challenge? Most AI expects neat rows and columns, like a spreadsheet. But the real world is messy and interconnected. My research develops new ways for machines to learn from this interconnected reality—teaching them to understand not just individual pieces, but how everything fits together.
-                  </p>
-
-                  {/* Personal insight */}
-                  <div className="bg-primary/5 border-l-4 border-primary/40 p-5 rounded-r-lg my-6">
-                    <p className="text-foreground/80 italic leading-relaxed">
-                      "What fascinates me is that current approaches, are based on the mechanism of <emp>message passing</emp> hit a fundamental wall. Nodes can only 'see' information from immediate neighbors, like trying to understand a city by only talking to people next door. I'm working on methods that let AI grasp both local patterns and global structure simultaneously."
-                    </p>
-                  </div>
-
-                  <p>
-                    <strong>Where this matters:</strong> Discovering new drugs by understanding molecular structures, detecting fraud in financial networks, recommending content based on social connections, or predicting traffic patterns in transportation systems.
-                  </p>
-
-                  {/* GLOW Community Link */}
-                  <div className="bg-accent/5 border border-accent/20 rounded-lg p-5 mt-6">
-                    <p className="text-foreground/80 mb-3">
-                      💡 <strong>Interested in graph learning?</strong> Join our weekly reading group where researchers discuss the latest papers and ideas in this field.
-                    </p>
-                    <a
-                      href="https://sites.google.com/view/graph-learning-on-weds/home-page?authuser=0"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-primary hover:underline font-medium"
-                    >
-                      <Users className="w-4 h-4" />
-                      Join GLOW - Graph Learning on Wednesdays →
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Research Area 2: Network Science & Topology */}
-            <div
-              ref={researchArea2Ref.ref}
-              className={`relative transition-all duration-700 ease-out ${
-                researchArea2Ref.isVisible
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-8'
-              }`}
-              style={{ transitionDelay: '150ms' }}
-            >
-              <div className="bg-card border border-border rounded-lg p-8 shadow-sm hover:shadow-md transition-all duration-300">
-                <div className="flex items-start gap-6 mb-6">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 relative z-10 ring-4 ring-background">
-                    <Network className="w-6 h-6 text-primary" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-foreground mb-2">
-                      Network Science & Topology
-                    </h3>
-                    <p className="text-base text-foreground/60">
-                      Why Network Shape Matters?
-                    </p>
-                  </div>
-                </div>
-
-                <div className="space-y-4 text-foreground/80 leading-relaxed">
-                  <p>
-                    Not all networks are created equal. Compare a highway system (few main routes, many branches) to the internet (highly interconnected mesh). Their different shapes fundamentally change how information, diseases, or even ideas flow through them. This is what network science studies: how structure shapes behavior.
-                  </p>
-
-                  <p>
-                    My research investigates how these structural properties affect machine learning. Does your social network's clustering make recommendations harder or easier? Does the way telecommunication networks are organized impact how well AI can detect anomalies? These aren't just theoretical questions—they determine whether our methods work in practice.
-                  </p>
-
-                  {/* Personal insight from Ericsson */}
-                  <div className="bg-primary/5 border-l-4 border-accent/40 p-5 rounded-r-lg my-6">
-                    <p className="text-foreground/80 italic leading-relaxed">
-                      "Working at Ericsson taught me that real networks rarely behave like the clean graphs in textbooks. They're messy, dynamic, and full of hidden patterns. A method that works beautifully on toy data can completely fail on real infrastructure—and understanding <em>why</em> is what drives this research."
-                    </p>
-                  </div>
-
-                  <p>
-                    I develop methods that embrace this messiness rather than fight it. By understanding how network topology influences learning dynamics, we can design AI systems that are more robust, efficient, and practical for real-world deployment.
-                  </p>
-
-                  <p>
-                    <strong>Where this matters:</strong> Optimizing telecommunications infrastructure, predicting epidemic spread and designing interventions, understanding supply chain vulnerabilities, or improving power grid resilience.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Research Area 3: Collaborative Learning */}
-            <div
-              ref={researchArea3Ref.ref}
-              className={`relative transition-all duration-700 ease-out ${
-                researchArea3Ref.isVisible
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-8'
-              }`}
-              style={{ transitionDelay: '300ms' }}
-            >
-              <div className="bg-card border border-border rounded-lg p-8 shadow-sm hover:shadow-md transition-all duration-300">
-                <div className="flex items-start gap-6 mb-6">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 relative z-10 ring-4 ring-background">
-                    <Users className="w-6 h-6 text-primary" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-foreground mb-2">
-                      Collaborative & Federated Learning
-                    </h3>
-                    <p className="text-base text-foreground/60">
-                      Learning Together, Without Sharing Everything
-                    </p>
-                  </div>
-                </div>
-
-                <div className="space-y-4 text-foreground/80 leading-relaxed">
-                  <p>
-                    Imagine three hospitals that want to build a better cancer detection AI. Each has valuable patient data, but they can't legally share it with each other. How do they collaborate? This is the puzzle I work on: teaching machines to learn together while keeping sensitive data private.
-                  </p>
-
-                  {/* Key challenge callout */}
-                  <div className="bg-gradient-to-r from-primary/5 to-accent/5 border border-primary/20 rounded-lg p-5 my-6">
-                    <p className="text-foreground/80 leading-relaxed">
-                      <span className="text-xl mr-2">💡</span> <strong>The Challenge:</strong> How do we train powerful AI models when data can't leave its source? And how does the network structure between these sources affect learning?
-                    </p>
-                  </div>
-
-                  <p>
-                    My research explores <strong>federated learning on graphs</strong>—using the network topology itself as a resource. Instead of sending all data to one place, I develop methods where nodes (hospitals, phones, organizations) share insights while keeping their data local. The connections between them become part of the solution.
-                  </p>
-
-                  <p>
-                    During my master's thesis at <strong>Ericsson's AI Accelerator</strong>, I discovered how messy real-world collaboration can be: some nodes have tons of data, others have little; some are well-connected, others isolated. Making this work efficiently is both a technical and a design challenge.
-                  </p>
-
-                  <p>
-                    <strong>Where this matters:</strong> Privacy-preserving healthcare AI, smartphone keyboard predictions that don't spy on you, collaborative fraud detection across banks, or training models across IoT devices without draining their batteries.
-                  </p>
-                </div>
-              </div>
-            </div>
+          {/* Content Panel */}
+          <div className="bg-card border border-border rounded-lg p-8 shadow-sm">
+            <ResearchContentPanel
+              activeNodeId={activeResearchNode}
+              onNavigate={setActiveResearchNode}
+            />
           </div>
         </div>
       </section>
