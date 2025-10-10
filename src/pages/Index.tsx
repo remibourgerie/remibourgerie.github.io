@@ -366,21 +366,22 @@ const Index = () => {
             }`}
           >
             {/* Header */}
-            <div className="mb-6">
-              <h2 className="text-4xl font-bold text-foreground mb-3">Publications</h2>
+            <div className="mb-8">
+              <div className="flex items-center justify-between mb-3">
+                <h2 className="text-4xl font-bold text-foreground">Publications</h2>
+                <a
+                  href="https://scholar.google.com/citations?user=T3J6BMcAAAAJ&hl=en"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline flex items-center gap-2 text-sm font-medium"
+                >
+                  <BookOpen className="w-4 h-4" />
+                  Google Scholar →
+                </a>
+              </div>
               <p className="text-foreground/80 leading-relaxed">
                 Here you can find the publications related to my research in peer-reviewed venues.
               </p>
-            </div>
-
-            {/* Google Scholar Button */}
-            <div className="mb-8">
-              <Button size="lg" className="bg-primary hover:bg-primary-dark shadow-material-2" asChild>
-                <a href="https://scholar.google.com/citations?user=T3J6BMcAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">
-                  <BookOpen className="w-4 h-4 mr-2" />
-                  Follow me on Scholar
-                </a>
-              </Button>
             </div>
 
             {/* Publication List - Full Width */}
@@ -406,7 +407,7 @@ const Index = () => {
                 <div>
                   <h2 className="text-4xl font-bold mb-6 text-foreground">Open Source</h2>
                   <p className="text-foreground/80 leading-relaxed">
-                    Tools that I have developed to advance research and make it more accessible to the community. Feel free to star them.
+                    Tools that I have developed to advance research and make it more accessible to the community. Feel free to use them and star them if they were useful to you.
                   </p>
                 </div>
               </div>
