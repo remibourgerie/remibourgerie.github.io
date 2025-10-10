@@ -167,7 +167,7 @@ const ResearchGraph = ({ onNodeClick, activeNodeId }: ResearchGraphProps) => {
   }, [activeNodeId, hoveredNode, updateNodeStyles]);
 
   return (
-    <div className="w-full h-[500px] bg-muted/30 rounded-lg border border-border overflow-hidden">
+    <div className="w-full h-[450px] bg-muted/30 rounded-lg border border-border overflow-hidden">
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -179,13 +179,12 @@ const ResearchGraph = ({ onNodeClick, activeNodeId }: ResearchGraphProps) => {
         fitView
         minZoom={0.5}
         maxZoom={1.5}
-        defaultViewport={{ x: 0, y: 0, zoom: 1 }}
         nodesDraggable={false}
         nodesConnectable={false}
         elementsSelectable={false}
         zoomOnScroll={false}
         panOnScroll={false}
-        panOnDrag={true}
+        panOnDrag={false}
       >
         <Background variant={BackgroundVariant.Dots} gap={16} size={1} color="hsl(var(--primary) / 0.1)" />
         <Controls showInteractive={false} />

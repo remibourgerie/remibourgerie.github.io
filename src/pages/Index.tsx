@@ -322,35 +322,34 @@ const Index = () => {
 
       {/* Research Section - Interactive Graph */}
       <section id="research" className="py-20 px-6 bg-muted/30">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div
             ref={researchRef.ref}
-            className={`text-center mb-16 transition-all duration-700 ease-out ${
+            className={`transition-all duration-700 ease-out ${
               researchRef.isVisible
                 ? 'opacity-100 translate-y-0'
                 : 'opacity-0 translate-y-8'
             }`}
           >
-            <h2 className="text-4xl font-bold mb-6 text-foreground">About my research</h2>
-            <p className="text-lg text-foreground/70 max-w-3xl mx-auto leading-relaxed">
-              I teach computers to understand connections—whether they're social networks, molecules, or communication systems. My work combines machine learning with the messy, interconnected reality of the world around us.
-            </p>
-          </div>
+            <h2 className="text-4xl font-bold mb-12 text-foreground">About my research</h2>
 
-          {/* Interactive Graph */}
-          <div className="mb-12">
-            <ResearchGraph
-              onNodeClick={setActiveResearchNode}
-              activeNodeId={activeResearchNode}
-            />
-          </div>
+            <div className="grid md:grid-cols-[400px_1fr] gap-12 items-start">
+              {/* Left Sidebar - Interactive Graph (Sticky) */}
+              <div className="sticky top-24">
+                <ResearchGraph
+                  onNodeClick={setActiveResearchNode}
+                  activeNodeId={activeResearchNode}
+                />
+              </div>
 
-          {/* Content Panel */}
-          <div className="bg-card border border-border rounded-lg p-8 shadow-sm">
-            <ResearchContentPanel
-              activeNodeId={activeResearchNode}
-              onNavigate={setActiveResearchNode}
-            />
+              {/* Right Content - Research Details (Scrollable) */}
+              <div className="bg-card border border-border rounded-lg p-8 shadow-sm">
+                <ResearchContentPanel
+                  activeNodeId={activeResearchNode}
+                  onNavigate={setActiveResearchNode}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
