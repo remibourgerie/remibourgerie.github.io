@@ -5,6 +5,7 @@ import { ExternalLink, Users, Calendar, FileText, Image, Code, BookOpen, Video, 
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 interface ResearchPaperProps {
+  id?: string;
   title: string;
   authors: string[];
   journal: string;
@@ -26,6 +27,7 @@ interface ResearchPaperProps {
 }
 
 const ResearchPaper: React.FC<ResearchPaperProps> = ({
+  id,
   title,
   authors,
   journal,
@@ -50,10 +52,11 @@ const ResearchPaper: React.FC<ResearchPaperProps> = ({
 
   return (
     <div
+      id={id ? `pub-${id}` : undefined}
       ref={ref}
       className={`transition-all duration-700 ease-out ${
-        isVisible 
-          ? 'opacity-100 translate-y-0' 
+        isVisible
+          ? 'opacity-100 translate-y-0'
           : 'opacity-0 translate-y-8'
       }`}
       style={{ transitionDelay: `${delay}ms` }}

@@ -17,7 +17,7 @@ export interface ResearchNode {
   content: {
     paragraphs: JSX.Element[];
     personalInsight?: JSX.Element;
-    applications?: string;
+    applications?: string | string[];
     communityLinks?: Array<{
       title: string;
       description: string;
@@ -39,11 +39,16 @@ export const researchNodes: Record<string, ResearchNode> = {
     content: {
       paragraphs: [
         <>
-          I teach computers to understand connections—whether they're social networks, molecules, or communication systems. My work combines machine learning with the messy, interconnected reality of the world around us.
+          My research lies at the intersection of Machine Learning, graph, and networks, building systems that learn from connected data.
         </>,
-        <>
-          <strong>Click any research area to explore in depth.</strong>
-        </>,
+      ],
+      communityLinks: [
+        {
+          title: 'Join GLOW - Graph Learning on Wednesdays',
+          description: 'Interested in graph learning? Join our weekly reading group where researchers discuss the latest papers and ideas in this field.',
+          url: 'https://sites.google.com/view/graph-learning-on-weds/home-page?authuser=0',
+          icon: Users,
+        },
       ],
     },
   },
@@ -51,7 +56,7 @@ export const researchNodes: Record<string, ResearchNode> = {
   'graph-ml': {
     id: 'graph-ml',
     title: 'Machine Learning on Graph-Structured Data',
-    tagline: 'When learning aided by relation data becomes non trivial',
+    tagline: 'Where relations matter as much as data', // When learning meets relational structure. Learning in the presence of structure and dependency. Understanding the world through its connections.
     icon: Brain,
     category: 'core',
     position: { x: 400, y: 50 },
@@ -65,20 +70,17 @@ export const researchNodes: Record<string, ResearchNode> = {
         </>,
       ],
       personalInsight: (
-        <div className="bg-primary/5 border-l-4 border-primary/40 p-5 rounded-r-lg my-6">
-          <p className="text-foreground/80 italic leading-relaxed">
+        <blockquote className="border-l-2 border-primary/30 pl-4 my-4">
+          <p className="text-foreground/70 italic text-sm leading-relaxed">
             "What fascinates me is that current approaches, are based on the mechanism of <em>message passing</em> hit a fundamental wall. Nodes can only 'see' information from immediate neighbors, like trying to understand a city by only talking to people next door. I'm working on methods that let AI grasp both local patterns and global structure simultaneously."
           </p>
-        </div>
+        </blockquote>
       ),
-      applications: 'Discovering new drugs by understanding molecular structures, detecting fraud in financial networks, recommending content based on social connections, or predicting traffic patterns in transportation systems.',
-      communityLinks: [
-        {
-          title: 'Join GLOW - Graph Learning on Wednesdays',
-          description: '💡 Interested in graph learning? Join our weekly reading group where researchers discuss the latest papers and ideas in this field.',
-          url: 'https://sites.google.com/view/graph-learning-on-weds/home-page?authuser=0',
-          icon: Users,
-        },
+      applications: [
+        'Drug discovery through molecular structure analysis',
+        'Fraud detection in financial networks',
+        'Social network-based content recommendation',
+        'Traffic pattern prediction in transportation systems'
       ],
     },
   },
@@ -100,13 +102,18 @@ export const researchNodes: Record<string, ResearchNode> = {
         </>,
       ],
       personalInsight: (
-        <div className="bg-primary/5 border-l-4 border-accent/40 p-5 rounded-r-lg my-6">
-          <p className="text-foreground/80 italic leading-relaxed">
+        <blockquote className="border-l-2 border-primary/30 pl-4 my-4">
+          <p className="text-foreground/70 italic text-sm leading-relaxed">
             "Working at Ericsson taught me that real networks rarely behave like the clean graphs in textbooks. They're messy, dynamic, and full of hidden patterns. A method that works beautifully on toy data can completely fail on real infrastructure—and understanding <em>why</em> is what drives this research."
           </p>
-        </div>
+        </blockquote>
       ),
-      applications: 'Optimizing telecommunications infrastructure, predicting epidemic spread and designing interventions, understanding supply chain vulnerabilities, or improving power grid resilience.',
+      applications: [
+        'Telecommunications infrastructure optimization',
+        'Epidemic spread prediction and intervention design',
+        'Supply chain vulnerability analysis',
+        'Power grid resilience improvement'
+      ],
     },
   },
 
@@ -130,13 +137,18 @@ export const researchNodes: Record<string, ResearchNode> = {
         </>,
       ],
       personalInsight: (
-        <div className="bg-gradient-to-r from-primary/5 to-accent/5 border border-primary/20 rounded-lg p-5 my-6">
-          <p className="text-foreground/80 leading-relaxed">
-            <span className="text-xl mr-2">💡</span> <strong>The Challenge:</strong> How do we train powerful AI models when data can't leave its source? And how does the network structure between these sources affect learning?
+        <blockquote className="border-l-2 border-primary/30 pl-4 my-4">
+          <p className="text-foreground/70 italic text-sm leading-relaxed">
+            "The challenge: How do we train powerful AI models when data can't leave its source? And how does the network structure between these sources affect learning? During my thesis at Ericsson, I saw this tension firsthand—powerful algorithms that couldn't work because data privacy walls made collaboration impossible."
           </p>
-        </div>
+        </blockquote>
       ),
-      applications: 'Privacy-preserving healthcare AI, smartphone keyboard predictions that don\'t spy on you, collaborative fraud detection across banks, or training models across IoT devices without draining their batteries.',
+      applications: [
+        'Privacy-preserving healthcare AI',
+        'Private smartphone keyboard predictions',
+        'Collaborative fraud detection across banks',
+        'Energy-efficient IoT device training'
+      ],
     },
   },
 };

@@ -4,7 +4,8 @@ import { RefreshCw } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
-interface Publication {
+export interface Publication {
+  id?: string;
   title: string;
   authors: string[];
   journal: string;
@@ -22,6 +23,7 @@ interface Publication {
   illustrationUrl?: string;
   tags: string[];
   publicationType?: string;
+  researchAreas?: string[];
 }
 
 const PublicationManager: React.FC = () => {
@@ -45,6 +47,7 @@ const PublicationManager: React.FC = () => {
       if (error) throw error;
 
       const formattedPublications: Publication[] = (data || []).map(pub => ({
+        id: pub.id,
         title: pub.title,
         authors: pub.authors,
         journal: pub.journal,
@@ -62,6 +65,7 @@ const PublicationManager: React.FC = () => {
         illustrationUrl: pub.illustration_url || undefined,
         tags: pub.tags || [],
         publicationType: pub.publication_type || undefined,
+        researchAreas: pub.research_areas || [],
       }));
 
       setPublications(formattedPublications);
@@ -126,6 +130,7 @@ const PublicationManager: React.FC = () => {
         filteredPublications.map((paper, index) => (
             <ResearchPaper
               key={index}
+              id={paper.id}
               title={paper.title}
               authors={paper.authors}
               journal={paper.journal}

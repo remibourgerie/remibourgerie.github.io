@@ -1,12 +1,10 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import ReactFlow, {
   Node,
   Edge,
-  Controls,
-  Background,
   useNodesState,
   useEdgesState,
-  BackgroundVariant,
+  Panel,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import { researchNodes, researchEdges } from '@/data/researchContent';
@@ -17,56 +15,43 @@ interface ResearchGraphProps {
 }
 
 const ResearchGraph = ({ onNodeClick, activeNodeId }: ResearchGraphProps) => {
-  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
-
-  // Generate nodes dynamically from data
+  // Generate nodes with simpler, more reliable positioning
+  // Normalize positions to work in a 0-800 x 0-500 coordinate system
   const initialNodes: Node[] = Object.values(researchNodes).map((node) => {
-    const Icon = node.icon;
     const isCenter = node.isCenter || false;
 
     return {
       id: node.id,
       position: node.position,
       data: {
-        label: (
-          <div className="text-center px-2">
-            <div className={`${isCenter ? 'text-sm' : 'text-xs'} font-semibold`}>
-              {node.title}
-            </div>
-          </div>
-        ),
+        label: node.title,
       },
-      type: 'default',
+      className: isCenter ? 'research-node-center' : 'research-node',
       style: {
-        background: isCenter ? 'hsl(var(--primary))' : 'hsl(var(--card))',
-        color: isCenter ? 'white' : 'hsl(var(--foreground))',
-        border: isCenter
-          ? '3px solid hsl(var(--primary))'
-          : '2px solid hsl(var(--primary) / 0.3)',
+        width: isCenter ? 140 : 120,
+        height: isCenter ? 140 : 120,
         borderRadius: '50%',
-        width: isCenter ? 120 : 100,
-        height: isCenter ? 120 : 100,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        fontSize: isCenter ? '14px' : '12px',
+        textAlign: 'center',
+        padding: '10px',
+        fontSize: isCenter ? '13px' : '11px',
         fontWeight: 600,
         cursor: 'pointer',
-        transition: 'all 0.3s ease',
-        boxShadow: isCenter ? '0 8px 16px hsl(var(--primary) / 0.3)' : 'none',
+        border: isCenter ? '3px solid' : '2px solid',
       },
     };
   });
 
-  // Generate edges dynamically from data (no labels)
+  // Generate edges
   const initialEdges: Edge[] = researchEdges.map((edge, index) => ({
     id: `edge-${index}`,
     source: edge.source,
     target: edge.target,
-    type: 'straight',
+    type: 'default',
     animated: false,
     style: {
-      stroke: 'hsl(var(--primary) / 0.2)',
       strokeWidth: 2,
     },
   }));
@@ -74,72 +59,35 @@ const ResearchGraph = ({ onNodeClick, activeNodeId }: ResearchGraphProps) => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-  // Update node styling based on active and hover states
-  const updateNodeStyles = useCallback((activeId: string, hoverId: string | null) => {
+  // Update node styling based on active state
+  useEffect(() => {
     setNodes((nds) =>
       nds.map((node) => {
         const nodeData = researchNodes[node.id];
-        const isActive = node.id === activeId;
-        const isHovered = node.id === hoverId;
+        const isActive = node.id === activeNodeId;
         const isCenter = nodeData?.isCenter || false;
 
-        let newStyle = { ...node.style };
-
-        if (isActive) {
-          newStyle = {
-            ...newStyle,
-            border: isCenter
-              ? '4px solid hsl(var(--primary))'
-              : '3px solid hsl(var(--primary))',
-            boxShadow: '0 12px 24px hsl(var(--primary) / 0.4)',
-            transform: 'scale(1.05)',
-          };
-        } else if (isHovered) {
-          newStyle = {
-            ...newStyle,
-            border: isCenter
-              ? '3px solid hsl(var(--primary))'
-              : '2px solid hsl(var(--primary) / 0.5)',
-            boxShadow: '0 8px 16px hsl(var(--primary) / 0.2)',
-            transform: 'scale(1.02)',
-          };
-        } else {
-          newStyle = {
-            ...newStyle,
-            border: isCenter
-              ? '3px solid hsl(var(--primary))'
-              : '2px solid hsl(var(--primary) / 0.3)',
-            boxShadow: isCenter ? '0 8px 16px hsl(var(--primary) / 0.3)' : 'none',
-            transform: 'scale(1)',
-          };
-        }
-
-        return { ...node, style: newStyle };
-      })
-    );
-
-    // Update edge styling
-    setEdges((eds) =>
-      eds.map((edge) => {
-        const isConnectedToActive = edge.source === activeId || edge.target === activeId;
-        const isConnectedToHover = hoverId && (edge.source === hoverId || edge.target === hoverId);
-
         return {
-          ...edge,
-          animated: isConnectedToActive,
-          style: {
-            ...edge.style,
-            stroke: isConnectedToActive
-              ? 'hsl(var(--primary) / 0.6)'
-              : isConnectedToHover
-              ? 'hsl(var(--primary) / 0.4)'
-              : 'hsl(var(--primary) / 0.2)',
-            strokeWidth: isConnectedToActive ? 3 : 2,
-          },
+          ...node,
+          className: isActive
+            ? (isCenter ? 'research-node-center active' : 'research-node active')
+            : (isCenter ? 'research-node-center' : 'research-node'),
         };
       })
     );
-  }, [setNodes, setEdges]);
+
+    // Keep edges static - no animation
+    setEdges((eds) =>
+      eds.map((edge) => {
+        const isConnected = edge.source === activeNodeId || edge.target === activeNodeId;
+        return {
+          ...edge,
+          animated: false,
+          className: isConnected ? 'research-edge-active' : 'research-edge',
+        };
+      })
+    );
+  }, [activeNodeId, setNodes, setEdges]);
 
   // Handle node click
   const handleNodeClick = useCallback(
@@ -149,45 +97,127 @@ const ResearchGraph = ({ onNodeClick, activeNodeId }: ResearchGraphProps) => {
     [onNodeClick]
   );
 
-  // Handle node hover
-  const handleNodeMouseEnter = useCallback(
-    (_event: React.MouseEvent, node: Node) => {
-      setHoveredNode(node.id);
-    },
-    []
-  );
-
-  const handleNodeMouseLeave = useCallback(() => {
-    setHoveredNode(null);
-  }, []);
-
-  // Update styles when active node or hovered node changes
-  useEffect(() => {
-    updateNodeStyles(activeNodeId, hoveredNode);
-  }, [activeNodeId, hoveredNode, updateNodeStyles]);
-
   return (
-    <div className="w-full h-[450px] bg-muted/30 rounded-lg border border-border overflow-hidden">
+    <div className="w-full min-h-[300px] aspect-[4/3] bg-background rounded-lg border border-border overflow-hidden">
+      <style>{`
+        @keyframes subtlePulse {
+          0%, 100% {
+            box-shadow: 0 4px 12px hsl(var(--primary) / 0.15);
+          }
+          50% {
+            box-shadow: 0 4px 16px hsl(var(--primary) / 0.35);
+          }
+        }
+
+        @keyframes activeGlow {
+          0%, 100% {
+            box-shadow:
+              0 0 0 0 hsl(var(--primary) / 0.4),
+              0 12px 32px hsl(var(--primary) / 0.4);
+          }
+          50% {
+            box-shadow:
+              0 0 0 8px hsl(var(--primary) / 0),
+              0 12px 32px hsl(var(--primary) / 0.6);
+          }
+        }
+
+        @keyframes activeCenterGlow {
+          0%, 100% {
+            box-shadow:
+              0 0 0 0 hsl(var(--primary) / 0.5),
+              0 14px 36px hsl(var(--primary) / 0.5);
+          }
+          50% {
+            box-shadow:
+              0 0 0 10px hsl(var(--primary) / 0),
+              0 14px 36px hsl(var(--primary) / 0.7);
+          }
+        }
+
+        .research-node {
+          background: hsl(var(--card));
+          color: hsl(var(--foreground));
+          border-color: hsl(var(--primary) / 0.3);
+          transition: all 0.3s ease;
+          animation: subtlePulse 2s ease-in-out infinite;
+        }
+
+        .research-node:hover {
+          border-color: hsl(var(--primary) / 0.6);
+          box-shadow: 0 4px 12px hsl(var(--primary) / 0.2);
+          transform: scale(1.05);
+          animation: none;
+        }
+
+        .research-node.active {
+          border-color: hsl(var(--primary));
+          border-width: 3px;
+          background: hsl(var(--card));
+          transform: scale(1.12);
+          animation: activeGlow 1.5s ease-in-out infinite;
+          z-index: 100 !important;
+        }
+
+        .research-node-center {
+          background: hsl(var(--primary));
+          color: white;
+          border-color: hsl(var(--primary));
+          box-shadow: 0 6px 16px hsl(var(--primary) / 0.3);
+          transition: all 0.3s ease;
+        }
+
+        .research-node-center:hover {
+          box-shadow: 0 8px 20px hsl(var(--primary) / 0.4);
+          transform: scale(1.05);
+        }
+
+        .research-node-center.active {
+          border-width: 4px;
+          transform: scale(1.12);
+          animation: activeCenterGlow 1.5s ease-in-out infinite;
+          z-index: 100 !important;
+        }
+
+        .research-edge {
+          stroke: hsl(var(--primary) / 0.2);
+        }
+
+        .research-edge-active {
+          stroke: hsl(var(--primary) / 0.6);
+          stroke-width: 3px;
+        }
+
+        .react-flow__node {
+          z-index: 10;
+        }
+
+        .react-flow__edge {
+          z-index: 5;
+        }
+      `}</style>
       <ReactFlow
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onNodeClick={handleNodeClick}
-        onNodeMouseEnter={handleNodeMouseEnter}
-        onNodeMouseLeave={handleNodeMouseLeave}
         fitView
+        fitViewOptions={{ padding: 0.2, maxZoom: 1 }}
         minZoom={0.5}
-        maxZoom={1.5}
+        maxZoom={2}
+        defaultViewport={{ x: 0, y: 0, zoom: 1 }}
         nodesDraggable={false}
         nodesConnectable={false}
-        elementsSelectable={false}
-        zoomOnScroll={false}
+        elementsSelectable={true}
+        zoomOnScroll={true}
         panOnScroll={false}
-        panOnDrag={false}
+        panOnDrag={true}
+        preventScrolling={false}
       >
-        <Background variant={BackgroundVariant.Dots} gap={16} size={1} color="hsl(var(--primary) / 0.1)" />
-        <Controls showInteractive={false} />
+        <Panel position="top-right" className="text-xs text-muted-foreground bg-background/80 px-2 py-1 rounded">
+          Scroll to zoom
+        </Panel>
       </ReactFlow>
     </div>
   );

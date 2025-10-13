@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Download, Github, Linkedin, Mail, BookOpen, Briefcase, ArrowDown, MapPin, GraduationCap, History, Coffee } from 'lucide-react';
+import { Download, Github, Linkedin, Mail, BookOpen, Briefcase, ArrowDown, MapPin, GraduationCap, History, Coffee, Compass } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useGithubProjects } from '@/hooks/useGithubProjects';
 import { useNews } from '@/hooks/useNews';
@@ -11,6 +11,7 @@ import ResearchGraph from '@/components/ResearchGraph';
 import ResearchContentPanel from '@/components/ResearchContentPanel';
 import profileImage from '@/assets/profile.jpg';
 import { getCoffeeChatMailto, CONTACT_CONFIG } from '@/config/contact';
+import { ReactFlowProvider } from 'reactflow';
 
 
 const Index = () => {
@@ -63,8 +64,8 @@ const Index = () => {
       
       {/* Hero Section - Side-by-Side Personal */}
       <section id="home" className="pt-24 pb-16 px-6 border-b border-border">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-[280px_1fr] gap-12 items-center">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-[280px_1fr] gap-12 items-center justify-center">
             {/* Left: Profile Photo */}
             <div className="mx-auto md:mx-0">
               <img
@@ -136,7 +137,7 @@ const Index = () => {
 
       {/* News & Updates Section */}
       <section className="py-16 px-6 bg-muted/30">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold mb-8 text-foreground">News & Updates</h2>
 
           {newsLoading ? (
@@ -334,29 +335,32 @@ const Index = () => {
             <h2 className="text-4xl font-bold mb-12 text-foreground">About my research</h2>
 
             <div className="grid md:grid-cols-[300px_1fr] gap-12 items-start">
-              {/* Left Sidebar - Interactive Graph (Sticky) */}
-              <div className="sticky top-24 space-y-6">
-                {/* Intro Text */}
+              {/* Left Column - Interactive Graph (Sticky) */}
+              <div className="sticky top-24 space-y-5">
                 <div>
-                  <p className="text-sm text-foreground/70 leading-relaxed">
-                    I teach computers to understand connections—whether they're social networks, molecules, or communication systems. My work combines machine learning with the messy, interconnected reality of the world around us.
-                  </p>
-                </div>
-
-                {/* Interactive Graph */}
-                <div>
-                  <ResearchGraph
-                    onNodeClick={setActiveResearchNode}
-                    activeNodeId={activeResearchNode}
-                  />
-                  <p className="text-xs text-foreground/50 text-center mt-3">
-                    Click to explore →
-                  </p>
+                  <div className="mb-4">
+                    <h3 className="text-xl font-semibold text-foreground">
+                      Research Areas
+                    </h3>
+                  </div>
+                  <ReactFlowProvider>
+                    <ResearchGraph
+                      onNodeClick={setActiveResearchNode}
+                      activeNodeId={activeResearchNode}
+                    />
+                  </ReactFlowProvider>
+                  <div className="mt-4 text-center">
+                    <p className="text-sm text-primary font-semibold flex items-center justify-center gap-2">
+                      <Compass className="w-4 h-4" />
+                      Click any node to explore
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              {/* Right Content - Research Details (Scrollable) */}
-              <div className="bg-card border border-border rounded-lg p-8 shadow-sm">
+              {/* Right Column - Content (Scrollable) */}
+              <div className="space-y-8">
+                {/* Research Content Panel */}
                 <ResearchContentPanel
                   activeNodeId={activeResearchNode}
                   onNavigate={setActiveResearchNode}
@@ -380,13 +384,13 @@ const Index = () => {
           >
             {/* Header */}
             <div className="mb-8">
-              <div className="flex items-center justify-between mb-3">
+              <div className="flex items-baseline gap-3 mb-3 flex-wrap">
                 <h2 className="text-4xl font-bold text-foreground">Publications</h2>
                 <a
                   href="https://scholar.google.com/citations?user=T3J6BMcAAAAJ&hl=en"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary hover:underline flex items-center gap-2 text-sm font-medium"
+                  className="text-primary hover:underline flex items-center gap-1.5 text-sm font-medium"
                 >
                   <BookOpen className="w-4 h-4" />
                   Google Scholar →
