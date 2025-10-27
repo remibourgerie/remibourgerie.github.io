@@ -23,9 +23,13 @@ export type Database = {
           created_at: string | null
           id: string
           journal: string
+          last_synced_at: string | null
           pdf_url: string | null
           poster_url: string | null
           publication_type: string | null
+          research_areas: string[] | null
+          scholar_cluster_id: string | null
+          scholar_id: string | null
           tags: string[] | null
           title: string
           updated_at: string | null
@@ -40,9 +44,13 @@ export type Database = {
           created_at?: string | null
           id?: string
           journal: string
+          last_synced_at?: string | null
           pdf_url?: string | null
           poster_url?: string | null
           publication_type?: string | null
+          research_areas?: string[] | null
+          scholar_cluster_id?: string | null
+          scholar_id?: string | null
           tags?: string[] | null
           title: string
           updated_at?: string | null
@@ -57,9 +65,13 @@ export type Database = {
           created_at?: string | null
           id?: string
           journal?: string
+          last_synced_at?: string | null
           pdf_url?: string | null
           poster_url?: string | null
           publication_type?: string | null
+          research_areas?: string[] | null
+          scholar_cluster_id?: string | null
+          scholar_id?: string | null
           tags?: string[] | null
           title?: string
           updated_at?: string | null

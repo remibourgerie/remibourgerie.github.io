@@ -256,4 +256,20 @@ All colors MUST be HSL.
   .animate-pulse-glow {
     animation: pulse-glow 2s ease-in-out infinite;
   }
+
+  /* Research content panel slide-in animation */
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 300ms ease-out;
+  }
 }

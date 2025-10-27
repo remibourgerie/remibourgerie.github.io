@@ -17,7 +17,10 @@ const ResearchContentPanel = ({ activeNodeId, onNavigate }: ResearchContentPanel
     );
 
     return (
-      <div className="space-y-6 text-foreground/80 leading-relaxed">
+      <div
+        key={activeNodeId}
+        className="space-y-6 text-foreground/80 leading-relaxed animate-slide-in-right"
+      >
         <div>
           <h3 className="text-2xl font-bold text-foreground mb-4">
             {node.title}
@@ -83,7 +86,10 @@ const ResearchContentPanel = ({ activeNodeId, onNavigate }: ResearchContentPanel
   }
 
   return (
-    <div className="space-y-6 text-foreground/80 leading-relaxed">
+    <div
+      key={activeNodeId}
+      className="space-y-6 text-foreground/80 leading-relaxed animate-slide-in-right"
+    >
       {/* Header */}
       <div>
         <h3 className="text-2xl font-bold text-foreground mb-3">

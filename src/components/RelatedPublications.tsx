@@ -19,7 +19,8 @@ const RelatedPublications = ({ researchAreaId }: RelatedPublicationsProps) => {
           .from('publications')
           .select('*')
           .contains('research_areas', [researchAreaId])
-          .order('year', { ascending: false });
+          .order('year', { ascending: false })
+          .order('citations', { ascending: false });
 
         if (error) throw error;
 

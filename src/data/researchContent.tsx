@@ -1,4 +1,4 @@
-import { Brain, Network, Users, Compass } from 'lucide-react';
+import { Brain, Network, Users, Compass, GitMerge } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 
 export interface GraphPosition {
@@ -45,7 +45,7 @@ export const researchNodes: Record<string, ResearchNode> = {
       communityLinks: [
         {
           title: 'Join GLOW - Graph Learning on Wednesdays',
-          description: 'Interested in graph learning? Join our weekly reading group where researchers discuss the latest papers and ideas in this field.',
+          description: 'Interested in graph learning? Join the weekly reading group where researchers discuss the latest papers and ideas in this field.',
           url: 'https://sites.google.com/view/graph-learning-on-weds/home-page?authuser=0',
           icon: Users,
         },
@@ -117,9 +117,44 @@ export const researchNodes: Record<string, ResearchNode> = {
     },
   },
 
+  'collaborative-graph-learning': {
+    id: 'collaborative-graph-learning',
+    title: 'Collaborative Learning on Graph Data',
+    tagline: 'Distributed Learning Meets Network Structure',
+    icon: GitMerge,
+    category: 'core',
+    position: { x: 400, y: 450 },
+    content: {
+      paragraphs: [
+        <>
+          What happens when you combine collaborative learning with graph-structured data? You get a powerful new paradigm where multiple entities can jointly learn from interconnected information while preserving privacy and leveraging network topology.
+        </>,
+        <>
+          My research explores how graph neural networks can be trained in a federated manner across distributed nodes. This means each participant (a hospital, organization, or device) can contribute to learning a shared model without exposing their private graph data, while the network structure itself guides the collaboration.
+        </>,
+        <>
+          The challenge is unique: unlike traditional federated learning where data points are independent, graph data has dependencies between nodes. How do we split a social network for training? How do we handle edges that cross organizational boundaries? These questions drive my current research.
+        </>,
+      ],
+      personalInsight: (
+        <blockquote className="border-l-2 border-primary/30 pl-4 my-4">
+          <p className="text-foreground/70 italic text-sm leading-relaxed">
+            "This sits at the intersection of my core interests: the expressiveness of graph neural networks, the topology of real-world networks, and the practical constraints of distributed, privacy-preserving learning. It's where theory meets real-world impact."
+          </p>
+        </blockquote>
+      ),
+      applications: [
+        'Cross-hospital patient network analysis without data sharing',
+        'Distributed fraud detection across financial institutions',
+        'Privacy-preserving social network analysis',
+        'Collaborative learning on knowledge graphs'
+      ],
+    },
+  },
+
   'federated-learning': {
     id: 'federated-learning',
-    title: 'Collaborative & Federated Learning',
+    title: 'Collaborative Learning',
     tagline: 'Learning Together, Without Sharing Everything',
     icon: Users,
     category: 'core',
@@ -127,22 +162,23 @@ export const researchNodes: Record<string, ResearchNode> = {
     content: {
       paragraphs: [
         <>
-          Imagine three hospitals that want to build a better cancer detection AI. Each has valuable patient data, but they can't legally share it with each other. How do they collaborate? This is the puzzle I work on: teaching machines to learn together while keeping sensitive data private.
+          Imagine three hospitals that want to build a better cancer detection AI. Each has valuable patient data, but they can't legally share it with each other. How do they collaborate? This is the problem collaborative learning aims to to solve, building systems that make agents collaborate while keeping sensitive data private to its holder.
         </>,
         <>
-          My research explores <strong>federated learning on graphs</strong>—using the network topology itself as a resource. Instead of sending all data to one place, I develop methods where nodes (hospitals, phones, organizations) share insights while keeping their data local. The connections between them become part of the solution.
+          My research explores different aspects of collaborative learning, using the network topology, that is the relations between the different agents, itself as an information. Instead of sending all data to one place, I develop methods where nodes (hospitals, phones, organizations) share insights while keeping their data local. The connections between them become part of the solution.
         </>,
-        <>
-          During my master's thesis at <strong>Ericsson's AI Accelerator</strong>, I discovered how messy real-world collaboration can be: some nodes have tons of data, others have little; some are well-connected, others isolated. Making this work efficiently is both a technical and a design challenge.
-        </>,
+        <>So we have trained on the entire web, now what? Even though in terms of web data or public data—these are things like Wikipedia, news websites, blog posts, research papers, so on and so forth—even though we've exhausted that distribution for us to get real improvements and to march forward in this progress, we really have to tap on new sources of data. [...] That is data that belongs to entities like end users, smartphone users... it is patient data, it is institutional data. This is data that captures a lot of nuances that you would not find in open web data" <a> Peter Kairouz, Google href= "https://www.youtube.com/watch?v=Xh89Kp4jM60"</a></>,
       ],
       personalInsight: (
         <blockquote className="border-l-2 border-primary/30 pl-4 my-4">
           <p className="text-foreground/70 italic text-sm leading-relaxed">
-            "The challenge: How do we train powerful AI models when data can't leave its source? And how does the network structure between these sources affect learning? During my thesis at Ericsson, I saw this tension firsthand—powerful algorithms that couldn't work because data privacy walls made collaboration impossible."
+            "During my master's thesis at <strong>Ericsson's AI Accelerator</strong>, 
+            I discovered how messy real-world collaboration can be: some nodes have tons of data, others have little; some are well-connected, others isolated. 
+            Making this work efficiently is both a technical and a design challenge."
           </p>
         </blockquote>
       ),
+      
       applications: [
         'Privacy-preserving healthcare AI',
         'Private smartphone keyboard predictions',
@@ -164,4 +200,8 @@ export const researchEdges: GraphEdge[] = [
   { source: 'overview', target: 'graph-ml' },
   { source: 'overview', target: 'network-science' },
   { source: 'overview', target: 'federated-learning' },
+  { source: 'overview', target: 'collaborative-graph-learning' },
+  // Collaborative Graph Learning connects to its parent topics
+  { source: 'graph-ml', target: 'collaborative-graph-learning' },
+  { source: 'federated-learning', target: 'collaborative-graph-learning' },
 ];

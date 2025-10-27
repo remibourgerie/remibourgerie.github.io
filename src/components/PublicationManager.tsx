@@ -24,6 +24,9 @@ export interface Publication {
   tags: string[];
   publicationType?: string;
   researchAreas?: string[];
+  scholarId?: string;
+  scholarClusterId?: string;
+  lastSyncedAt?: string;
 }
 
 const PublicationManager: React.FC = () => {
@@ -42,7 +45,8 @@ const PublicationManager: React.FC = () => {
       const { data, error } = await supabase
         .from('publications')
         .select('*')
-        .order('year', { ascending: false });
+        .order('year', { ascending: false })
+        .order('citations', { ascending: false });
 
       if (error) throw error;
 
@@ -66,6 +70,9 @@ const PublicationManager: React.FC = () => {
         tags: pub.tags || [],
         publicationType: pub.publication_type || undefined,
         researchAreas: pub.research_areas || [],
+        scholarId: pub.scholar_id || undefined,
+        scholarClusterId: pub.scholar_cluster_id || undefined,
+        lastSyncedAt: pub.last_synced_at || undefined,
       }));
 
       setPublications(formattedPublications);

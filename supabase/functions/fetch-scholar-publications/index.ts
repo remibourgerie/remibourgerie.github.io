@@ -50,16 +50,48 @@ serve(async (req) => {
     
     console.log(`Received ${data.articles?.length || 0} publications from SerpAPI`);
 
+    // Log first article structure to help debug field names
+    if (data.articles && data.articles.length > 0) {
+      console.log('First article structure:', JSON.stringify(data.articles[0], null, 2));
+    }
+
     // Transform SerpAPI response to our publication format
-    const publications = (data.articles || []).map((article: any) => ({
-      title: article.title,
-      authors: article.authors ? article.authors.split(',').map((a: string) => a.trim()) : ['Rémi Bourgerie'],
-      venue: article.publication || 'Unknown Journal',
-      year: article.year || new Date().getFullYear(),
-      citations: article.cited_by?.value || 0,
-      snippet: article.snippet || 'Abstract not available',
-      link: article.link || null,
-    }));
+    const publications = (data.articles || []).map((article: any) => {
+      // Extract scholar IDs
+      // citation_id format: "LSsXyncAAAAJ:2osOgNQ5qMEC" (author_id:article_id)
+      const scholarId = article.citation_id || null;
+
+      // Extract cluster ID from cited_by.link or cited_by.cites_id
+      // The cites parameter in the URL is the cluster ID
+      let clusterId = null;
+      if (article.cited_by?.link) {
+        const citesMatch = article.cited_by.link.match(/cites=(\d+)/);
+        if (citesMatch) {
+          clusterId = citesMatch[1];
+        }
+      }
+
+      console.log('Processing article:', {
+        title: article.title,
+        scholarId,
+        clusterId,
+        citations: article.cited_by?.value || 0,
+        year: article.year
+      });
+
+      return {
+        title: article.title,
+        authors: article.authors ? article.authors.split(',').map((a: string) => a.trim()) : ['Rémi Bourgerie'],
+        venue: article.publication || 'Unknown Journal',
+        year: article.year || new Date().getFullYear(),
+        citations: article.cited_by?.value || 0,
+        snippet: article.snippet || 'Abstract not available',
+        link: article.link || null,
+        // Google Scholar identifiers for deduplication
+        scholarId,
+        clusterID: clusterId,
+      };
+    });
 
     return new Response(
       JSON.stringify({ publications }),

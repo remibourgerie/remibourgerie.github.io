@@ -285,7 +285,7 @@ const Index = () => {
                 <Button size="lg" variant="outline" className="w-full coffee-button" asChild>
                   <a href={getCoffeeChatMailto()}>
                     <Coffee className="w-4 h-4 mr-2 coffee-icon" />
-                    Curious? book a<em>fika</em>with me
+                    Curious? book a <em>coffee</em>with me
                   </a>
                 </Button>
               </div>
