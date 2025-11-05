@@ -39,7 +39,7 @@ export const researchNodes: Record<string, ResearchNode> = {
     content: {
       paragraphs: [
         <>
-          My research lies at the intersection of Machine Learning, graph, and networks, building systems that learn from connected data.
+          My research lies at the intersection of <strong>Networks</strong>, <strong> Graphs</strong> and <strong>Machine Learning</strong>, building systems that learn from connected data.
         </>,
       ],
       communityLinks: [

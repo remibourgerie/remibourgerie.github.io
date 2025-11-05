@@ -94,7 +94,7 @@ const Index = () => {
               </div>
 
               <p className="text-lg text-foreground/80 leading-relaxed max-w-xl">
-                I work at the intersection of <strong>graphs</strong>, <strong>networks</strong>, and <strong>Machine Learning</strong>, building systems that learn from connected data.
+                I work at the intersection of <strong>Networks</strong>, <strong>graphs</strong>, and <strong>Machine Learning</strong>, building systems that learn from connected data.
               </p>
 
               <div className="flex flex-wrap gap-4 items-center">
@@ -307,7 +307,7 @@ const Index = () => {
                     </p>
 
                     <p>
-                      In 2021, I moved to Sweden for a double degree through the <a href="https://www.time-top-industrial-managers-for-europe.eu/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">T.I.M.E.</a> program between <a href="https://www.ec-lyon.fr/en" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">École Centrale de Lyon</a> and <a href="https://www.kth.se" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">KTH Royal Institute of Technology</a>, specializing in <strong>Machine Learning</strong>. During this time, I conducted my <a href="#publications" className="text-primary hover:underline">master's thesis</a> in the industry at <a href="https://www.ericsson.com/en/ai" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Ericsson Global AI Accelerator</a>, where I worked on applied machine learning using Graph Neural Networks and Federated Learning for software anomaly detection. I graduated in 2023 with both an Engineering degree from ECL and a MSc. in Machine Learning from KTH. Since then, I am pursuing a PhD degree in Computer Science at KTH under the supervision of Viktoria Fodor and Sarunas Girdzijauskas.
+                      In 2021, I moved to Sweden for a double degree through the <a href="https://www.time-top-industrial-managers-for-europe.eu/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">T.I.M.E.</a> program between <a href="https://www.ec-lyon.fr/en" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">École Centrale de Lyon</a> and <a href="https://www.kth.se" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">KTH Royal Institute of Technology</a>, specializing in <strong>Machine Learning</strong>. During this time, I conducted my <a href="#publications" className="text-primary hover:underline">master's thesis</a> in the industry at <a href="https://www.ericsson.com/en/ai" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Ericsson Global AI Accelerator</a>, where I worked on applied machine learning using Graph Neural Networks and Federated Learning for software anomaly detection. I graduated in 2023 with both an Engineering degree from ECL and a MSc. in Machine Learning from KTH. Since then, I am pursuing a PhD degree in Computer Science at KTH under the supervision of <a href="https://www.kth.se/profile/vjfodor/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Viktoria Fodor</a> and <a href="https://www.kth.se/profile/sarunasg/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Sarunas Girdzijauskas</a>.
                     </p>
                   </div>
                 </div>
