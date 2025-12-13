@@ -1,4 +1,4 @@
-import { Brain, Network, Users, Compass, GitMerge } from 'lucide-react';
+import { BrainCircuit, Waypoints, Users, Compass, GitMerge } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 
 export interface GraphPosition {
@@ -21,7 +21,8 @@ export interface ResearchNode {
     communityLinks?: Array<{
       title: string;
       description: string;
-      url: string;
+      url?: string;
+      nodeId?: string;
       icon?: LucideIcon;
     }>;
   };
@@ -39,7 +40,7 @@ export const researchNodes: Record<string, ResearchNode> = {
     content: {
       paragraphs: [
         <>
-          My research lies at the intersection of <strong>Networks</strong>, <strong> Graphs</strong> and <strong>Machine Learning</strong>, building systems that learn from connected data.
+          My research lies at the intersection of <strong>Machine Learning</strong>, <strong>Graphs</strong> and <strong>Networks</strong>, building systems that learn from connected data.
         </>,
       ],
       communityLinks: [
@@ -57,7 +58,7 @@ export const researchNodes: Record<string, ResearchNode> = {
     id: 'graph-ml',
     title: 'Machine Learning on Graph-Structured Data',
     tagline: 'Where relations matter as much as data', // When learning meets relational structure. Learning in the presence of structure and dependency. Understanding the world through its connections.
-    icon: Brain,
+    icon: BrainCircuit,
     category: 'core',
     position: { x: 400, y: 50 },
     content: {
@@ -89,7 +90,7 @@ export const researchNodes: Record<string, ResearchNode> = {
     id: 'network-science',
     title: 'Network Science & Topology',
     tagline: 'Why Network Shape Matters?',
-    icon: Network,
+    icon: Waypoints,
     category: 'core',
     position: { x: 150, y: 350 },
     content: {
@@ -139,7 +140,9 @@ export const researchNodes: Record<string, ResearchNode> = {
       personalInsight: (
         <blockquote className="border-l-2 border-primary/30 pl-4 my-4">
           <p className="text-foreground/70 italic text-sm leading-relaxed">
-            "This sits at the intersection of my core interests: the expressiveness of graph neural networks, the topology of real-world networks, and the practical constraints of distributed, privacy-preserving learning. It's where theory meets real-world impact."
+            "During my master's thesis at <strong>Ericsson's AI Accelerator</strong>,
+            I discovered how messy real-world collaboration can be: some nodes have tons of data, others have little; some are well-connected, others isolated.
+            Making this work efficiently is both a technical and a design challenge."
           </p>
         </blockquote>
       ),
@@ -162,23 +165,31 @@ export const researchNodes: Record<string, ResearchNode> = {
     content: {
       paragraphs: [
         <>
-          Imagine three hospitals that want to build a better cancer detection AI. Each has valuable patient data, but they can't legally share it with each other. How do they collaborate? This is the problem collaborative learning aims to to solve, building systems that make agents collaborate while keeping sensitive data private to its holder.
+          Imagine three hospitals that want to build a better cancer detection AI. Each has valuable patient data, but they can't legally share it with each other. How do they collaborate? This is the problem collaborative learning aims to solve, building systems that make agents collaborate while keeping sensitive data private to its holder.
         </>,
         <>
-          My research explores different aspects of collaborative learning, using the network topology, that is the relations between the different agents, itself as an information. Instead of sending all data to one place, I develop methods where nodes (hospitals, phones, organizations) share insights while keeping their data local. The connections between them become part of the solution.
+          <blockquote className="border-l-2 border-primary/30 pl-4 my-4">
+            <p className="text-foreground/70 italic text-sm leading-relaxed">
+              "<strong>So we have trained on the entire web, now what?</strong> To get real improvements and march forward, we really have to tap on new sources of data. That is data that belongs to entities like end users, smartphone users, patient data, institutional data. This captures nuances you would not find in open web data."
+            </p>
+            <footer className="text-xs text-foreground/60 mt-2">
+              — Peter Kairouz, Google Research,{' '}
+              <a
+                href="https://www.youtube.com/watch?v=Xh89Kp4jM60"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline"
+              >
+                source
+              </a>
+            </footer>
+          </blockquote>
         </>,
-        <>So we have trained on the entire web, now what? Even though in terms of web data or public data—these are things like Wikipedia, news websites, blog posts, research papers, so on and so forth—even though we've exhausted that distribution for us to get real improvements and to march forward in this progress, we really have to tap on new sources of data. [...] That is data that belongs to entities like end users, smartphone users... it is patient data, it is institutional data. This is data that captures a lot of nuances that you would not find in open web data" <a> Peter Kairouz, Google href= "https://www.youtube.com/watch?v=Xh89Kp4jM60"</a></>,
+        <>
+          My survey maps the landscape of collaborative learning, distinguishing two paradigms: <em>isolated inference</em> and <em>collaborative inference</em>. Traditional collaborative learning lets agents train together, then make predictions independently. Graph neural networks break this pattern: when the graph is distributed across agents, the message passing required for inference becomes cross-agent communication, forcing continuous collaboration. This transforms collaborative learning from a training-time problem to both training and inference.
+        </>,
       ],
-      personalInsight: (
-        <blockquote className="border-l-2 border-primary/30 pl-4 my-4">
-          <p className="text-foreground/70 italic text-sm leading-relaxed">
-            "During my master's thesis at <strong>Ericsson's AI Accelerator</strong>, 
-            I discovered how messy real-world collaboration can be: some nodes have tons of data, others have little; some are well-connected, others isolated. 
-            Making this work efficiently is both a technical and a design challenge."
-          </p>
-        </blockquote>
-      ),
-      
+
       applications: [
         'Privacy-preserving healthcare AI',
         'Private smartphone keyboard predictions',
@@ -200,7 +211,6 @@ export const researchEdges: GraphEdge[] = [
   { source: 'overview', target: 'graph-ml' },
   { source: 'overview', target: 'network-science' },
   { source: 'overview', target: 'federated-learning' },
-  { source: 'overview', target: 'collaborative-graph-learning' },
   // Collaborative Graph Learning connects to its parent topics
   { source: 'graph-ml', target: 'collaborative-graph-learning' },
   { source: 'federated-learning', target: 'collaborative-graph-learning' },

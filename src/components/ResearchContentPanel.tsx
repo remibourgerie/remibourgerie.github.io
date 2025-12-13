@@ -59,15 +59,25 @@ const ResearchContentPanel = ({ activeNodeId, onNavigate }: ResearchContentPanel
                   <p className="text-sm text-foreground/60 mb-3">
                     {link.description}
                   </p>
-                  <a
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-primary hover:underline font-medium text-sm"
-                  >
-                    {LinkIcon && <LinkIcon className="w-4 h-4" />}
-                    {link.title} →
-                  </a>
+                  {link.nodeId ? (
+                    <button
+                      onClick={() => onNavigate(link.nodeId!)}
+                      className="inline-flex items-center gap-2 text-primary hover:underline font-medium text-sm"
+                    >
+                      {LinkIcon && <LinkIcon className="w-4 h-4" />}
+                      {link.title} →
+                    </button>
+                  ) : (
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-primary hover:underline font-medium text-sm"
+                    >
+                      {LinkIcon && <LinkIcon className="w-4 h-4" />}
+                      {link.title} →
+                    </a>
+                  )}
                 </div>
               );
             })}
@@ -149,15 +159,25 @@ const ResearchContentPanel = ({ activeNodeId, onNavigate }: ResearchContentPanel
                   <p className="text-foreground/80 mb-3">
                     {link.description}
                   </p>
-                  <a
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-primary hover:underline font-medium"
-                  >
-                    {LinkIcon && <LinkIcon className="w-4 h-4" />}
-                    {link.title} →
-                  </a>
+                  {link.nodeId ? (
+                    <button
+                      onClick={() => onNavigate(link.nodeId!)}
+                      className="inline-flex items-center gap-2 text-primary hover:underline font-medium"
+                    >
+                      {LinkIcon && <LinkIcon className="w-4 h-4" />}
+                      {link.title} →
+                    </button>
+                  ) : (
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-primary hover:underline font-medium"
+                    >
+                      {LinkIcon && <LinkIcon className="w-4 h-4" />}
+                      {link.title} →
+                    </a>
+                  )}
                 </div>
               );
             })}
