@@ -1,0 +1,61 @@
+{
+  "collections": {
+    "GNN": {
+      "label": "Graph Neural Networks",
+      "category": "Methods",
+      "color": "#6366f1"
+    },
+    "Federated Learning": {
+      "label": "Federated Learning",
+      "category": "Methods",
+      "color": "#8b5cf6"
+    },
+    "Network Science": {
+      "label": "Network Science",
+      "category": "Theory",
+      "color": "#06b6d4"
+    },
+    "Machine Learning": {
+      "label": "Machine Learning",
+      "category": "Methods",
+      "color": "#3b82f6"
+    },
+    "Deep Learning": {
+      "label": "Deep Learning",
+      "category": "Methods",
+      "color": "#a855f7"
+    },
+    "Graph Theory": {
+      "label": "Graph Theory",
+      "category": "Theory",
+      "color": "#14b8a6"
+    },
+    "Distributed Systems": {
+      "label": "Distributed Systems",
+      "category": "Domains",
+      "color": "#f59e0b"
+    },
+    "Anomaly Detection": {
+      "label": "Anomaly Detection",
+      "category": "Domains",
+      "color": "#ef4444"
+    },
+    "Telecommunications": {
+      "label": "Telecommunications",
+      "category": "Domains",
+      "color": "#f97316"
+    },
+    "Scalability": {
+      "label": "Scalability",
+      "category": "Theory",
+      "color": "#22d3ee"
+    }
+  },
+  "categories": {
+    "Methods": "#6366f1",
+    "Theory": "#06b6d4",
+    "Domains": "#f59e0b",
+    "Tools": "#10b981"
+  },
+  "_instructions": "Edit the 'collections' object to match your Zotero collection names. Each key must exactly match a Zotero collection name. The script will warn about unmapped collections."
+}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { FileText, ExternalLink } from 'lucide-react';
-import { Publication } from './PublicationManager';
+import { Publication } from '@/types/publication';
 
 interface RelatedPublicationsProps {
   researchAreaId: string;

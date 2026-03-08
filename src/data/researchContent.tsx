@@ -13,6 +13,7 @@ export interface ResearchNode {
   icon: LucideIcon;
   category: 'overview' | 'core';
   isCenter?: boolean;
+  hidden?: boolean;
   position: GraphPosition;
   content: {
     paragraphs: JSX.Element[];
@@ -32,7 +33,7 @@ export const researchNodes: Record<string, ResearchNode> = {
   overview: {
     id: 'overview',
     title: 'My Research',
-    tagline: 'Networked Intelligence',
+    tagline: '',
     icon: Compass,
     category: 'overview',
     isCenter: true,
@@ -40,7 +41,7 @@ export const researchNodes: Record<string, ResearchNode> = {
     content: {
       paragraphs: [
         <>
-          My research lies at the intersection of <strong>Machine Learning</strong>, <strong>Graphs</strong> and <strong>Networks</strong>, building systems that learn from connected data.
+          My research lies at the intersection of <strong>Machine Learning</strong>, <strong>Graphs</strong> and <strong>networks</strong>, building systems that learn from connected data.
         </>,
       ],
       communityLinks: [
@@ -57,7 +58,7 @@ export const researchNodes: Record<string, ResearchNode> = {
   'graph-ml': {
     id: 'graph-ml',
     title: 'Machine Learning on Graph-Structured Data',
-    tagline: 'Where relations matter as much as data', // When learning meets relational structure. Learning in the presence of structure and dependency. Understanding the world through its connections.
+    tagline: 'When geometry meets learning',
     icon: BrainCircuit,
     category: 'core',
     position: { x: 400, y: 50 },
@@ -67,13 +68,13 @@ export const researchNodes: Record<string, ResearchNode> = {
           Think about your friends on social media. You know people who know people, forming a web of relationships. Or consider how molecules work—atoms bonded together in specific patterns that determine whether something is medicine or poison. These are <strong>graphs</strong>: data where connections matter as much as the data points themselves.
         </>,
         <>
-          The challenge? Most AI expects neat rows and columns, like a spreadsheet. But the real world is messy and interconnected. My research develops new ways for machines to learn from this interconnected reality—teaching them to understand not just individual pieces, but how everything fits together.
+          The challenge? The techniques behind breakthrough AI systems (vision models, language models) rely on data having regular, grid-like structure. These regularities let models exploit regular patterns efficiently. But graphs have no such structure. A single network can contain millions of irregular patterns overlapping and intertwining at different scales.
         </>,
       ],
       personalInsight: (
         <blockquote className="border-l-2 border-primary/30 pl-4 my-4">
           <p className="text-foreground/70 italic text-sm leading-relaxed">
-            "What fascinates me is that current approaches, are based on the mechanism of <em>message passing</em> hit a fundamental wall. Nodes can only 'see' information from immediate neighbors, like trying to understand a city by only talking to people next door. I'm working on methods that let AI grasp both local patterns and global structure simultaneously."
+            "What fascinates me is that current approaches, are based on the mechanism of <em>message passing</em> hit a fundamental wall. Nodes can only 'see' information from immediate neighbors, like trying to understand a city by only talking to people next door. Adding layers to see farther causes information to get compressed through bottlenecks and node features to become indistinguishable, limiting network depth and expressiveness."
           </p>
         </blockquote>
       ),
@@ -92,6 +93,7 @@ export const researchNodes: Record<string, ResearchNode> = {
     tagline: 'Why Network Shape Matters?',
     icon: Waypoints,
     category: 'core',
+    hidden: true,
     position: { x: 150, y: 350 },
     content: {
       paragraphs: [
@@ -124,6 +126,7 @@ export const researchNodes: Record<string, ResearchNode> = {
     tagline: 'Distributed Learning Meets Network Structure',
     icon: GitMerge,
     category: 'core',
+    hidden: true,
     position: { x: 400, y: 450 },
     content: {
       paragraphs: [
@@ -186,7 +189,7 @@ export const researchNodes: Record<string, ResearchNode> = {
           </blockquote>
         </>,
         <>
-          My survey maps the landscape of collaborative learning, distinguishing two paradigms: <em>isolated inference</em> and <em>collaborative inference</em>. Traditional collaborative learning lets agents train together, then make predictions independently. Graph neural networks break this pattern: when the graph is distributed across agents, the message passing required for inference becomes cross-agent communication, forcing continuous collaboration. This transforms collaborative learning from a training-time problem to both training and inference.
+         My <strong>TMLR survey</strong> analyzes <strong>400+ papers</strong> on collaborative learning, from <em>Euclidean domains</em> (vision, language, time series) to <em>graph domains</em> (social networks, molecular systems, IoT). But graph domains introduce a fundamental challenge: graph neural networks rely on message passing, requiring nodes to exchange information not just during training but also during inference.  When graphs are distributed across agents, this becomes cross-agent communication, demanding continuous collaboration. I am the first to systematically characterize the resulting <strong>trilemma</strong> of <em>effectiveness</em>, <em>efficiency</em>, and <em>privacy</em>, providing a roadmap for practitioners navigating these constraints.
         </>,
       ],
 

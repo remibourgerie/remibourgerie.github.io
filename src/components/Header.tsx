@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 
-interface HeaderProps {
-  activeSection?: string;
-}
+const navItems = [
+  { id: 'home', label: 'Home' },
+  { id: 'about', label: 'About Me' },
+  { id: 'research', label: 'Research' },
+  { id: 'publications', label: 'Publications' },
+];
 
-export const Header: React.FC<HeaderProps> = ({ activeSection = 'home' }) => {
+export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +24,30 @@ export const Header: React.FC<HeaderProps> = ({ activeSection = 'home' }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const sectionIds = navItems.map(item => item.id);
+
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        }
+      },
+      { rootMargin: '-20% 0px -60% 0px' }
+    );
+
+    for (const id of sectionIds) {
+      const el = document.getElementById(id);
+      if (el) observerRef.current.observe(el);
+    }
+
+    return () => {
+      observerRef.current?.disconnect();
+    };
+  }, []);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -27,18 +56,11 @@ export const Header: React.FC<HeaderProps> = ({ activeSection = 'home' }) => {
     setIsMobileMenuOpen(false);
   };
 
-  const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About Me' },
-    { id: 'research', label: 'Research' },
-    { id: 'publications', label: 'Publications' }
-  ];
-
   return (
-    <header 
+    <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-background/95 backdrop-blur-md border-b border-border shadow-material-2' 
+        isScrolled
+          ? 'bg-background/95 backdrop-blur-md border-b border-border shadow-material-2'
           : 'bg-transparent'
       }`}
     >
@@ -59,8 +81,8 @@ export const Header: React.FC<HeaderProps> = ({ activeSection = 'home' }) => {
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
                 className={`text-sm font-medium transition-colors hover:text-primary ${
-                  activeSection === item.id 
-                    ? 'text-primary' 
+                  activeSection === item.id
+                    ? 'text-primary'
                     : 'text-foreground/70'
                 }`}
               >
@@ -89,8 +111,8 @@ export const Header: React.FC<HeaderProps> = ({ activeSection = 'home' }) => {
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
                   className={`text-left text-sm font-medium transition-colors hover:text-primary px-4 py-2 ${
-                    activeSection === item.id 
-                      ? 'text-primary bg-primary/10' 
+                    activeSection === item.id
+                      ? 'text-primary bg-primary/10'
                       : 'text-foreground/70'
                   }`}
                 >

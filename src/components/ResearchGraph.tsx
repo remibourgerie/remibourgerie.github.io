@@ -69,49 +69,53 @@ const useForceLayout = (initialNodes: Node[], initialEdges: Edge[]) => {
 };
 
 const ResearchGraph = ({ onNodeClick, activeNodeId }: ResearchGraphProps) => {
-  // Generate nodes with initial positioning
-  const initialNodes: Node[] = Object.values(researchNodes).map((node) => {
-    const isCenter = node.isCenter || false;
+  // Generate nodes with initial positioning (filter out hidden nodes)
+  const initialNodes: Node[] = Object.values(researchNodes)
+    .filter((node) => !node.hidden)
+    .map((node) => {
+      const isCenter = node.isCenter || false;
 
-    return {
-      id: node.id,
-      type: 'custom',
-      position: node.position, // Use as initial position
-      data: {
-        label: node.title,
-        tagline: node.tagline,
-        icon: node.icon,
-        isCenter: isCenter,
-      },
-      className: isCenter ? 'research-node-center' : 'research-node',
+      return {
+        id: node.id,
+        type: 'custom',
+        position: node.position, // Use as initial position
+        data: {
+          label: node.title,
+          tagline: node.tagline,
+          icon: node.icon,
+          isCenter: isCenter,
+        },
+        className: isCenter ? 'research-node-center' : 'research-node',
+        style: {
+          width: isCenter ? 140 : 120,
+          height: isCenter ? 140 : 120,
+          borderRadius: '50%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center',
+          padding: '10px',
+          cursor: 'pointer',
+          border: isCenter ? '3px solid' : '2px solid',
+        },
+      };
+    });
+
+  // Generate edges with smooth Bezier curves (filter out edges to hidden nodes)
+  const initialEdges: Edge[] = researchEdges
+    .filter((edge) => !researchNodes[edge.source]?.hidden && !researchNodes[edge.target]?.hidden)
+    .map((edge, index) => ({
+      id: `edge-${index}`,
+      source: edge.source,
+      target: edge.target,
+      type: 'simplebezier',
+      animated: false,
       style: {
-        width: isCenter ? 140 : 120,
-        height: isCenter ? 140 : 120,
-        borderRadius: '50%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlign: 'center',
-        padding: '10px',
-        cursor: 'pointer',
-        border: isCenter ? '3px solid' : '2px solid',
+        strokeWidth: 2,
+        stroke: 'hsl(var(--primary) / 0.3)',
+        strokeLinecap: 'round',
       },
-    };
-  });
-
-  // Generate edges with smooth Bezier curves
-  const initialEdges: Edge[] = researchEdges.map((edge, index) => ({
-    id: `edge-${index}`,
-    source: edge.source,
-    target: edge.target,
-    type: 'simplebezier',
-    animated: false,
-    style: {
-      strokeWidth: 2,
-      stroke: 'hsl(var(--primary) / 0.3)',
-      strokeLinecap: 'round',
-    },
-  }));
+    }));
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
@@ -438,6 +442,7 @@ const ResearchGraph = ({ onNodeClick, activeNodeId }: ResearchGraphProps) => {
         panOnScroll={false}
         panOnDrag={true}
         preventScrolling={false}
+        proOptions={{ hideAttribution: true }}
       >
         <Panel position="top-right" className="text-xs text-muted-foreground bg-background/80 px-2 py-1 rounded">
           Scroll to zoom • Drag nodes to reposition

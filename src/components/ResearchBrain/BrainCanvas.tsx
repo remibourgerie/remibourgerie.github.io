@@ -43,7 +43,7 @@ function getRadius(node: GraphNode, visiblePapers?: number): number {
     const pc = visiblePapers ?? 0;
     return 3 + Math.log2(1 + pc) * 1.8;
   }
-  return node.isOwn ? 3.5 : 2;
+  return 2;
 }
 
 interface BrainCanvasProps {
@@ -181,8 +181,8 @@ export default function BrainCanvas({
   }, [initSim]);
 
   useEffect(() => {
-    if (isRestarting) initSim();
-  }, [isRestarting, initSim]);
+    if (!isRestarting && currentStep === 0) initSim();
+  }, [isRestarting, currentStep, initSim]);
 
   // Add nodes when currentStep advances
   useEffect(() => {
@@ -319,7 +319,10 @@ export default function BrainCanvas({
           const c3 = c1 + 1;
           n.appearScale = 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
         }
-        if (n.glowIntensity > 0) n.glowIntensity = Math.max(0, n.glowIntensity - 0.012);
+        if (n.glowIntensity > 0) {
+          const decay = n.nodeData.isOwn ? 0.002 : 0.012;
+          n.glowIntensity = Math.max(0, n.glowIntensity - decay);
+        }
       }
 
       // Draw edges
@@ -369,10 +372,27 @@ export default function BrainCanvas({
           ctx!.restore();
         }
 
+        // Persistent glow for own papers — strong, multi-layer
+        if (n.nodeData.isOwn && n.appearScale >= 1) {
+          ctx!.save();
+          ctx!.shadowColor = color;
+          ctx!.shadowBlur = 20;
+          ctx!.globalAlpha = 0.35;
+          ctx!.beginPath();
+          ctx!.arc(n.x, n.y, r + 5, 0, Math.PI * 2);
+          ctx!.fillStyle = color;
+          ctx!.fill();
+          ctx!.globalAlpha = 0.15;
+          ctx!.beginPath();
+          ctx!.arc(n.x, n.y, r + 10, 0, Math.PI * 2);
+          ctx!.fill();
+          ctx!.restore();
+        }
+
         ctx!.beginPath();
         ctx!.arc(n.x, n.y, r, 0, Math.PI * 2);
         ctx!.fillStyle = color;
-        ctx!.globalAlpha = 0.7;
+        ctx!.globalAlpha = 0.9;
         ctx!.fill();
         ctx!.globalAlpha = 1;
       }

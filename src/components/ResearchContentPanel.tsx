@@ -13,7 +13,7 @@ const ResearchContentPanel = ({ activeNodeId, onNavigate }: ResearchContentPanel
   if (activeNodeId === 'overview') {
     // Get all non-overview research nodes dynamically
     const researchAreaNodes = Object.values(researchNodes).filter(
-      n => n.category === 'core'
+      n => n.category === 'core' && !n.hidden
     );
 
     return (

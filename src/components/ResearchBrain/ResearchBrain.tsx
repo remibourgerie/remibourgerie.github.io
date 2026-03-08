@@ -44,7 +44,7 @@ export default function ResearchBrain() {
   const animation = useBrainAnimation({
     totalSteps: data?.meta.timeSteps ?? 0,
     stepInterval: 400,
-    pauseAtEnd: 2000,
+    pauseAtEnd: 5000,
   });
 
   const currentDate = data

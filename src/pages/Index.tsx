@@ -1,26 +1,28 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { Button } from '@/components/ui/button';
 import { Download, Github, Linkedin, Mail, BookOpen, Briefcase, ArrowDown, MapPin, GraduationCap, History, Coffee, Compass } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useGithubProjects } from '@/hooks/useGithubProjects';
 import { useNews } from '@/hooks/useNews';
 import Header from '@/components/Header';
-import PublicationManager from '@/components/PublicationManager';
 import ProjectCard from '@/components/ProjectCard';
-import ResearchGraph from '@/components/ResearchGraph';
-import ResearchContentPanel from '@/components/ResearchContentPanel';
+import ErrorBoundary from '@/components/ErrorBoundary';
 import profileImage from '@/assets/profile.jpg';
 import { getCoffeeChatMailto, CONTACT_CONFIG } from '@/config/contact';
-import { ReactFlowProvider } from 'reactflow';
+
+const ResearchGraph = lazy(() => import('@/components/ResearchGraph'));
+const ResearchContentPanel = lazy(() => import('@/components/ResearchContentPanel'));
+const PublicationManager = lazy(() => import('@/components/PublicationManager'));
+const ReactFlowProvider = lazy(() => import('reactflow').then(m => ({ default: m.ReactFlowProvider })));
+const ResearchBrain = lazy(() => import('@/components/ResearchBrain/ResearchBrain'));
 
 
 const Index = () => {
-  const heroRef = useScrollAnimation();
   const aboutRef = useScrollAnimation();
+  const brainRef = useScrollAnimation();
   const researchRef = useScrollAnimation();
   const papersRef = useScrollAnimation();
   const projectsRef = useScrollAnimation();
-  const postsRef = useScrollAnimation();
 
   // State for interactive research graph
   const [activeResearchNode, setActiveResearchNode] = useState('overview');
@@ -31,25 +33,6 @@ const Index = () => {
 
   // Fetch all news/updates
   const { news, loading: newsLoading, error: newsError } = useNews(100);
-
-  const linkedinPosts = [
-    {
-      content: "Excited to share that our paper on hierarchical graph pooling has been accepted at NeurIPS 2023! 🎉\n\nThis work addresses one of the key challenges in graph neural networks: scalability. By introducing a novel hierarchical pooling mechanism, we can now apply GNNs to graphs with millions of nodes while maintaining representation quality.\n\nGrateful to my amazing collaborators and looking forward to presenting at the conference. The future of graph learning is bright! 🚀\n\n#GraphNeuralNetworks #MachineLearning #Research #NeurIPS2023",
-      date: "2 weeks ago",
-      likes: 127,
-      comments: 23,
-      shares: 15,
-      url: "https://linkedin.com/in/remi-bourgerie"
-    },
-    {
-      content: "Just finished implementing a new attention mechanism for graph neural networks that captures both local neighborhood and global graph structure. 🧠\n\nEarly results are promising - we're seeing 15-20% improvement on node classification tasks across multiple benchmarks. The key insight is that nodes need context at different scales to be properly understood.\n\nCode will be open-sourced soon! Always excited to contribute to the #OpenScience community.\n\n#GraphML #AI #Research #OpenSource",
-      date: "1 month ago", 
-      likes: 89,
-      comments: 12,
-      shares: 8,
-      url: "https://linkedin.com/in/remi-bourgerie"
-    }
-  ];
 
   const scrollToResearch = () => {
     const element = document.getElementById('research');
@@ -94,7 +77,7 @@ const Index = () => {
               </div>
 
               <p className="text-lg text-foreground/80 leading-relaxed max-w-xl">
-                I work at the intersection of <strong>Machine Learning</strong>, <strong>graphs</strong>, and <strong>Networks</strong>, building systems that learn from connected data.
+                I work at the intersection of <strong>Machine Learning</strong>, <strong>graphs</strong>, and <strong>networks</strong>, building systems that learn from connected data.
               </p>
 
               <div className="flex flex-wrap gap-4 items-center">
@@ -220,6 +203,7 @@ const Index = () => {
                     src={profileImage}
                     alt="Rémi Bourgerie"
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                 </div>
 
@@ -230,8 +214,8 @@ const Index = () => {
                     <div className="flex items-start gap-2.5 text-sm">
                       <Briefcase className="w-4 h-4 text-primary flex-shrink-0 mt-1" />
                       <div className="leading-tight">
-                        <p className="font-semibold text-foreground text-sm">PhD Student • KTH</p>
-                        <p className="text-foreground/60 text-xs mt-0.5">Network & Systems Eng. • 2023-Present</p>
+                        <span className="font-semibold text-foreground text-sm">PhD Student • KTH</span>
+                        <span className="text-foreground/60 text-xs"> • Dec. 2023-Present</span>
                       </div>
                     </div>
                   </div>
@@ -276,9 +260,11 @@ const Index = () => {
                 </div>
 
                 {/* Download CV Button */}
-                <Button size="lg" className="w-full bg-primary hover:bg-primary-dark shadow-material-2">
-                  <Download className="w-4 h-4 mr-2" />
-                  Download CV
+                <Button size="lg" className="w-full bg-primary hover:bg-primary-dark shadow-material-2" asChild>
+                  <a href="/cv_remi_bourgerie.pdf" download>
+                    <Download className="w-4 h-4 mr-2" />
+                    Download CV
+                  </a>
                 </Button>
 
                 {/* Book a Coffee Button */}
@@ -295,7 +281,7 @@ const Index = () => {
                 <div>
                   <h3 className="text-lg font-semibold text-foreground mb-3">In Short</h3>
                   <p>
-                    I am a PhD student in Computer Science at <a href="https://www.kth.se" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">KTH Royal Institute of Technology</a>, in the <a href="https://www.kth.se/cs/nse/division-of-network-and-systems-engineering-1.790377" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Division of Network and Systems Engineering</a>. I am under the supervision of <a href="https://www.kth.se/profile/vjfodor/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Viktoria Fodor</a> (main supervisor) and <a href="https://www.kth.se/profile/sarunasg/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Sarunas Girdzijauskas</a> (assistant supervisor). My research explores how networked systems and machine learning intersect, with a particular interest in <strong>graph neural networks</strong>. I am particularly interested in how topological structure shapes information flow and learning in networked systems, and how these insights can help design more robust and efficient distributed intelligence.
+                    I am a PhD student in Computer Science at <a href="https://www.kth.se" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">KTH Royal Institute of Technology</a>, in the <a href="https://www.kth.se/cs/nse/division-of-network-and-systems-engineering-1.790377" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Department of Network and Systems Engineering</a>. I am under the supervision of <a href="https://www.kth.se/profile/vjfodor/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Viktoria Fodor</a> (main supervisor) and <a href="https://www.kth.se/profile/sarunasg/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Sarunas Girdzijauskas</a> (assistant supervisor). My research explores how networked systems and machine learning intersect, with a particular interest in <strong>graph neural networks</strong>. I am particularly interested in how topological structure shapes information flow and learning in networked systems, and how these insights can help design more robust and efficient distributed intelligence.
                   </p>
                 </div>
 
@@ -307,7 +293,7 @@ const Index = () => {
                     </p>
 
                     <p>
-                      In 2021, I moved to Sweden for a double degree through the <a href="https://timeassociation.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">T.I.M.E.</a> program between <a href="https://www.ec-lyon.fr/en" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">École Centrale de Lyon</a> and <a href="https://www.kth.se" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">KTH Royal Institute of Technology</a>, specializing in <strong>Machine Learning</strong>. During this time, I conducted my <a href="#publications" className="text-primary hover:underline">master's thesis</a> in the industry at <a href="https://www.ericsson.com/en/ai" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Ericsson Global AI Accelerator</a>, where I worked on applied machine learning using Graph Neural Networks and Federated Learning for software anomaly detection. I graduated in 2023 with both an Engineering degree from ECL and a MSc. in Machine Learning from KTH. Since then, I am pursuing a PhD degree in Computer Science at KTH under the supervision of <a href="https://www.kth.se/profile/vjfodor/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Viktoria Fodor</a> and <a href="https://www.kth.se/profile/sarunasg/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Sarunas Girdzijauskas</a>.
+                      In 2021, I moved to Sweden for a double degree through the <a href="https://timeassociation.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">T.I.M.E.</a> program between <a href="https://www.ec-lyon.fr/en" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">École Centrale de Lyon</a> and <a href="https://www.kth.se" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">KTH Royal Institute of Technology</a>, specializing in <strong>Machine Learning</strong>. During this time, I conducted my <a href="#publications" className="text-primary hover:underline">master's thesis</a> in the industry at <a href="https://www.ericsson.com/en/ai" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Ericsson Global AI Accelerator</a>, where I worked on applied machine learning using Graph Neural Networks and Federated Learning for software anomaly detection. I graduated in 2023 with both a <em>diplôme d'ingénieur</em> from ECL and a MSc. in Machine Learning from KTH. Since then, I am pursuing a PhD degree in Computer Science at KTH advised by <a href="https://www.kth.se/profile/vjfodor/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Viktoria Fodor</a> and <a href="https://www.kth.se/profile/sarunasg/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Sarunas Girdzijauskas</a>.
                     </p>
                   </div>
                 </div>
@@ -321,8 +307,33 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Research Journey - Animated Brain */}
+      <section className="py-20 px-6 bg-muted/30">
+        <div className="max-w-4xl mx-auto">
+          <div
+            ref={brainRef.ref}
+            className={`transition-all duration-700 ease-out ${
+              brainRef.isVisible
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-8'
+            }`}
+          >
+            <h2 className="text-4xl font-bold mb-4 text-foreground">Research Journey</h2>
+            <p className="text-sm text-foreground/50 mb-3 italic">A growing network of papers and ideas that led from curiosity to contribution.</p>
+            <p className="text-foreground/70 mb-8">
+              Research often begins with curiosity before it becomes expertise. This map traces the papers I've read over the years, gradually forming the universe that shapes my work. Each node represents a paper, each cluster a research idea pulling nearby work into orbit. Over time, the map grows into a small galaxy, and the purple nodes mark where I began adding a few stars of my own.
+            </p>
+            <ErrorBoundary>
+              <Suspense fallback={<div className="h-[400px] bg-slate-100 rounded-xl animate-pulse" />}>
+                <ResearchBrain />
+              </Suspense>
+            </ErrorBoundary>
+          </div>
+        </div>
+      </section>
+
       {/* Research Section - Interactive Graph */}
-      <section id="research" className="py-20 px-6 bg-muted/30">
+      <section id="research" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div
             ref={researchRef.ref}
@@ -343,12 +354,16 @@ const Index = () => {
                       Research Areas
                     </h3>
                   </div>
-                  <ReactFlowProvider>
-                    <ResearchGraph
-                      onNodeClick={setActiveResearchNode}
-                      activeNodeId={activeResearchNode}
-                    />
-                  </ReactFlowProvider>
+                  <ErrorBoundary>
+                    <Suspense fallback={<div className="aspect-[4/3] bg-muted/50 rounded-lg animate-pulse" />}>
+                      <ReactFlowProvider>
+                        <ResearchGraph
+                          onNodeClick={setActiveResearchNode}
+                          activeNodeId={activeResearchNode}
+                        />
+                      </ReactFlowProvider>
+                    </Suspense>
+                  </ErrorBoundary>
                   <div className="mt-4 text-center">
                     <p className="text-sm text-primary font-semibold flex items-center justify-center gap-2">
                       <Compass className="w-4 h-4" />
@@ -361,10 +376,14 @@ const Index = () => {
               {/* Right Column - Content (Scrollable) */}
               <div className="space-y-8">
                 {/* Research Content Panel */}
-                <ResearchContentPanel
-                  activeNodeId={activeResearchNode}
-                  onNavigate={setActiveResearchNode}
-                />
+                <ErrorBoundary>
+                  <Suspense fallback={<div className="h-64 bg-muted/50 rounded-lg animate-pulse" />}>
+                    <ResearchContentPanel
+                      activeNodeId={activeResearchNode}
+                      onNavigate={setActiveResearchNode}
+                    />
+                  </Suspense>
+                </ErrorBoundary>
               </div>
             </div>
           </div>
@@ -402,7 +421,11 @@ const Index = () => {
             </div>
 
             {/* Publication List - Full Width */}
-            <PublicationManager />
+            <ErrorBoundary>
+              <Suspense fallback={<div className="h-64 bg-muted/50 rounded-lg animate-pulse" />}>
+                <PublicationManager />
+              </Suspense>
+            </ErrorBoundary>
           </div>
         </div>
       </section>
