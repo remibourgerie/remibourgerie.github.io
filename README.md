@@ -2,7 +2,7 @@
 
 My personal academic website, built with React, TypeScript, Supabase, and Tailwind CSS.
 
-Live at [remibourgerie.com](https://remibourgerie.com)
+Live at [remibourgerie.github.io](https://remibourgerie.github.io)
 
 ## Stack
 

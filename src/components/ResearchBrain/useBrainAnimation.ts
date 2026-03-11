@@ -4,6 +4,7 @@ interface UseBrainAnimationOptions {
   totalSteps: number;
   stepInterval?: number;   // ms between steps, default 400
   pauseAtEnd?: number;     // ms to pause before restarting, default 2000
+  isVisible?: boolean;     // only animate when visible
 }
 
 interface UseBrainAnimationReturn {
@@ -16,10 +17,12 @@ export function useBrainAnimation({
   totalSteps,
   stepInterval = 200,
   pauseAtEnd = 3000,
+  isVisible = true,
 }: UseBrainAnimationOptions): UseBrainAnimationReturn {
   const [currentStep, setCurrentStep] = useState(0);
   const [isRestarting, setIsRestarting] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const startedRef = useRef(false);
 
   const clearTimer = useCallback(() => {
     if (timerRef.current !== null) {
@@ -29,7 +32,12 @@ export function useBrainAnimation({
   }, []);
 
   useEffect(() => {
-    if (totalSteps <= 0) return;
+    if (totalSteps <= 0 || !isVisible) return;
+
+    // If already started and just coming back into view, don't restart
+    if (startedRef.current && currentStep > 0) return;
+
+    startedRef.current = true;
 
     const advance = () => {
       setCurrentStep(prev => {
@@ -52,10 +60,11 @@ export function useBrainAnimation({
 
     timerRef.current = setTimeout(advance, stepInterval);
     return clearTimer;
-  }, [totalSteps, stepInterval, pauseAtEnd, clearTimer]);
+  }, [totalSteps, stepInterval, pauseAtEnd, clearTimer, isVisible]);
 
   const reset = useCallback(() => {
     clearTimer();
+    startedRef.current = false;
     setCurrentStep(0);
     setIsRestarting(false);
   }, [clearTimer]);

@@ -9,6 +9,7 @@ export default function ResearchBrain() {
   const [error, setError] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 500 });
+  const [isVisible, setIsVisible] = useState(false);
   const [tooltip, setTooltip] = useState<{
     node?: GraphNode;
     x: number;
@@ -41,10 +42,23 @@ export default function ResearchBrain() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.5 }
+    );
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
+
   const animation = useBrainAnimation({
     totalSteps: data?.meta.timeSteps ?? 0,
     stepInterval: 400,
     pauseAtEnd: 5000,
+    isVisible,
   });
 
   const currentDate = data
