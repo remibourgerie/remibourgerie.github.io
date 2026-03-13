@@ -4,6 +4,7 @@ import { Download, Github, Linkedin, Mail, BookOpen, Briefcase, ArrowDown, MapPi
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useGithubProjects } from '@/hooks/useGithubProjects';
 import { useNews } from '@/hooks/useNews';
+import { useAnalytics } from '@/hooks/useAnalytics';
 import Header from '@/components/Header';
 import ProjectCard from '@/components/ProjectCard';
 import ErrorBoundary from '@/components/ErrorBoundary';
@@ -23,6 +24,8 @@ const Index = () => {
   const researchRef = useScrollAnimation();
   const papersRef = useScrollAnimation();
   const projectsRef = useScrollAnimation();
+
+  const { trackClick } = useAnalytics();
 
   // State for interactive research graph
   const [activeResearchNode, setActiveResearchNode] = useState('overview');
@@ -95,21 +98,21 @@ const Index = () => {
                   className="coffee-button"
                   asChild
                 >
-                  <a href={getCoffeeChatMailto()}>
+                  <a href={getCoffeeChatMailto()} onClick={() => trackClick('coffee-chat-hero')}>
                     <Coffee className="w-4 h-4 mr-2 coffee-icon" />
                     Grab a Coffee?
                   </a>
                 </Button>
-                <a href={`mailto:${CONTACT_CONFIG.email}`} className="text-foreground/60 hover:text-primary transition-colors" title="Email">
+                <a href={`mailto:${CONTACT_CONFIG.email}`} className="text-foreground/60 hover:text-primary transition-colors" title="Email" onClick={() => trackClick('social-email')}>
                   <Mail className="w-5 h-5" />
                 </a>
-                <a href="https://www.linkedin.com/in/remi-bourgerie/" target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-primary transition-colors" title="LinkedIn">
+                <a href="https://www.linkedin.com/in/remi-bourgerie/" target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-primary transition-colors" title="LinkedIn" onClick={() => trackClick('social-linkedin')}>
                   <Linkedin className="w-5 h-5" />
                 </a>
-                <a href="https://scholar.google.com/citations?user=T3J6BMcAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-primary transition-colors" title="Google Scholar">
+                <a href="https://scholar.google.com/citations?user=T3J6BMcAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-primary transition-colors" title="Google Scholar" onClick={() => trackClick('social-scholar')}>
                   <BookOpen className="w-5 h-5" />
                 </a>
-                <a href="https://github.com/remibourgerie" target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-primary transition-colors" title="GitHub">
+                <a href="https://github.com/remibourgerie" target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-primary transition-colors" title="GitHub" onClick={() => trackClick('social-github')}>
                   <Github className="w-5 h-5" />
                 </a>
               </div>
@@ -261,7 +264,7 @@ const Index = () => {
 
                 {/* Download CV Button */}
                 <Button size="lg" className="w-full bg-primary hover:bg-primary-dark shadow-material-2" asChild>
-                  <a href="/cv_remi_bourgerie.pdf" download>
+                  <a href="/cv_remi_bourgerie.pdf" download onClick={() => trackClick('cv-download')}>
                     <Download className="w-4 h-4 mr-2" />
                     Download CV
                   </a>
@@ -269,7 +272,7 @@ const Index = () => {
 
                 {/* Book a Coffee Button */}
                 <Button size="lg" variant="outline" className="w-full coffee-button" asChild>
-                  <a href={getCoffeeChatMailto()}>
+                  <a href={getCoffeeChatMailto()} onClick={() => trackClick('coffee-chat-about')}>
                     <Coffee className="w-4 h-4 mr-2 coffee-icon" />
                     Curious? book a <em>coffee</em>with me
                   </a>
@@ -410,6 +413,7 @@ const Index = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary hover:underline flex items-center gap-1.5 text-sm font-medium"
+                  onClick={() => trackClick('publications-scholar-link')}
                 >
                   <BookOpen className="w-4 h-4" />
                   Google Scholar →
@@ -490,16 +494,16 @@ const Index = () => {
             Rémi Bourgerie
           </p>
           <div className="flex justify-center gap-6">
-            <a href={`mailto:${CONTACT_CONFIG.email}`} className="text-muted-foreground hover:text-primary transition-colors" title="Email">
+            <a href={`mailto:${CONTACT_CONFIG.email}`} className="text-muted-foreground hover:text-primary transition-colors" title="Email" onClick={() => trackClick('footer-email')}>
               <Mail className="w-5 h-5" />
             </a>
-            <a href="https://www.linkedin.com/in/remi-bourgerie/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" title="LinkedIn">
+            <a href="https://www.linkedin.com/in/remi-bourgerie/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" title="LinkedIn" onClick={() => trackClick('footer-linkedin')}>
               <Linkedin className="w-5 h-5" />
             </a>
-            <a href="https://scholar.google.com/citations?user=T3J6BMcAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" title="Google Scholar">
+            <a href="https://scholar.google.com/citations?user=T3J6BMcAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" title="Google Scholar" onClick={() => trackClick('footer-scholar')}>
               <BookOpen className="w-5 h-5" />
             </a>
-            <a href="https://github.com/remibourgerie" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" title="GitHub">
+            <a href="https://github.com/remibourgerie" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" title="GitHub" onClick={() => trackClick('footer-github')}>
               <Github className="w-5 h-5" />
             </a>
           </div>

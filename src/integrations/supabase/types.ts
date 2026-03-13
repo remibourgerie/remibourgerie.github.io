@@ -14,6 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
+      click_events: {
+        Row: {
+          id: string
+          session_id: string
+          clicked_at: string
+          element: string
+          metadata: Json
+        }
+        Insert: {
+          id?: string
+          session_id: string
+          clicked_at?: string
+          element: string
+          metadata?: Json
+        }
+        Update: {
+          id?: string
+          session_id?: string
+          clicked_at?: string
+          element?: string
+          metadata?: Json
+        }
+        Relationships: []
+      }
+      page_views: {
+        Row: {
+          id: string
+          session_id: string
+          entered_at: string
+          left_at: string | null
+          duration_seconds: number | null
+          referrer: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          id?: string
+          session_id: string
+          entered_at?: string
+          left_at?: string | null
+          duration_seconds?: number | null
+          referrer?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          id?: string
+          session_id?: string
+          entered_at?: string
+          left_at?: string | null
+          duration_seconds?: number | null
+          referrer?: string | null
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       publications: {
         Row: {
           abstract: string
