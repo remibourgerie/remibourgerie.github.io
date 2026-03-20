@@ -2,9 +2,9 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 
 interface UseBrainAnimationOptions {
   totalSteps: number;
-  stepInterval?: number;   // ms between steps, default 400
-  pauseAtEnd?: number;     // ms to pause before restarting, default 2000
-  isVisible?: boolean;     // only animate when visible
+  stepInterval?: number;
+  pauseAtEnd?: number;
+  isVisible?: boolean;
 }
 
 interface UseBrainAnimationReturn {
@@ -21,49 +21,61 @@ export function useBrainAnimation({
 }: UseBrainAnimationOptions): UseBrainAnimationReturn {
   const [currentStep, setCurrentStep] = useState(0);
   const [isRestarting, setIsRestarting] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const clearTimer = useCallback(() => {
-    if (timerRef.current !== null) {
-      clearTimeout(timerRef.current);
-      timerRef.current = null;
-    }
-  }, []);
+  const rafRef = useRef<number>(0);
+  const stepRef = useRef(0);
+  const lastTimeRef = useRef(0);
+  const pausingRef = useRef(false);
 
   useEffect(() => {
     if (totalSteps <= 0 || !isVisible) {
-      clearTimer();
+      cancelAnimationFrame(rafRef.current);
       return;
     }
 
-    const advance = () => {
-      setCurrentStep(prev => {
-        const next = prev + 1;
-        if (next >= totalSteps) {
-          // Reached end — pause then restart
-          setIsRestarting(true);
-          timerRef.current = setTimeout(() => {
-            setIsRestarting(false);
-            setCurrentStep(0);
-            // Schedule next tick after reset
-            timerRef.current = setTimeout(advance, stepInterval);
-          }, pauseAtEnd);
-          return prev;
+    lastTimeRef.current = performance.now();
+
+    const tick = (now: number) => {
+      const elapsed = now - lastTimeRef.current;
+
+      if (pausingRef.current) {
+        // Waiting at end before restarting
+        if (elapsed >= pauseAtEnd) {
+          pausingRef.current = false;
+          stepRef.current = 0;
+          lastTimeRef.current = now;
+          setCurrentStep(0);
+          setIsRestarting(false);
         }
-        timerRef.current = setTimeout(advance, stepInterval);
-        return next;
-      });
+      } else if (elapsed >= stepInterval) {
+        stepRef.current += 1;
+        lastTimeRef.current = now;
+
+        if (stepRef.current >= totalSteps) {
+          // Reached end — start pause
+          stepRef.current = totalSteps - 1;
+          pausingRef.current = true;
+          setCurrentStep(totalSteps - 1);
+          setIsRestarting(true);
+        } else {
+          setCurrentStep(stepRef.current);
+        }
+      }
+
+      rafRef.current = requestAnimationFrame(tick);
     };
 
-    timerRef.current = setTimeout(advance, stepInterval);
-    return clearTimer;
-  }, [totalSteps, stepInterval, pauseAtEnd, clearTimer, isVisible]);
+    rafRef.current = requestAnimationFrame(tick);
+
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [totalSteps, stepInterval, pauseAtEnd, isVisible]);
 
   const reset = useCallback(() => {
-    clearTimer();
+    cancelAnimationFrame(rafRef.current);
+    stepRef.current = 0;
+    pausingRef.current = false;
     setCurrentStep(0);
     setIsRestarting(false);
-  }, [clearTimer]);
+  }, []);
 
   return { currentStep, isRestarting, reset };
 }

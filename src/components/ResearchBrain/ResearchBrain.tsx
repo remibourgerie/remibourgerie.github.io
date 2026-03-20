@@ -30,7 +30,7 @@ export default function ResearchBrain() {
     const container = containerRef.current;
     if (!container) return;
 
-    const observer = new ResizeObserver(entries => {
+    const resizeObs = new ResizeObserver(entries => {
       for (const entry of entries) {
         const w = entry.contentRect.width;
         const h = Math.min(w * 0.6, window.innerHeight * 0.65);
@@ -38,21 +38,18 @@ export default function ResearchBrain() {
       }
     });
 
-    observer.observe(container);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const observer = new IntersectionObserver(
+    const intersectionObs = new IntersectionObserver(
       ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.5 }
+      { threshold: 0.2 }
     );
-    observer.observe(container);
-    return () => observer.disconnect();
-  }, []);
+
+    resizeObs.observe(container);
+    intersectionObs.observe(container);
+    return () => {
+      resizeObs.disconnect();
+      intersectionObs.disconnect();
+    };
+  }, [data]);
 
   const animation = useBrainAnimation({
     totalSteps: data?.meta.timeSteps ?? 0,
@@ -89,49 +86,45 @@ export default function ResearchBrain() {
     }
   }, []);
 
-  if (error) {
-    return (
-      <div className="text-center py-12 text-foreground/50">
-        <p className="text-sm">Research evolution data not available yet.</p>
-        <p className="text-xs mt-1">Run the preprocessing script to generate it.</p>
-      </div>
-    );
-  }
-
-  if (!data) {
-    return (
-      <div className="animate-pulse rounded-xl bg-slate-100" style={{ height: 400 }} />
-    );
-  }
-
   return (
     <div ref={containerRef} className="relative w-full rounded-xl border border-border/40 bg-card/30">
-      <BrainCanvas
-        data={data}
-        currentStep={animation.currentStep}
-        isRestarting={animation.isRestarting}
-        width={dimensions.width}
-        height={dimensions.height}
-        onHover={handleHover}
-        onClick={handleClick}
-      />
-      <BrainTooltip
-        node={tooltip?.node}
-        x={tooltip?.x ?? 0}
-        y={tooltip?.y ?? 0}
-        visible={tooltip !== null}
-      />
+      {error ? (
+        <div className="text-center py-12 text-foreground/50">
+          <p className="text-sm">Research evolution data not available yet.</p>
+          <p className="text-xs mt-1">Run the preprocessing script to generate it.</p>
+        </div>
+      ) : !data ? (
+        <div className="animate-pulse rounded-xl bg-slate-100" style={{ height: 400 }} />
+      ) : (
+        <>
+          <BrainCanvas
+            data={data}
+            currentStep={animation.currentStep}
+            isRestarting={animation.isRestarting}
+            width={dimensions.width}
+            height={dimensions.height}
+            onHover={handleHover}
+            onClick={handleClick}
+          />
+          <BrainTooltip
+            node={tooltip?.node}
+            x={tooltip?.x ?? 0}
+            y={tooltip?.y ?? 0}
+            visible={tooltip !== null}
+          />
 
-      {/* Paper counter */}
-      <span className="absolute bottom-3 left-4 text-xs text-foreground/40 pointer-events-none">
-        {visiblePapers} / {data.meta.totalPapers} papers
-      </span>
+          {/* Paper counter */}
+          <span className="absolute bottom-3 left-4 text-xs text-foreground/40 pointer-events-none">
+            {visiblePapers} / {data.meta.totalPapers} papers
+          </span>
 
-      {/* Date label */}
-      {formattedDate && (
-        <span className="absolute bottom-3 right-4 text-xs font-mono text-foreground/40 pointer-events-none">
-          {formattedDate}
-        </span>
+          {/* Date label */}
+          {formattedDate && (
+            <span className="absolute bottom-3 right-4 text-xs font-mono text-foreground/40 pointer-events-none">
+              {formattedDate}
+            </span>
+          )}
+        </>
       )}
     </div>
   );

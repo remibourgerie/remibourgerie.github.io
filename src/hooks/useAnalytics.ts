@@ -40,12 +40,16 @@ export function useAnalytics() {
         duration_seconds: duration,
       });
 
-      // Use sendBeacon for reliability on page unload
+      // sendBeacon can't set custom headers, so rely on visibilitychange instead
+      // This is just a last-resort fallback
       const url = `${import.meta.env.VITE_SUPABASE_URL}/rest/v1/page_views?id=eq.${rowIdRef.current}`;
-      navigator.sendBeacon(
-        url,
-        new Blob([body], { type: 'application/json' })
-      );
+      const headers = {
+        'Content-Type': 'application/json',
+        'apikey': import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+        'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+        'Prefer': 'return=minimal',
+      };
+      fetch(url, { method: 'PATCH', headers, body, keepalive: true }).catch(() => {});
     };
 
     // sendBeacon doesn't support PATCH with auth headers reliably,
