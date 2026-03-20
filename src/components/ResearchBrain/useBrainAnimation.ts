@@ -22,7 +22,6 @@ export function useBrainAnimation({
   const [currentStep, setCurrentStep] = useState(0);
   const [isRestarting, setIsRestarting] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const startedRef = useRef(false);
 
   const clearTimer = useCallback(() => {
     if (timerRef.current !== null) {
@@ -32,12 +31,10 @@ export function useBrainAnimation({
   }, []);
 
   useEffect(() => {
-    if (totalSteps <= 0 || !isVisible) return;
-
-    // If already started and just coming back into view, don't restart
-    if (startedRef.current && currentStep > 0) return;
-
-    startedRef.current = true;
+    if (totalSteps <= 0 || !isVisible) {
+      clearTimer();
+      return;
+    }
 
     const advance = () => {
       setCurrentStep(prev => {
@@ -64,7 +61,6 @@ export function useBrainAnimation({
 
   const reset = useCallback(() => {
     clearTimer();
-    startedRef.current = false;
     setCurrentStep(0);
     setIsRestarting(false);
   }, [clearTimer]);
