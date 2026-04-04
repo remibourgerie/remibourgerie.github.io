@@ -82,7 +82,12 @@ const ResearchPaper: React.FC<ResearchPaperProps> = ({
 
           {/* Full-width: metadata row */}
           <p className="text-xs text-foreground/60 leading-relaxed">
-            {authors.join(', ')}
+            {authors.map((author, i) => (
+              <span key={i}>
+                {i > 0 && ', '}
+                {author.includes('Bourgerie') ? <strong>{author}</strong> : author}
+              </span>
+            ))}
             <span className="mx-1.5 opacity-40">·</span>
             <span className="italic">{journal}</span>
             {conferenceUrl && (
