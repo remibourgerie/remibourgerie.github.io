@@ -312,7 +312,7 @@ const Index = () => {
 
       {/* Research Journey - Animated Brain */}
       <section className="py-20 px-6 bg-muted/30">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div
             ref={brainRef.ref}
             className={`transition-all duration-700 ease-out ${
@@ -395,7 +395,7 @@ const Index = () => {
 
       {/* Publications Section */}
       <section id="publications" className="py-20 px-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div
             ref={papersRef.ref}
             className={`transition-all duration-700 ease-out ${
@@ -489,7 +489,7 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="py-12 px-6 border-t border-border">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-5xl mx-auto text-center">
           <p className="text-muted-foreground mb-4">
             Rémi Bourgerie
           </p>

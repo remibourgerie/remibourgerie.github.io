@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink, Users, Calendar, FileText, Image, Code, BookOpen, Video, Presentation } from 'lucide-react';
+import { ExternalLink, FileText, Image, Code, BookOpen, Video, Presentation } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 interface ResearchPaperProps {
@@ -55,121 +55,115 @@ const ResearchPaper: React.FC<ResearchPaperProps> = ({
       id={id ? `pub-${id}` : undefined}
       ref={ref}
       className={`transition-all duration-700 ease-out ${
-        isVisible
-          ? 'opacity-100 translate-y-0'
-          : 'opacity-0 translate-y-8'
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       <Card className="shadow-material-2 hover:shadow-material-3 transition-all duration-300 hover:-translate-y-1 bg-gradient-card border-0">
-        <CardHeader className="pb-3">
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex-1">
-              <div className="flex items-start gap-2 flex-wrap">
-                {url ? (
-                  <a
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group"
-                  >
-                    <CardTitle className="text-lg font-semibold leading-tight text-foreground group-hover:text-primary transition-colors cursor-pointer">
-                      {title}
-                    </CardTitle>
-                  </a>
-                ) : (
-                  <CardTitle className="text-lg font-semibold leading-tight text-foreground">
-                    {title}
-                  </CardTitle>
-                )}
-                {publicationType && (
-                  <Badge variant="outline" className="text-xs mt-0.5 bg-secondary/50">
-                    {publicationType}
-                  </Badge>
-                )}
-              </div>
-              <CardDescription className="flex items-center gap-4 mt-2 text-sm">
-                <span className="flex items-center gap-1">
-                  <Users className="w-4 h-4" />
-                  {authors.length} authors
-                </span>
-                <span className="flex items-center gap-1">
-                  <Calendar className="w-4 h-4" />
-                  {year}
-                </span>
-                <span className="font-medium text-primary">
-                  {citations} citations
-                </span>
-              </CardDescription>
-            </div>
-          </div>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div>
-            <h4 className="font-medium text-sm text-muted-foreground mb-1">Authors</h4>
-            <p className="text-sm text-foreground">{authors.join(', ')}</p>
-          </div>
-          
-          <div>
-            <h4 className="font-medium text-sm text-muted-foreground mb-1">Published in</h4>
-            <div className="flex items-center gap-1.5">
-              <p className="text-sm text-foreground">{journal}</p>
-              {conferenceUrl && (
-                <a
-                  href={conferenceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                  title="Conference website"
-                >
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              )}
-            </div>
-          </div>
+        <CardContent className="pt-5 pb-5 flex flex-col gap-3">
 
-          {/* Abstract with optional illustration */}
-          <div className={illustrationUrl ? "grid md:grid-cols-[2fr,1fr] gap-6" : ""}>
-            <div>
-              <h4 className="font-medium text-sm text-muted-foreground mb-2">Abstract</h4>
-              <div
-                className="cursor-pointer group"
-                onClick={() => setIsAbstractExpanded(!isAbstractExpanded)}
-              >
-                <p className={`text-sm text-foreground/80 leading-relaxed transition-all ${
-                  isAbstractExpanded
-                    ? ''
-                    : (illustrationUrl ? 'line-clamp-4' : 'line-clamp-3')
-                }`}>
-                  {abstract}
-                </p>
-                <span className="text-xs text-primary mt-1 inline-block group-hover:underline">
-                  {isAbstractExpanded ? '← Show less' : 'Read more →'}
-                </span>
-              </div>
-            </div>
-            {illustrationUrl && (
-              <a
-                href={illustrationUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="order-first md:order-last"
-              >
-                <img
-                  src={illustrationUrl}
-                  alt={`Illustration for ${title}`}
-                  className="w-full h-auto max-h-[250px] object-contain rounded-lg border border-border hover:border-primary transition-colors cursor-pointer"
-                  loading="lazy"
-                />
+          {/* Full-width: title + badge */}
+          <div className="flex items-start gap-2 flex-wrap">
+            {url ? (
+              <a href={url} target="_blank" rel="noopener noreferrer" className="group">
+                <h3 className="text-base font-semibold leading-snug text-foreground group-hover:text-primary transition-colors cursor-pointer">
+                  {title}
+                </h3>
               </a>
+            ) : (
+              <h3 className="text-base font-semibold leading-snug text-foreground">{title}</h3>
+            )}
+            {publicationType && (
+              <Badge variant="outline" className="text-xs shrink-0 bg-secondary/50 self-center">
+                {publicationType}
+              </Badge>
             )}
           </div>
 
-          <div className="flex flex-wrap gap-2 pt-2">
+          {/* Full-width: metadata row */}
+          <p className="text-xs text-foreground/60 leading-relaxed">
+            {authors.join(', ')}
+            <span className="mx-1.5 opacity-40">·</span>
+            <span className="italic">{journal}</span>
+            {conferenceUrl && (
+              <a
+                href={conferenceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center ml-1 text-muted-foreground hover:text-primary transition-colors"
+                title="Conference website"
+              >
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            )}
+            <span className="mx-1.5 opacity-40">·</span>
+            {year}
+            {citations > 0 && (
+              <>
+                <span className="mx-1.5 opacity-40">·</span>
+                <span className="text-primary font-medium">{citations} citations</span>
+              </>
+            )}
+          </p>
+
+          {/* Abstract + illustration */}
+          <div onClick={() => setIsAbstractExpanded(!isAbstractExpanded)} className="cursor-pointer group">
+            {/* Collapsed: side by side, height-matched */}
+            {!isAbstractExpanded && (
+              <div className={illustrationUrl ? 'grid md:grid-cols-[1fr_224px] gap-5 items-start' : ''}>
+                <div className="overflow-hidden" style={{ maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)' }}>
+                  <p className="text-sm text-foreground/75 leading-relaxed line-clamp-6">
+                    {abstract}
+                  </p>
+                </div>
+                {illustrationUrl && (
+                  <img
+                    src={illustrationUrl}
+                    alt={`Illustration for ${title}`}
+                    className="hidden md:block w-56 object-contain rounded-lg"
+                    loading="lazy"
+                  />
+                )}
+              </div>
+            )}
+
+            {/* Expanded: full abstract, then illustration centered below */}
+            {isAbstractExpanded && (
+              <div>
+                <p className="text-sm text-foreground/75 leading-relaxed">
+                  {abstract}
+                </p>
+                {illustrationUrl && (
+                  <div className="mt-4 flex justify-center animate-in fade-in zoom-in-95 duration-300">
+                    <a
+                      href={illustrationUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={e => e.stopPropagation()}
+                    >
+                      <img
+                        src={illustrationUrl}
+                        alt={`Illustration for ${title}`}
+                        className="max-w-sm w-full object-contain rounded-lg"
+                        loading="lazy"
+                      />
+                    </a>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <span className="text-xs text-primary mt-1 inline-block group-hover:underline">
+              {isAbstractExpanded ? '← Show less' : 'Read more →'}
+            </span>
+          </div>
+
+          {/* Full-width: tags */}
+          <div className="flex flex-wrap gap-1.5">
             {tags.map((tag, index) => (
-              <Badge 
-                key={index} 
-                variant="secondary" 
+              <Badge
+                key={index}
+                variant="secondary"
                 className="text-xs bg-primary/10 text-primary hover:bg-primary/20"
               >
                 {tag}
@@ -177,73 +171,43 @@ const ResearchPaper: React.FC<ResearchPaperProps> = ({
             ))}
           </div>
 
-          {/* Action buttons for PDF, Proceeding, Presentation, Video, Poster, Code */}
+          {/* Full-width: action buttons */}
           {(pdfUrl || posterUrl || codeUrl || proceedingUrl || presentationUrl || videoUrl) && (
-            <div className="flex flex-wrap gap-3 pt-4 border-t border-border/50">
+            <div className="flex flex-wrap gap-2 pt-1 border-t border-border/40">
               {pdfUrl && (
-                <a
-                  href={pdfUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-3 py-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg transition-colors text-sm font-medium"
-                >
-                  <FileText className="w-4 h-4" />
-                  PDF
+                <a href={pdfUrl} target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
+                  <FileText className="w-3.5 h-3.5" /> PDF
                 </a>
               )}
               {proceedingUrl && (
-                <a
-                  href={proceedingUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-3 py-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg transition-colors text-sm font-medium"
-                >
-                  <BookOpen className="w-4 h-4" />
-                  Proceeding
+                <a href={proceedingUrl} target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
+                  <BookOpen className="w-3.5 h-3.5" /> Proceeding
                 </a>
               )}
               {presentationUrl && (
-                <a
-                  href={presentationUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-3 py-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg transition-colors text-sm font-medium"
-                >
-                  <Presentation className="w-4 h-4" />
-                  Presentation
+                <a href={presentationUrl} target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
+                  <Presentation className="w-3.5 h-3.5" /> Presentation
                 </a>
               )}
               {videoUrl && (
-                <a
-                  href={videoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-3 py-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg transition-colors text-sm font-medium"
-                >
-                  <Video className="w-4 h-4" />
-                  Video
+                <a href={videoUrl} target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
+                  <Video className="w-3.5 h-3.5" /> Video
                 </a>
               )}
               {posterUrl && (
-                <a
-                  href={posterUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-3 py-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg transition-colors text-sm font-medium"
-                >
-                  <Image className="w-4 h-4" />
-                  Poster
+                <a href={posterUrl} target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
+                  <Image className="w-3.5 h-3.5" /> Poster
                 </a>
               )}
               {codeUrl && (
-                <a
-                  href={codeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-3 py-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg transition-colors text-sm font-medium"
-                >
-                  <Code className="w-4 h-4" />
-                  Code
+                <a href={codeUrl} target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
+                  <Code className="w-3.5 h-3.5" /> Code
                 </a>
               )}
             </div>
