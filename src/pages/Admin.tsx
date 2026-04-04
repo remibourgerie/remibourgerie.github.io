@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { RefreshCw, Save, Trash2, X, LogOut, Lock } from 'lucide-react';
+import { RefreshCw, Save, Trash2, X, LogOut, Lock, Plus } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import GoogleScholarIntegration from '@/components/GoogleScholarIntegration';
@@ -34,6 +34,11 @@ const Admin: React.FC = () => {
   const [publications, setPublications] = useState<Publication[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editForm, setEditForm] = useState<Publication | null>(null);
+  const [isAdding, setIsAdding] = useState(false);
+  const [newForm, setNewForm] = useState<Publication>({
+    title: '', authors: [], journal: '', year: new Date().getFullYear(),
+    citations: 0, abstract: '', tags: [],
+  });
   const [showScholar, setShowScholar] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -217,6 +222,22 @@ const Admin: React.FC = () => {
     }
   };
 
+  const handleInsert = async () => {
+    try {
+      const { error } = await supabase.from('publications').insert({
+        ...newForm,
+        updated_at: new Date().toISOString(),
+      });
+      if (error) throw error;
+      toast({ title: "Publication added", description: "New publication saved successfully" });
+      setIsAdding(false);
+      setNewForm({ title: '', authors: [], journal: '', year: new Date().getFullYear(), citations: 0, abstract: '', tags: [] });
+      fetchPublications();
+    } catch (error: any) {
+      toast({ title: "Error adding publication", description: error.message, variant: "destructive" });
+    }
+  };
+
   const handleScholarSync = async (newPublications: any[]) => {
     try {
       let addedCount = 0;
@@ -364,22 +385,54 @@ const Admin: React.FC = () => {
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold">Publications Admin</h1>
           <div className="flex gap-2">
-            <Button
-              onClick={() => setShowScholar(!showScholar)}
-              variant="outline"
-            >
+            <Button onClick={() => setIsAdding(!isAdding)} variant="outline">
+              <Plus className="w-4 h-4 mr-2" />
+              Add Publication
+            </Button>
+            <Button onClick={() => setShowScholar(!showScholar)} variant="outline">
               <RefreshCw className="w-4 h-4 mr-2" />
               Sync from Google Scholar
             </Button>
-            <Button
-              onClick={handleLogout}
-              variant="outline"
-            >
+            <Button onClick={handleLogout} variant="outline">
               <LogOut className="w-4 h-4 mr-2" />
               Logout
             </Button>
           </div>
         </div>
+
+        {isAdding && (
+          <Card className="mb-8 border-primary/30">
+            <CardHeader>
+              <CardTitle>New Publication</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div><Label>Title</Label><Input value={newForm.title} onChange={e => setNewForm({...newForm, title: e.target.value})} /></div>
+              <div><Label>Authors (comma separated)</Label><Input value={newForm.authors.join(', ')} onChange={e => setNewForm({...newForm, authors: e.target.value.split(',').map(a => a.trim())})} /></div>
+              <div className="grid grid-cols-2 gap-4">
+                <div><Label>Journal/Venue</Label><Input value={newForm.journal} onChange={e => setNewForm({...newForm, journal: e.target.value})} /></div>
+                <div><Label>Year</Label><Input type="number" value={newForm.year} onChange={e => setNewForm({...newForm, year: parseInt(e.target.value)})} /></div>
+              </div>
+              <div><Label>Abstract</Label><Textarea value={newForm.abstract} onChange={e => setNewForm({...newForm, abstract: e.target.value})} rows={4} /></div>
+              <div className="grid grid-cols-2 gap-4">
+                <div><Label>Google Scholar URL</Label><Input value={newForm.url || ''} onChange={e => setNewForm({...newForm, url: e.target.value})} /></div>
+                <div><Label>PDF URL</Label><Input value={newForm.pdf_url || ''} onChange={e => setNewForm({...newForm, pdf_url: e.target.value})} /></div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div><Label>Code URL</Label><Input value={newForm.code_url || ''} onChange={e => setNewForm({...newForm, code_url: e.target.value})} /></div>
+                <div><Label>Poster URL</Label><Input value={newForm.poster_url || ''} onChange={e => setNewForm({...newForm, poster_url: e.target.value})} /></div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div><Label>Proceeding URL</Label><Input value={newForm.proceeding_url || ''} onChange={e => setNewForm({...newForm, proceeding_url: e.target.value})} /></div>
+                <div><Label>Conference URL</Label><Input value={newForm.conference_url || ''} onChange={e => setNewForm({...newForm, conference_url: e.target.value})} /></div>
+              </div>
+              <div><Label>Publication Type</Label><Input value={newForm.publication_type || ''} onChange={e => setNewForm({...newForm, publication_type: e.target.value})} placeholder="Conference, Journal, Workshop paper..." /></div>
+              <div className="flex gap-2">
+                <Button onClick={handleInsert}><Save className="w-4 h-4 mr-2" />Save</Button>
+                <Button variant="outline" onClick={() => setIsAdding(false)}>Cancel</Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {showScholar && (
           <div className="mb-8">
