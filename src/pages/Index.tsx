@@ -420,7 +420,7 @@ const Index = () => {
                 </a>
               </div>
               <p className="text-foreground/80 leading-relaxed">
-                Here you can find the publications related to my research in peer-reviewed venues.
+                Here you can find a selection of publications related to my research in peer-reviewed venues.
               </p>
             </div>
 

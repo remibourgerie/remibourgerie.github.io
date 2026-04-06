@@ -63,10 +63,11 @@ const ResearchPaper: React.FC<ResearchPaperProps> = ({
           {/* Full-width: title + badge */}
           <div className="flex items-start gap-2 flex-wrap">
             {url ? (
-              <a href={url} target="_blank" rel="noopener noreferrer" className="group">
+              <a href={url} target="_blank" rel="noopener noreferrer" className="group inline-flex items-start gap-1">
                 <h3 className="text-base font-semibold leading-snug text-foreground group-hover:text-primary transition-colors cursor-pointer">
                   {title}
                 </h3>
+                <ExternalLink className="w-3.5 h-3.5 mt-0.5 shrink-0 text-foreground/60 group-hover:text-primary transition-colors" />
               </a>
             ) : (
               <h3 className="text-base font-semibold leading-snug text-foreground">{title}</h3>

@@ -39,6 +39,7 @@ const Admin: React.FC = () => {
     citations: 0, abstract: '', tags: [],
   });
   const [showScholar, setShowScholar] = useState(false);
+  const [tagInput, setTagInput] = useState('');
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [email, setEmail] = useState('');
@@ -637,14 +638,25 @@ const Admin: React.FC = () => {
                       </div>
                       <div className="flex gap-2">
                         <Input
-                          placeholder="Add tag"
+                          placeholder="Type a keyword and press Enter or comma"
+                          value={tagInput}
+                          onChange={(e) => setTagInput(e.target.value)}
                           onKeyDown={(e) => {
-                            if (e.key === 'Enter') {
-                              addTag(e.currentTarget.value);
-                              e.currentTarget.value = '';
+                            if (e.key === 'Enter' || e.key === ',') {
+                              e.preventDefault();
+                              const val = tagInput.replace(/,/g, '').trim();
+                              if (val) { addTag(val); setTagInput(''); }
                             }
                           }}
                         />
+                        <button
+                          type="button"
+                          className="px-3 py-1 bg-primary/10 hover:bg-primary/20 text-primary rounded-md text-sm"
+                          onClick={() => {
+                            const val = tagInput.replace(/,/g, '').trim();
+                            if (val) { addTag(val); setTagInput(''); }
+                          }}
+                        >Add</button>
                       </div>
                     </div>
                   </div>
