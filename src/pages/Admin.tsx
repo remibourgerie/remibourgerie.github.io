@@ -27,6 +27,7 @@ interface Publication {
   illustration_url?: string;
   tags: string[];
   publication_type?: string;
+  award?: string;
 }
 
 const Admin: React.FC = () => {
@@ -172,6 +173,7 @@ const Admin: React.FC = () => {
           illustration_url: editForm.illustration_url,
           tags: editForm.tags,
           publication_type: editForm.publication_type,
+          award: editForm.award,
           updated_at: new Date().toISOString(),
         })
         .eq('id', editingId);
@@ -428,7 +430,10 @@ const Admin: React.FC = () => {
                 <div><Label>Video URL</Label><Input value={newForm.video_url || ''} onChange={e => setNewForm({...newForm, video_url: e.target.value})} placeholder="https://youtube.com/..." /></div>
                 <div><Label>Illustration URL</Label><Input value={newForm.illustration_url || ''} onChange={e => setNewForm({...newForm, illustration_url: e.target.value})} placeholder="https://..." /></div>
               </div>
-              <div><Label>Publication Type</Label><Input value={newForm.publication_type || ''} onChange={e => setNewForm({...newForm, publication_type: e.target.value})} placeholder="Conference, Journal, Workshop paper..." /></div>
+              <div className="grid grid-cols-2 gap-4">
+                <div><Label>Publication Type</Label><Input value={newForm.publication_type || ''} onChange={e => setNewForm({...newForm, publication_type: e.target.value})} placeholder="Conference, Journal, Workshop paper..." /></div>
+                <div><Label>Award</Label><Input value={newForm.award || ''} onChange={e => setNewForm({...newForm, award: e.target.value})} placeholder="e.g., Survey Certification, Best Paper Award" /></div>
+              </div>
               <div className="flex gap-2">
                 <Button onClick={handleInsert}><Save className="w-4 h-4 mr-2" />Save</Button>
                 <Button variant="outline" onClick={() => setIsAdding(false)}>Cancel</Button>
@@ -612,13 +617,23 @@ const Admin: React.FC = () => {
                       />
                     </div>
 
-                    <div>
-                      <Label>Publication Type</Label>
-                      <Input
-                        value={editForm.publication_type || ''}
-                        onChange={(e) => updateFormField('publication_type', e.target.value)}
-                        placeholder="e.g., Workshop paper, Conference, Journal, MSc thesis, PhD Thesis"
-                      />
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label>Publication Type</Label>
+                        <Input
+                          value={editForm.publication_type || ''}
+                          onChange={(e) => updateFormField('publication_type', e.target.value)}
+                          placeholder="e.g., Workshop paper, Conference, Journal"
+                        />
+                      </div>
+                      <div>
+                        <Label>Award</Label>
+                        <Input
+                          value={editForm.award || ''}
+                          onChange={(e) => updateFormField('award', e.target.value)}
+                          placeholder="e.g., Survey Certification, Best Paper Award"
+                        />
+                      </div>
                     </div>
 
                     <div>

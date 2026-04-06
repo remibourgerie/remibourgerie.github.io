@@ -45,6 +45,7 @@ const PublicationManager: React.FC = () => {
         illustrationUrl: pub.illustration_url || undefined,
         tags: pub.tags || [],
         publicationType: pub.publication_type || undefined,
+        award: pub.award || undefined,
         researchAreas: pub.research_areas || [],
         scholarId: pub.scholar_id || undefined,
         scholarClusterId: pub.scholar_cluster_id || undefined,
@@ -129,6 +130,7 @@ const PublicationManager: React.FC = () => {
               videoUrl={paper.videoUrl}
               illustrationUrl={paper.illustrationUrl}
               publicationType={paper.publicationType}
+              award={paper.award}
               tags={paper.tags}
               delay={index * 100}
             />

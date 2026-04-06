@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink, FileText, Image, Code, Video, Presentation } from 'lucide-react';
+import { ExternalLink, FileText, Image, Code, Video, Presentation, Trophy } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 interface ResearchPaperProps {
@@ -21,6 +21,7 @@ interface ResearchPaperProps {
   videoUrl?: string;
   illustrationUrl?: string;
   publicationType?: string;
+  award?: string;
   tags: string[];
   delay?: number;
 }
@@ -42,6 +43,7 @@ const ResearchPaper: React.FC<ResearchPaperProps> = ({
   videoUrl,
   illustrationUrl,
   publicationType,
+  award,
   tags,
   delay = 0,
 }) => {
@@ -75,6 +77,11 @@ const ResearchPaper: React.FC<ResearchPaperProps> = ({
             {publicationType && (
               <Badge variant="outline" className="text-xs shrink-0 bg-secondary/50 self-center">
                 {publicationType}
+              </Badge>
+            )}
+            {award && (
+              <Badge className="text-xs shrink-0 bg-amber-100 text-amber-800 border border-amber-300 gap-1 self-center">
+                <Trophy className="w-3 h-3" /> {award}
               </Badge>
             )}
           </div>

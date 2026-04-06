@@ -16,6 +16,7 @@ export interface Publication {
   illustrationUrl?: string;
   tags: string[];
   publicationType?: string;
+  award?: string;
   researchAreas?: string[];
   scholarId?: string;
   scholarClusterId?: string;
