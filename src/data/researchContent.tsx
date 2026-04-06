@@ -47,7 +47,7 @@ export const researchNodes: Record<string, ResearchNode> = {
       communityLinks: [
         {
           title: 'Join GLOW - Graph Learning on Wednesdays',
-          description: 'Interested in graph learning? Join the weekly reading group where researchers discuss the latest papers and ideas in this field.',
+          description: 'Interested in graph learning? Join the monthly reading group where researchers discuss the latest papers and ideas in this field.',
           url: 'https://sites.google.com/view/graph-learning-on-weds/home-page?authuser=0',
           icon: Users,
         },
