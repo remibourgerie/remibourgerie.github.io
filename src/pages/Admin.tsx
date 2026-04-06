@@ -21,9 +21,8 @@ interface Publication {
   pdf_url?: string;
   poster_url?: string;
   code_url?: string;
-  proceeding_url?: string;
   presentation_url?: string;
-  conference_url?: string;
+  venue_url?: string;
   video_url?: string;
   illustration_url?: string;
   tags: string[];
@@ -166,9 +165,8 @@ const Admin: React.FC = () => {
           pdf_url: editForm.pdf_url,
           poster_url: editForm.poster_url,
           code_url: editForm.code_url,
-          proceeding_url: editForm.proceeding_url,
           presentation_url: editForm.presentation_url,
-          conference_url: editForm.conference_url,
+          venue_url: editForm.venue_url,
           video_url: editForm.video_url,
           illustration_url: editForm.illustration_url,
           tags: editForm.tags,
@@ -414,7 +412,7 @@ const Admin: React.FC = () => {
               </div>
               <div><Label>Abstract</Label><Textarea value={newForm.abstract} onChange={e => setNewForm({...newForm, abstract: e.target.value})} rows={4} /></div>
               <div className="grid grid-cols-2 gap-4">
-                <div><Label>Google Scholar URL</Label><Input value={newForm.url || ''} onChange={e => setNewForm({...newForm, url: e.target.value})} /></div>
+                <div><Label>Paper URL (OpenReview / arXiv / DOI)</Label><Input value={newForm.url || ''} onChange={e => setNewForm({...newForm, url: e.target.value})} /></div>
                 <div><Label>PDF URL</Label><Input value={newForm.pdf_url || ''} onChange={e => setNewForm({...newForm, pdf_url: e.target.value})} /></div>
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -422,8 +420,12 @@ const Admin: React.FC = () => {
                 <div><Label>Poster URL</Label><Input value={newForm.poster_url || ''} onChange={e => setNewForm({...newForm, poster_url: e.target.value})} /></div>
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <div><Label>Proceeding URL</Label><Input value={newForm.proceeding_url || ''} onChange={e => setNewForm({...newForm, proceeding_url: e.target.value})} /></div>
-                <div><Label>Conference URL</Label><Input value={newForm.conference_url || ''} onChange={e => setNewForm({...newForm, conference_url: e.target.value})} /></div>
+                <div><Label>Venue URL (journal / conference homepage)</Label><Input value={newForm.venue_url || ''} onChange={e => setNewForm({...newForm, venue_url: e.target.value})} placeholder="https://..." /></div>
+                <div><Label>Presentation URL</Label><Input value={newForm.presentation_url || ''} onChange={e => setNewForm({...newForm, presentation_url: e.target.value})} placeholder="https://..." /></div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div><Label>Video URL</Label><Input value={newForm.video_url || ''} onChange={e => setNewForm({...newForm, video_url: e.target.value})} placeholder="https://youtube.com/..." /></div>
+                <div><Label>Illustration URL</Label><Input value={newForm.illustration_url || ''} onChange={e => setNewForm({...newForm, illustration_url: e.target.value})} placeholder="https://..." /></div>
               </div>
               <div><Label>Publication Type</Label><Input value={newForm.publication_type || ''} onChange={e => setNewForm({...newForm, publication_type: e.target.value})} placeholder="Conference, Journal, Workshop paper..." /></div>
               <div className="flex gap-2">
@@ -536,7 +538,7 @@ const Admin: React.FC = () => {
 
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <Label>Google Scholar URL</Label>
+                        <Label>Paper URL (OpenReview / arXiv / DOI)</Label>
                         <Input
                           value={editForm.url || ''}
                           onChange={(e) => updateFormField('url', e.target.value)}
@@ -574,10 +576,10 @@ const Admin: React.FC = () => {
 
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <Label>Proceeding URL</Label>
+                        <Label>Venue URL (journal / conference homepage)</Label>
                         <Input
-                          value={editForm.proceeding_url || ''}
-                          onChange={(e) => updateFormField('proceeding_url', e.target.value)}
+                          value={editForm.venue_url || ''}
+                          onChange={(e) => updateFormField('venue_url', e.target.value)}
                           placeholder="https://..."
                         />
                       </div>
@@ -587,17 +589,6 @@ const Admin: React.FC = () => {
                           value={editForm.presentation_url || ''}
                           onChange={(e) => updateFormField('presentation_url', e.target.value)}
                           placeholder="https://... (slides/presentation)"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <Label>Conference URL</Label>
-                        <Input
-                          value={editForm.conference_url || ''}
-                          onChange={(e) => updateFormField('conference_url', e.target.value)}
-                          placeholder="https://..."
                         />
                       </div>
                     </div>
@@ -667,9 +658,8 @@ const Admin: React.FC = () => {
                     {pub.pdf_url && <p><strong>PDF:</strong> <a href={pub.pdf_url} target="_blank" rel="noopener noreferrer" className="text-primary">Link</a></p>}
                     {pub.poster_url && <p><strong>Poster:</strong> <a href={pub.poster_url} target="_blank" rel="noopener noreferrer" className="text-primary">Link</a></p>}
                     {pub.code_url && <p><strong>Code:</strong> <a href={pub.code_url} target="_blank" rel="noopener noreferrer" className="text-primary">Link</a></p>}
-                    {pub.proceeding_url && <p><strong>Proceeding:</strong> <a href={pub.proceeding_url} target="_blank" rel="noopener noreferrer" className="text-primary">Link</a></p>}
                     {pub.presentation_url && <p><strong>Presentation:</strong> <a href={pub.presentation_url} target="_blank" rel="noopener noreferrer" className="text-primary">Link</a></p>}
-                    {pub.conference_url && <p><strong>Conference:</strong> <a href={pub.conference_url} target="_blank" rel="noopener noreferrer" className="text-primary">Link</a></p>}
+                    {pub.venue_url && <p><strong>Venue:</strong> <a href={pub.venue_url} target="_blank" rel="noopener noreferrer" className="text-primary">Link</a></p>}
                     {pub.video_url && <p><strong>Video:</strong> <a href={pub.video_url} target="_blank" rel="noopener noreferrer" className="text-primary">Link</a></p>}
                     {pub.illustration_url && <p><strong>Illustration:</strong> <a href={pub.illustration_url} target="_blank" rel="noopener noreferrer" className="text-primary">View</a></p>}
                     <div className="flex flex-wrap gap-2">

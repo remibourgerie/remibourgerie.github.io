@@ -10,9 +10,8 @@ export interface Publication {
   pdfUrl?: string;
   posterUrl?: string;
   codeUrl?: string;
-  proceedingUrl?: string;
   presentationUrl?: string;
-  conferenceUrl?: string;
+  venueUrl?: string;
   videoUrl?: string;
   illustrationUrl?: string;
   tags: string[];

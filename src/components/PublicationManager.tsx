@@ -21,8 +21,9 @@ const PublicationManager: React.FC = () => {
       const { data, error } = await supabase
         .from('publications')
         .select('*')
+        .eq('visible', true)
         .order('year', { ascending: false })
-        .order('citations', { ascending: false });
+        .order('citations', { ascending: false }) as any;
 
       if (error) throw error;
 
@@ -38,9 +39,8 @@ const PublicationManager: React.FC = () => {
         pdfUrl: pub.pdf_url || undefined,
         posterUrl: pub.poster_url || undefined,
         codeUrl: pub.code_url || undefined,
-        proceedingUrl: pub.proceeding_url || undefined,
         presentationUrl: pub.presentation_url || undefined,
-        conferenceUrl: pub.conference_url || undefined,
+        venueUrl: pub.venue_url || undefined,
         videoUrl: pub.video_url || undefined,
         illustrationUrl: pub.illustration_url || undefined,
         tags: pub.tags || [],
@@ -124,9 +124,8 @@ const PublicationManager: React.FC = () => {
               pdfUrl={paper.pdfUrl}
               posterUrl={paper.posterUrl}
               codeUrl={paper.codeUrl}
-              proceedingUrl={paper.proceedingUrl}
               presentationUrl={paper.presentationUrl}
-              conferenceUrl={paper.conferenceUrl}
+              venueUrl={paper.venueUrl}
               videoUrl={paper.videoUrl}
               illustrationUrl={paper.illustrationUrl}
               publicationType={paper.publicationType}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink, FileText, Image, Code, BookOpen, Video, Presentation } from 'lucide-react';
+import { ExternalLink, FileText, Image, Code, Video, Presentation } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 interface ResearchPaperProps {
@@ -16,9 +16,8 @@ interface ResearchPaperProps {
   pdfUrl?: string;
   posterUrl?: string;
   codeUrl?: string;
-  proceedingUrl?: string;
   presentationUrl?: string;
-  conferenceUrl?: string;
+  venueUrl?: string;
   videoUrl?: string;
   illustrationUrl?: string;
   publicationType?: string;
@@ -38,9 +37,8 @@ const ResearchPaper: React.FC<ResearchPaperProps> = ({
   pdfUrl,
   posterUrl,
   codeUrl,
-  proceedingUrl,
   presentationUrl,
-  conferenceUrl,
+  venueUrl,
   videoUrl,
   illustrationUrl,
   publicationType,
@@ -89,17 +87,12 @@ const ResearchPaper: React.FC<ResearchPaperProps> = ({
               </span>
             ))}
             <span className="mx-1.5 opacity-40">·</span>
-            <span className="italic">{journal}</span>
-            {conferenceUrl && (
-              <a
-                href={conferenceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center ml-1 text-muted-foreground hover:text-primary transition-colors"
-                title="Conference website"
-              >
-                <ExternalLink className="w-3 h-3" />
+            {venueUrl ? (
+              <a href={venueUrl} target="_blank" rel="noopener noreferrer" className="italic hover:text-primary transition-colors">
+                {journal}<ExternalLink className="w-3 h-3 inline ml-1 opacity-60" />
               </a>
+            ) : (
+              <span className="italic">{journal}</span>
             )}
             <span className="mx-1.5 opacity-40">·</span>
             {year}
@@ -177,7 +170,7 @@ const ResearchPaper: React.FC<ResearchPaperProps> = ({
           </div>
 
           {/* Full-width: action buttons */}
-          {(pdfUrl || posterUrl || codeUrl || proceedingUrl || presentationUrl || videoUrl) && (
+          {(pdfUrl || codeUrl || posterUrl || presentationUrl || videoUrl) && (
             <div className="flex flex-wrap gap-2 pt-1 border-t border-border/40">
               {pdfUrl && (
                 <a href={pdfUrl} target="_blank" rel="noopener noreferrer"
@@ -185,22 +178,10 @@ const ResearchPaper: React.FC<ResearchPaperProps> = ({
                   <FileText className="w-3.5 h-3.5" /> PDF
                 </a>
               )}
-              {proceedingUrl && (
-                <a href={proceedingUrl} target="_blank" rel="noopener noreferrer"
+              {codeUrl && (
+                <a href={codeUrl} target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
-                  <BookOpen className="w-3.5 h-3.5" /> Proceeding
-                </a>
-              )}
-              {presentationUrl && (
-                <a href={presentationUrl} target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
-                  <Presentation className="w-3.5 h-3.5" /> Presentation
-                </a>
-              )}
-              {videoUrl && (
-                <a href={videoUrl} target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
-                  <Video className="w-3.5 h-3.5" /> Video
+                  <Code className="w-3.5 h-3.5" /> Code
                 </a>
               )}
               {posterUrl && (
@@ -209,10 +190,16 @@ const ResearchPaper: React.FC<ResearchPaperProps> = ({
                   <Image className="w-3.5 h-3.5" /> Poster
                 </a>
               )}
-              {codeUrl && (
-                <a href={codeUrl} target="_blank" rel="noopener noreferrer"
+              {presentationUrl && (
+                <a href={presentationUrl} target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
-                  <Code className="w-3.5 h-3.5" /> Code
+                  <Presentation className="w-3.5 h-3.5" /> Slides
+                </a>
+              )}
+              {videoUrl && (
+                <a href={videoUrl} target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
+                  <Video className="w-3.5 h-3.5" /> Video
                 </a>
               )}
             </div>
