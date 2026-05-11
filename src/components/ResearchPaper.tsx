@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink, FileText, Image, Code, Video, Presentation, Trophy } from 'lucide-react';
+import { ExternalLink, FileText, Image, Code, Video, Presentation, Trophy, Quote, Check } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 interface ResearchPaperProps {
@@ -23,6 +23,7 @@ interface ResearchPaperProps {
   publicationType?: string;
   award?: string;
   tags: string[];
+  citationKey?: string;
   delay?: number;
 }
 
@@ -45,10 +46,29 @@ const ResearchPaper: React.FC<ResearchPaperProps> = ({
   publicationType,
   award,
   tags,
+  citationKey,
   delay = 0,
 }) => {
   const { ref, isVisible } = useScrollAnimation();
   const [isAbstractExpanded, setIsAbstractExpanded] = useState(false);
+  const [cited, setCited] = useState(false);
+
+  const generateBibTeX = () => {
+    if (citationKey) return citationKey;
+    const entryType = publicationType === 'Journal' ? 'article'
+      : (publicationType === 'Conference' || publicationType === 'Workshop') ? 'inproceedings'
+      : 'misc';
+    const lastName = (authors[0] ?? '').split(' ').pop()?.toLowerCase().replace(/[^a-z0-9]/g, '') ?? 'unknown';
+    const key = `${lastName}${year}${title.split(' ')[0].toLowerCase().replace(/[^a-z0-9]/g, '')}`;
+    const venueField = publicationType === 'Journal' ? 'journal' : 'booktitle';
+    return `@${entryType}{${key},\n  author = {${authors.join(' and ')}},\n  title = {${title}},\n  ${venueField} = {${journal}},\n  year = {${year}},\n}`;
+  };
+
+  const handleCite = async () => {
+    await navigator.clipboard.writeText(generateBibTeX());
+    setCited(true);
+    setTimeout(() => setCited(false), 2000);
+  };
 
   return (
     <div
@@ -178,40 +198,43 @@ const ResearchPaper: React.FC<ResearchPaperProps> = ({
           </div>
 
           {/* Full-width: action buttons */}
-          {(pdfUrl || codeUrl || posterUrl || presentationUrl || videoUrl) && (
-            <div className="flex flex-wrap gap-2 pt-1 border-t border-border/40">
-              {pdfUrl && (
-                <a href={pdfUrl} target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
-                  <FileText className="w-3.5 h-3.5" /> PDF
-                </a>
-              )}
-              {codeUrl && (
-                <a href={codeUrl} target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
-                  <Code className="w-3.5 h-3.5" /> Code
-                </a>
-              )}
-              {posterUrl && (
-                <a href={posterUrl} target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
-                  <Image className="w-3.5 h-3.5" /> Poster
-                </a>
-              )}
-              {presentationUrl && (
-                <a href={presentationUrl} target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
-                  <Presentation className="w-3.5 h-3.5" /> Slides
-                </a>
-              )}
-              {videoUrl && (
-                <a href={videoUrl} target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
-                  <Video className="w-3.5 h-3.5" /> Video
-                </a>
-              )}
-            </div>
-          )}
+          <div className="flex flex-wrap gap-2 pt-1 border-t border-border/40">
+            <button
+              onClick={handleCite}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
+              {cited ? <><Check className="w-3.5 h-3.5" /> Copied!</> : <><Quote className="w-3 h-3" /> Cite</>}
+            </button>
+            {pdfUrl && (
+              <a href={pdfUrl} target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
+                <FileText className="w-3.5 h-3.5" /> PDF
+              </a>
+            )}
+            {codeUrl && (
+              <a href={codeUrl} target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
+                <Code className="w-3.5 h-3.5" /> Code
+              </a>
+            )}
+            {posterUrl && (
+              <a href={posterUrl} target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
+                <Image className="w-3.5 h-3.5" /> Poster
+              </a>
+            )}
+            {presentationUrl && (
+              <a href={presentationUrl} target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
+                <Presentation className="w-3.5 h-3.5" /> Slides
+              </a>
+            )}
+            {videoUrl && (
+              <a href={videoUrl} target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
+                <Video className="w-3.5 h-3.5" /> Video
+              </a>
+            )}
+          </div>
         </CardContent>
       </Card>
     </div>

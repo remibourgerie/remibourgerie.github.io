@@ -10,6 +10,7 @@ const SCHOLAR_ID = 'T3J6BMcAAAAJ';
 const MAX_RESULTS = 50;
 
 
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });

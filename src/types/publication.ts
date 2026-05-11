@@ -21,4 +21,5 @@ export interface Publication {
   scholarId?: string;
   scholarClusterId?: string;
   lastSyncedAt?: string;
+  citationKey?: string;
 }

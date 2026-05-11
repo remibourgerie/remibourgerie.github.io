@@ -50,6 +50,7 @@ const PublicationManager: React.FC = () => {
         scholarId: pub.scholar_id || undefined,
         scholarClusterId: pub.scholar_cluster_id || undefined,
         lastSyncedAt: pub.last_synced_at || undefined,
+        citationKey: pub.citation_key || undefined,
       }));
 
       setPublications(formattedPublications);
@@ -132,6 +133,7 @@ const PublicationManager: React.FC = () => {
               publicationType={paper.publicationType}
               award={paper.award}
               tags={paper.tags}
+              citationKey={paper.citationKey}
               delay={index * 100}
             />
           ))
