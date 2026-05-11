@@ -58,7 +58,7 @@ export const researchNodes: Record<string, ResearchNode> = {
   'graph-ml': {
     id: 'graph-ml',
     title: 'Machine Learning on Graph-Structured Data',
-    tagline: 'When geometry meets learning',
+    tagline: 'Learning from Irregular Structure',
     icon: BrainCircuit,
     category: 'core',
     position: { x: 400, y: 50 },
