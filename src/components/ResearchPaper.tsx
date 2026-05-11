@@ -100,8 +100,8 @@ const ResearchPaper: React.FC<ResearchPaperProps> = ({
               </Badge>
             )}
             {award && (
-              <Badge className="text-xs shrink-0 bg-amber-100 text-amber-800 border border-amber-300 gap-1 self-center">
-                <Trophy className="w-3 h-3" /> {award}
+              <Badge className="award-badge text-xs shrink-0 bg-amber-100 text-amber-800 border border-amber-300 gap-1 self-center hover:bg-amber-100 hover:text-amber-800">
+                <Trophy className="trophy-icon w-3 h-3" /> {award}
               </Badge>
             )}
           </div>
@@ -201,8 +201,8 @@ const ResearchPaper: React.FC<ResearchPaperProps> = ({
           <div className="flex flex-wrap gap-2 pt-1 border-t border-border/40">
             <button
               onClick={handleCite}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
-              {cited ? <><Check className="w-3.5 h-3.5" /> Copied!</> : <><Quote className="w-3 h-3" /> Cite</>}
+              className="cite-button flex items-center gap-1.5 px-2.5 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-md transition-colors text-xs font-medium">
+              {cited ? <><Check className="w-3.5 h-3.5" /> Copied!</> : <><Quote className="quote-icon w-3 h-3" /> Cite</>}
             </button>
             {pdfUrl && (
               <a href={pdfUrl} target="_blank" rel="noopener noreferrer"

@@ -167,6 +167,40 @@ All colors MUST be HSL.
     scroll-margin-top: 80px; /* Account for fixed header */
   }
 
+  /* Trophy bounce animation */
+  @keyframes trophy-bounce {
+    0%, 100% { transform: translateY(0); }
+    20% { transform: translateY(-4px); }
+    40% { transform: translateY(0px); }
+    60% { transform: translateY(-2px); }
+    80% { transform: translateY(0px); }
+  }
+
+  .trophy-icon {
+    display: inline-block;
+  }
+
+  .award-badge:hover .trophy-icon {
+    animation: trophy-bounce 0.7s ease-in-out;
+  }
+
+  /* Quote wiggle animation */
+  @keyframes quote-wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    20% { transform: rotate(-12deg); }
+    40% { transform: rotate(10deg); }
+    60% { transform: rotate(-6deg); }
+    80% { transform: rotate(4deg); }
+  }
+
+  .quote-icon {
+    display: inline-block;
+  }
+
+  .cite-button:hover .quote-icon {
+    animation: quote-wiggle 0.6s ease-in-out;
+  }
+
   /* Coffee cup shake animation */
   @keyframes coffee-shake {
     0%, 100% { transform: rotate(0deg); }
