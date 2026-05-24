@@ -1,14 +1,14 @@
 {
   "meta": {
-    "generatedAt": "2026-03-08T22:12:56.304458+01:00",
-    "totalPapers": 862,
-    "totalCollections": 142,
-    "totalNodes": 1004,
+    "generatedAt": "2026-05-24T15:47:36.256714+02:00",
+    "totalPapers": 888,
+    "totalCollections": 143,
+    "totalNodes": 1031,
     "timeRange": {
       "start": "2023-11-20",
-      "end": "2026-03-08"
+      "end": "2026-05-24"
     },
-    "timeSteps": 29
+    "timeSteps": 31
   },
   "nodes": [
     {
@@ -8388,7 +8388,7 @@
       "label": "Graph Learning",
       "category": "Graph Learning",
       "color": "#5C6BC0",
-      "paperCount": 477,
+      "paperCount": 503,
       "depth": 0,
       "timeStep": 0
     },
@@ -8577,7 +8577,7 @@
       "label": "Application paper",
       "category": "Graph Learning",
       "color": "#5C6BC0",
-      "paperCount": 49,
+      "paperCount": 50,
       "depth": 1,
       "timeStep": 3
     },
@@ -8924,7 +8924,7 @@
       "label": "Proteins",
       "category": "Graph Learning",
       "color": "#5C6BC0",
-      "paperCount": 7,
+      "paperCount": 9,
       "depth": 2,
       "timeStep": 3
     },
@@ -9125,6 +9125,71 @@
       "depth": 3,
       "isOwn": false,
       "timeStep": 24
+    },
+    {
+      "id": "paper-2601.16955",
+      "type": "paper",
+      "title": "3D Molecule Generation from Rigid Motifs via SE(3) Flows",
+      "authors": [
+        "Poletukhin, R.",
+        "Kollovieh, M.",
+        "Eberhard, E.",
+        "G\u00fcnnemann, S."
+      ],
+      "dateAdded": "2026-02-04",
+      "year": 2026,
+      "abstract": "Three-dimensional molecular structure generation is typically performed at the level of individual atoms, yet molecular graph generation techniques often consider fragments as their structural unit...",
+      "url": "http://arxiv.org/abs/2601.16955",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 3,
+      "isOwn": false,
+      "timeStep": 27
+    },
+    {
+      "id": "paper-2605.02937",
+      "type": "paper",
+      "title": "Proteo-R1: Reasoning Foundation Models for De Novo Protein Design",
+      "authors": [
+        "Wu, F.",
+        "Xuan, W.",
+        "Qi, H.",
+        "Cao, H.",
+        "Chang, H.",
+        "Zhou, Z.",
+        "Zhao, H.",
+        "Jian, M.",
+        "Ma, C.",
+        "Cheng, Y.",
+        "Pang, K.",
+        "Tang, X.",
+        "Wang, Z.",
+        "Li, G.",
+        "Wang, H.",
+        "Ying, K.",
+        "Lu, P.",
+        "Im, C.",
+        "Han, S.",
+        "Xia, P.",
+        "Xu, T.",
+        "Li, Y.",
+        "Zhu, D.",
+        "Heng, P.",
+        "Yokoya, N.",
+        "Sugiyama, M.",
+        "Li, L.",
+        "Leskovec, J.",
+        "Choi, Y."
+      ],
+      "dateAdded": "2026-05-11",
+      "year": 2026,
+      "abstract": "Deep learning in \\emph{de novo} protein design has achieved atomic-level fidelity. However, existing models remain largely non-deliberative: they directly synthesize molecular geometries without ex...",
+      "url": "http://arxiv.org/abs/2605.02937",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 3,
+      "isOwn": false,
+      "timeStep": 30
     },
     {
       "id": "graph-learning-recommender-systems-collection_141",
@@ -9532,7 +9597,7 @@
       "label": "Challenges",
       "category": "Graph Learning",
       "color": "#5C6BC0",
-      "paperCount": 66,
+      "paperCount": 70,
       "depth": 1,
       "timeStep": 1
     },
@@ -9874,7 +9939,7 @@
       "label": "heterophily",
       "category": "Graph Learning",
       "color": "#5C6BC0",
-      "paperCount": 12,
+      "paperCount": 13,
       "depth": 2,
       "timeStep": 10
     },
@@ -10132,6 +10197,27 @@
       "depth": 3,
       "isOwn": false,
       "timeStep": 26
+    },
+    {
+      "id": "paper-11493576",
+      "type": "paper",
+      "title": "Node Classification in GNNs: Impact of Neighborhood Label Distribution on Homophily and Heterophily",
+      "authors": [
+        "Zhao, Z.",
+        "Wan, L.",
+        "Liu, X.",
+        "Yan, R.",
+        "Wang, S."
+      ],
+      "dateAdded": "2026-05-20",
+      "year": 2026,
+      "abstract": "In node classification, traditional graph neural networks (GNNs) typically assume implicit homophily, indicating that intraclass nodes are likely connected. However, real-world graphs frequently ex...",
+      "url": "https://ieeexplore.ieee.org/abstract/document/11493576",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 3,
+      "isOwn": false,
+      "timeStep": 30
     },
     {
       "id": "graph-learning-over-squashing-collection_63",
@@ -10427,7 +10513,7 @@
       "label": "Scalability",
       "category": "Graph Learning",
       "color": "#5C6BC0",
-      "paperCount": 6,
+      "paperCount": 7,
       "depth": 2,
       "timeStep": 3
     },
@@ -10538,6 +10624,27 @@
       "depth": 3,
       "isOwn": false,
       "timeStep": 12
+    },
+    {
+      "id": "paper-2411.00835",
+      "type": "paper",
+      "title": "Scalable Message Passing Neural Networks: No Need for Attention in Large Graph Representation Learning",
+      "authors": [
+        "Borde, H.",
+        "Lukoianov, A.",
+        "Kratsios, A.",
+        "Bronstein, M.",
+        "Dong, X."
+      ],
+      "dateAdded": "2026-03-27",
+      "year": 2026,
+      "abstract": "We propose Scalable Message Passing Neural Networks (SMPNNs) and demonstrate that, by integrating standard convolutional message passing into a Pre-Layer Normalization Transformer-style block inste...",
+      "url": "http://arxiv.org/abs/2411.00835",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 3,
+      "isOwn": false,
+      "timeStep": 28
     },
     {
       "id": "graph-learning-convergence-collection_37",
@@ -11854,7 +11961,7 @@
       "label": "Datasets",
       "category": "Graph Learning",
       "color": "#5C6BC0",
-      "paperCount": 38,
+      "paperCount": 39,
       "depth": 1,
       "timeStep": 0
     },
@@ -12541,6 +12648,33 @@
       "timeStep": 25
     },
     {
+      "id": "paper-2602.12606",
+      "type": "paper",
+      "title": "RelBench v2: A Large-Scale Benchmark and Repository for Relational Data",
+      "authors": [
+        "Gu, J.",
+        "Ranjan, R.",
+        "Kanatsoulis, C.",
+        "Tang, H.",
+        "Jurkovic, M.",
+        "Hudovernik, V.",
+        "Znidar, M.",
+        "Chaturvedi, P.",
+        "Shroff, P.",
+        "Li, F.",
+        "Leskovec, J."
+      ],
+      "dateAdded": "2026-03-11",
+      "year": 2026,
+      "abstract": "Relational deep learning (RDL) has emerged as a powerful paradigm for learning directly on relational databases by modeling entities and their relationships across multiple interconnected tables. A...",
+      "url": "http://arxiv.org/abs/2602.12606",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 2,
+      "isOwn": false,
+      "timeStep": 28
+    },
+    {
       "id": "graph-learning-distributed-collection_172",
       "type": "collection",
       "label": "Distributed",
@@ -12836,7 +12970,7 @@
       "label": "Equivariant/Invariant",
       "category": "Graph Learning",
       "color": "#5C6BC0",
-      "paperCount": 10,
+      "paperCount": 11,
       "depth": 1,
       "timeStep": 9
     },
@@ -13032,12 +13166,33 @@
       "timeStep": 24
     },
     {
+      "id": "paper-2602.20370",
+      "type": "paper",
+      "title": "Quantitative Approximation Rates for Group Equivariant Learning",
+      "authors": [
+        "Siegel, J.",
+        "Hordan, S.",
+        "Lawrence, H.",
+        "Syed, A.",
+        "Dym, N."
+      ],
+      "dateAdded": "2026-04-01",
+      "year": 2026,
+      "abstract": "The universal approximation theorem establishes that neural networks can approximate any continuous function on a compact set. Later works in approximation theory provide quantitative approximation...",
+      "url": "http://arxiv.org/abs/2602.20370",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 2,
+      "isOwn": false,
+      "timeStep": 29
+    },
+    {
       "id": "graph-learning-expressiveness-collection_187",
       "type": "collection",
       "label": "Expressiveness",
       "category": "Graph Learning",
       "color": "#5C6BC0",
-      "paperCount": 22,
+      "paperCount": 23,
       "depth": 1,
       "timeStep": 1
     },
@@ -13286,6 +13441,77 @@
       "timeStep": 24
     },
     {
+      "id": "graph-learning-pac-collection_248",
+      "type": "collection",
+      "label": "PAC",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "paperCount": 3,
+      "depth": 2,
+      "timeStep": 18
+    },
+    {
+      "id": "paper-morris23a.html",
+      "type": "paper",
+      "title": "WL meet VC",
+      "authors": [
+        "Morris, C.",
+        "Geerts, F.",
+        "T\u00f6nshoff, J.",
+        "Grohe, M."
+      ],
+      "dateAdded": "2025-05-26",
+      "year": 2023,
+      "abstract": "Recently, many works studied the expressive power of graph neural networks (GNNs) by linking it to the 111-dimensional Weisfeiler-Leman algorithm (1-WL1-WL1\\text{-}\\mathsf{WL}). Here, the 1-WL1-WL1...",
+      "url": "https://proceedings.mlr.press/v202/morris23a.html",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 3,
+      "isOwn": false,
+      "timeStep": 18
+    },
+    {
+      "id": "paper-S0893608018302363",
+      "type": "paper",
+      "title": "The Vapnik\u2013Chervonenkis dimension of graph and recursive neural networks",
+      "authors": [
+        "Scarselli, F.",
+        "Tsoi, A.",
+        "Hagenbuchner, M."
+      ],
+      "dateAdded": "2025-05-26",
+      "year": 2018,
+      "abstract": "The Vapnik\u2013Chervonenkis dimension (VC-dim) characterizes the sample learning complexity of a classification model and it is often used as an indicator for the generalization capability of a learnin...",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0893608018302363",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 3,
+      "isOwn": false,
+      "timeStep": 18
+    },
+    {
+      "id": "paper-2510.10101",
+      "type": "paper",
+      "title": "Rademacher Meets Colors: More Expressivity, but at What Cost ?",
+      "authors": [
+        "Carrasco, M.",
+        "Netto, C.",
+        "Martirosyan, V.",
+        "Mehrab, A.",
+        "Okoyomon, E.",
+        "Graziani, C."
+      ],
+      "dateAdded": "2026-03-10",
+      "year": 2025,
+      "abstract": "The expressive power of graph neural networks (GNNs) is typically understood through their correspondence with graph isomorphism tests such as the Weisfeiler-Leman (WL) hierarchy. While more expres...",
+      "url": "http://arxiv.org/abs/2510.10101",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 3,
+      "isOwn": false,
+      "timeStep": 28
+    },
+    {
       "id": "graph-learning-folkore-gnn-fgnn-collection_247",
       "type": "collection",
       "label": "Folkore GNN (FGNN)",
@@ -13322,7 +13548,7 @@
       "label": "Foundation models",
       "category": "Graph Learning",
       "color": "#5C6BC0",
-      "paperCount": 9,
+      "paperCount": 12,
       "depth": 1,
       "timeStep": 13
     },
@@ -13493,6 +13719,53 @@
       "depth": 2,
       "isOwn": false,
       "timeStep": 27
+    },
+    {
+      "id": "paper-2509.22416",
+      "type": "paper",
+      "title": "One Prompt Fits All: Universal Graph Adaptation for Pretrained Models",
+      "authors": [
+        "Huang, Y.",
+        "Zhao, J.",
+        "He, D.",
+        "Wang, X.",
+        "Li, Y.",
+        "Huang, Y.",
+        "Jin, D.",
+        "Feng, Z."
+      ],
+      "dateAdded": "2026-04-13",
+      "year": 2025,
+      "abstract": "Graph Prompt Learning (GPL) has emerged as a promising paradigm that bridges graph pretraining models and downstream scenarios, mitigating label dependency and the misalignment between upstream pre...",
+      "url": "http://arxiv.org/abs/2509.22416",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 2,
+      "isOwn": false,
+      "timeStep": 29
+    },
+    {
+      "id": "paper-2604.12596",
+      "type": "paper",
+      "title": "KumoRFM-2: Scaling Foundation Models for Relational Learning",
+      "authors": [
+        "Hudovernik, V.",
+        "L\u00f3pez, F.",
+        "Kocijan, V.",
+        "Nitta, A.",
+        "Lenssen, J.",
+        "Leskovec, J.",
+        "Fey, M."
+      ],
+      "dateAdded": "2026-04-18",
+      "year": 2026,
+      "abstract": "We introduce KumoRFM-2, the next iteration of a pre-trained foundation model for relational data. KumoRFM-2 supports in-context learning as well as fine-tuning and is applicable to a wide range of ...",
+      "url": "http://arxiv.org/abs/2604.12596",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 2,
+      "isOwn": false,
+      "timeStep": 29
     },
     {
       "id": "graph-learning-founding-paper-collection_5",
@@ -14333,7 +14606,7 @@
       "label": "Geometry",
       "category": "Graph Learning",
       "color": "#5C6BC0",
-      "paperCount": 8,
+      "paperCount": 9,
       "depth": 1,
       "timeStep": 3
     },
@@ -14474,6 +14747,27 @@
       "depth": 2,
       "isOwn": false,
       "timeStep": 27
+    },
+    {
+      "id": "paper-2605.14685",
+      "type": "paper",
+      "title": "Spontaneous symmetry breaking and Goldstone modes for deep information propagation",
+      "authors": [
+        "Iqbal, N.",
+        "Keller, T.",
+        "Song, Y.",
+        "Miyato, T.",
+        "Welling, M."
+      ],
+      "dateAdded": "2026-05-19",
+      "year": 2026,
+      "abstract": "In physical systems, whenever a continuous symmetry is spontaneously broken, the system possesses excitations called Goldstone modes, which allow coherent information propagation over long distance...",
+      "url": "http://arxiv.org/abs/2605.14685",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 2,
+      "isOwn": false,
+      "timeStep": 30
     },
     {
       "id": "graph-learning-graph-sampler-collection_110",
@@ -14974,7 +15268,7 @@
       "label": "Implicit GNN",
       "category": "Graph Learning",
       "color": "#5C6BC0",
-      "paperCount": 6,
+      "paperCount": 10,
       "depth": 1,
       "timeStep": 8
     },
@@ -15020,6 +15314,88 @@
       "depth": 2,
       "isOwn": false,
       "timeStep": 10
+    },
+    {
+      "id": "paper-baker23a.html",
+      "type": "paper",
+      "title": "Implicit Graph Neural Networks: A Monotone Operator Viewpoint",
+      "authors": [
+        "Baker, J.",
+        "Wang, Q.",
+        "Hauck, C.",
+        "Wang, B."
+      ],
+      "dateAdded": "2026-05-13",
+      "year": 2023,
+      "abstract": "Implicit graph neural networks (IGNNs) \u2013 that solve a fixed-point equilibrium equation using Picard iteration for representation learning \u2013 have shown remarkable performance in learning long-range ...",
+      "url": "https://proceedings.mlr.press/v202/baker23a.html",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 2,
+      "isOwn": false,
+      "timeStep": 30
+    },
+    {
+      "id": "paper-20M1358517",
+      "type": "paper",
+      "title": "Implicit Deep Learning",
+      "authors": [
+        "El Ghaoui, L.",
+        "Gu, F.",
+        "Travacca, B.",
+        "Askari, A.",
+        "Tsai, A."
+      ],
+      "dateAdded": "2026-05-13",
+      "year": 2021,
+      "abstract": "Implicit deep learning prediction rules generalize the recursive rules of feedforward neural networks. Such rules are based on the solution of a fixed-point equation involving a single vector of hi...",
+      "url": "https://epubs.siam.org/doi/abs/10.1137/20M1358517",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 2,
+      "isOwn": false,
+      "timeStep": 30
+    },
+    {
+      "id": "paper-1909.01377",
+      "type": "paper",
+      "title": "Deep Equilibrium Models",
+      "authors": [
+        "Bai, S.",
+        "Kolter, J.",
+        "Koltun, V."
+      ],
+      "dateAdded": "2026-05-13",
+      "year": 2019,
+      "abstract": "We present a new approach to modeling sequential data: the deep equilibrium model (DEQ). Motivated by an observation that the hidden layers of many existing deep sequence models converge towards so...",
+      "url": "http://arxiv.org/abs/1909.01377",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 2,
+      "isOwn": false,
+      "timeStep": 30
+    },
+    {
+      "id": "paper-3459637.3482225",
+      "type": "paper",
+      "title": "A Unified View on Graph Neural Networks as Graph Signal Denoising",
+      "authors": [
+        "Ma, Y.",
+        "Liu, X.",
+        "Zhao, T.",
+        "Liu, Y.",
+        "Tang, J.",
+        "Shah, N."
+      ],
+      "dateAdded": "2026-05-13",
+      "year": 2021,
+      "abstract": "Graph Neural Networks (GNNs) have risen to prominence in learning representations for graph structured data. A single GNN layer typically consists of a feature transformation and a feature aggregat...",
+      "url": "https://dl.acm.org/doi/10.1145/3459637.3482225",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 2,
+      "isOwn": false,
+      "timeStep": 30
     },
     {
       "id": "graph-learning-inference-collection_84",
@@ -15311,7 +15687,7 @@
       "label": "LLM",
       "category": "Graph Learning",
       "color": "#5C6BC0",
-      "paperCount": 13,
+      "paperCount": 14,
       "depth": 1,
       "timeStep": 17
     },
@@ -15409,7 +15785,7 @@
       "label": "LLMs for graph",
       "category": "Graph Learning",
       "color": "#5C6BC0",
-      "paperCount": 8,
+      "paperCount": 9,
       "depth": 2,
       "timeStep": 17
     },
@@ -15495,6 +15871,26 @@
       "depth": 3,
       "isOwn": false,
       "timeStep": 27
+    },
+    {
+      "id": "paper-2604.00342",
+      "type": "paper",
+      "title": "Is One Token All It Takes? Graph Pooling Tokens for LLM-based GraphQA",
+      "authors": [
+        "Grover, A.",
+        "Giaretta, L.",
+        "Bourgerie, R.",
+        "Girdzijauskas, S."
+      ],
+      "dateAdded": "2026-05-24",
+      "year": 2026,
+      "abstract": "The integration of Graph Neural Networks (GNNs) with Large Language Models (LLMs) has emerged as a promising paradigm for Graph Question Answering (GraphQA). However, effective methods for encoding...",
+      "url": "http://arxiv.org/abs/2604.00342",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 3,
+      "isOwn": true,
+      "timeStep": 30
     },
     {
       "id": "graph-learning-local-gnn-collection_246",
@@ -15708,7 +16104,7 @@
       "label": "Pooling",
       "category": "Graph Learning",
       "color": "#5C6BC0",
-      "paperCount": 11,
+      "paperCount": 12,
       "depth": 1,
       "timeStep": 3
     },
@@ -15832,6 +16228,26 @@
       "depth": 2,
       "isOwn": false,
       "timeStep": 24
+    },
+    {
+      "id": "paper-2605.06250",
+      "type": "paper",
+      "title": "The Role of Node Features in Graph Pooling",
+      "authors": [
+        "Pichowski, J.",
+        "Hrabo\u0161ov\u00e1, A.",
+        "Scholtes, I.",
+        "Bl\u00f6cker, C."
+      ],
+      "dateAdded": "2026-05-11",
+      "year": 2026,
+      "abstract": "Graph pooling is commonly applied in graph classification, yet its empirical gains over standard WL-1 expressive GNNs are often marginal or inconsistent. We study this gap by analysing the interact...",
+      "url": "http://arxiv.org/abs/2605.06250",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 2,
+      "isOwn": false,
+      "timeStep": 30
     },
     {
       "id": "graph-learning-privacy-collection_224",
@@ -16156,7 +16572,7 @@
       "label": "Sheaf",
       "category": "Graph Learning",
       "color": "#5C6BC0",
-      "paperCount": 22,
+      "paperCount": 26,
       "depth": 1,
       "timeStep": 12
     },
@@ -16584,6 +17000,86 @@
       "timeStep": 27
     },
     {
+      "id": "paper-gebhart23a.html",
+      "type": "paper",
+      "title": "Knowledge Sheaves: A Sheaf-Theoretic Framework for Knowledge Graph Embedding",
+      "authors": [
+        "Gebhart, T.",
+        "Hansen, J.",
+        "Schrater, P."
+      ],
+      "dateAdded": "2026-03-25",
+      "year": 2023,
+      "abstract": "Knowledge graph embedding involves learning representations of entities\u2014the vertices of the graph\u2014and relations\u2014the edges of the graph\u2014such that the resulting representations encode the known factu...",
+      "url": "https://proceedings.mlr.press/v206/gebhart23a.html",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 2,
+      "isOwn": false,
+      "timeStep": 28
+    },
+    {
+      "id": "paper-2605.06395",
+      "type": "paper",
+      "title": "Consistent Geometric Deep Learning via Hilbert Bundles and Cellular Sheaves",
+      "authors": [
+        "Tandon, K.",
+        "Gould, J.",
+        "Bhatia, T.",
+        "Dominici, F.",
+        "Ribeiro, A.",
+        "Battiloro, C."
+      ],
+      "dateAdded": "2026-05-13",
+      "year": 2026,
+      "abstract": "Modern deep learning architectures increasingly contend with sophisticated signals that are natively infinite-dimensional, such as time series, probability distributions, or operators, and are defi...",
+      "url": "http://arxiv.org/abs/2605.06395",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 2,
+      "isOwn": false,
+      "timeStep": 30
+    },
+    {
+      "id": "paper-2605.21435",
+      "type": "paper",
+      "title": "Gaussian Sheaf Neural Networks",
+      "authors": [
+        "Ribeiro, A.",
+        "Ten\u00f3rio, A.",
+        "Silva, T.",
+        "Mesquita, D."
+      ],
+      "dateAdded": "2026-05-21",
+      "year": 2026,
+      "abstract": "Graph Neural Networks (GNNs) have become the de facto standard for learning on relational data. While traditional GNNs' message passing is well suited for vector-valued node features, there are cas...",
+      "url": "http://arxiv.org/abs/2605.21435",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 2,
+      "isOwn": false,
+      "timeStep": 30
+    },
+    {
+      "id": "paper-2605.19021",
+      "type": "paper",
+      "title": "Deep Neural Sheaf Diffusion",
+      "authors": [
+        "Bourgerie, R.",
+        "Girdzijauskas, S.",
+        "Fodor, V."
+      ],
+      "dateAdded": "2026-05-23",
+      "year": 2026,
+      "abstract": "Deep Graph Neural Networks (GNNs) are essential for capturing complex dependencies in graph-structured data. However, scaling GNNs to depth remains challenging, as stacking layers leads to represen...",
+      "url": "http://arxiv.org/abs/2605.19021",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 2,
+      "isOwn": true,
+      "timeStep": 30
+    },
+    {
       "id": "graph-learning-spectral-collection_299",
       "type": "collection",
       "label": "Spectral",
@@ -16891,7 +17387,7 @@
       "label": "Tabular data",
       "category": "Graph Learning",
       "color": "#5C6BC0",
-      "paperCount": 15,
+      "paperCount": 18,
       "depth": 1,
       "timeStep": 7
     },
@@ -17149,6 +17645,27 @@
       "depth": 2,
       "isOwn": false,
       "timeStep": 27
+    },
+    {
+      "id": "paper-2605.07840",
+      "type": "paper",
+      "title": "RelAgent: LLM Agents as Data Scientists for Relational Learning",
+      "authors": [
+        "Huang, X.",
+        "Tichelman, L.",
+        "Kim, J.",
+        "Olejniczak, K.",
+        "Ceylan, \u0130."
+      ],
+      "dateAdded": "2026-05-20",
+      "year": 2026,
+      "abstract": "Relational learning is a challenging problem that has motivated a wide range of approaches, including graph-based models (e.g., graph neural networks, graph transformers), tabular methods (e.g., ta...",
+      "url": "http://arxiv.org/abs/2605.07840",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 2,
+      "isOwn": false,
+      "timeStep": 30
     },
     {
       "id": "graph-learning-temporal-collection_79",
@@ -17558,7 +18075,7 @@
       "label": "Topological Deep Learning",
       "category": "Graph Learning",
       "color": "#5C6BC0",
-      "paperCount": 116,
+      "paperCount": 120,
       "depth": 1,
       "timeStep": 3
     },
@@ -18131,7 +18648,7 @@
       "label": "Applications",
       "category": "Graph Learning",
       "color": "#5C6BC0",
-      "paperCount": 21,
+      "paperCount": 22,
       "depth": 2,
       "timeStep": 3
     },
@@ -18274,7 +18791,7 @@
       "label": "Cell Complexes",
       "category": "Graph Learning",
       "color": "#5C6BC0",
-      "paperCount": 7,
+      "paperCount": 9,
       "depth": 2,
       "timeStep": 10
     },
@@ -18337,6 +18854,50 @@
       "depth": 3,
       "isOwn": false,
       "timeStep": 24
+    },
+    {
+      "id": "paper-2603.09466",
+      "type": "paper",
+      "title": "TopoOR: A Unified Topological Scene Representation for the Operating Room",
+      "authors": [
+        "Wang, T.",
+        "Kim, K.",
+        "Birdal, T.",
+        "Navab, N.",
+        "Bastian, L."
+      ],
+      "dateAdded": "2026-04-16",
+      "year": 2026,
+      "abstract": "Surgical Scene Graphs abstract the complexity of surgical operating rooms (OR) into a structure of entities and their relations, but existing paradigms suffer from strictly dyadic structural limita...",
+      "url": "http://arxiv.org/abs/2603.09466",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 3,
+      "isOwn": false,
+      "timeStep": 29
+    },
+    {
+      "id": "paper-2605.10091",
+      "type": "paper",
+      "title": "TopoU-Net: a U-Net architecture for topological domains",
+      "authors": [
+        "Gaurav, G.",
+        "ALJabea, I.",
+        "Zakomornyy, Y.",
+        "Frank, E.",
+        "Elhamdadi, M.",
+        "Papamarkou, T.",
+        "Hajij, M."
+      ],
+      "dateAdded": "2026-05-20",
+      "year": 2026,
+      "abstract": "Many modern datasets mix points, edges, regions, groups, objects, events, hyperedges, and relations. Yet neural architectures often force such data into grids, graphs, or sequences, obscuring highe...",
+      "url": "http://arxiv.org/abs/2605.10091",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 3,
+      "isOwn": false,
+      "timeStep": 30
     },
     {
       "id": "graph-learning-hypergraphs-collection_112",
@@ -18664,7 +19225,7 @@
       "label": "Topological Data Analysis",
       "category": "Graph Learning",
       "color": "#5C6BC0",
-      "paperCount": 28,
+      "paperCount": 29,
       "depth": 2,
       "timeStep": 13
     },
@@ -18971,6 +19532,24 @@
       "depth": 3,
       "isOwn": false,
       "timeStep": 13
+    },
+    {
+      "id": "paper-2605.14824",
+      "type": "paper",
+      "title": "ToMAToMP: Robust and Multi-Parameter Topological Clustering",
+      "authors": [
+        "Andrianirina, L.",
+        "Carri\u00e8re, M."
+      ],
+      "dateAdded": "2026-05-19",
+      "year": 2026,
+      "abstract": "Topological clustering, and its main algorithm ToMATo, is a clustering method from Topological Data Analysis (TDA) which has been applied successfully in several applications during the last few ye...",
+      "url": "http://arxiv.org/abs/2605.14824",
+      "category": "Graph Learning",
+      "color": "#5C6BC0",
+      "depth": 3,
+      "isOwn": false,
+      "timeStep": 30
     },
     {
       "id": "graph-learning-ml-applications-collection_176",
@@ -21932,6 +22511,16 @@
       "type": "contains"
     },
     {
+      "source": "graph-learning-proteins-collection_121",
+      "target": "paper-2601.16955",
+      "type": "contains"
+    },
+    {
+      "source": "graph-learning-proteins-collection_121",
+      "target": "paper-2605.02937",
+      "type": "contains"
+    },
+    {
       "source": "graph-learning-application-paper-collection_24",
       "target": "graph-learning-recommender-systems-collection_141",
       "type": "hierarchy"
@@ -22247,6 +22836,11 @@
       "type": "contains"
     },
     {
+      "source": "graph-learning-heterophily-collection_122",
+      "target": "paper-11493576",
+      "type": "contains"
+    },
+    {
       "source": "graph-learning-challenges-collection_55",
       "target": "graph-learning-over-squashing-collection_63",
       "type": "hierarchy"
@@ -22404,6 +22998,11 @@
     {
       "source": "graph-learning-scalability-collection_109",
       "target": "paper-fey21a.html",
+      "type": "contains"
+    },
+    {
+      "source": "graph-learning-scalability-collection_109",
+      "target": "paper-2411.00835",
       "type": "contains"
     },
     {
@@ -23034,6 +23633,11 @@
     {
       "source": "graph-learning-datasets-collection_73",
       "target": "paper-forum?id=Gyq8lMgdk5",
+      "type": "contains"
+    },
+    {
+      "source": "graph-learning-datasets-collection_73",
+      "target": "paper-2602.12606",
       "type": "contains"
     },
     {
@@ -23987,6 +24591,11 @@
       "type": "contains"
     },
     {
+      "source": "graph-learning-equivariant-invariant-collection_262",
+      "target": "paper-2602.20370",
+      "type": "contains"
+    },
+    {
       "source": "cat-graph-learning",
       "target": "graph-learning-expressiveness-collection_187",
       "type": "hierarchy"
@@ -24057,6 +24666,26 @@
       "type": "contains"
     },
     {
+      "source": "graph-learning-expressiveness-collection_187",
+      "target": "graph-learning-pac-collection_248",
+      "type": "hierarchy"
+    },
+    {
+      "source": "graph-learning-pac-collection_248",
+      "target": "paper-morris23a.html",
+      "type": "contains"
+    },
+    {
+      "source": "graph-learning-pac-collection_248",
+      "target": "paper-S0893608018302363",
+      "type": "contains"
+    },
+    {
+      "source": "graph-learning-pac-collection_248",
+      "target": "paper-2510.10101",
+      "type": "contains"
+    },
+    {
       "source": "cat-graph-learning",
       "target": "graph-learning-folkore-gnn-fgnn-collection_247",
       "type": "hierarchy"
@@ -24124,6 +24753,21 @@
     {
       "source": "graph-learning-foundation-models-collection_183",
       "target": "paper-2602.22251",
+      "type": "contains"
+    },
+    {
+      "source": "graph-learning-foundation-models-collection_183",
+      "target": "paper-2509.22416",
+      "type": "contains"
+    },
+    {
+      "source": "graph-learning-foundation-models-collection_183",
+      "target": "paper-2604.12596",
+      "type": "contains"
+    },
+    {
+      "source": "graph-learning-foundation-models-collection_183",
+      "target": "paper-2605.02937",
       "type": "contains"
     },
     {
@@ -24557,6 +25201,11 @@
       "type": "contains"
     },
     {
+      "source": "graph-learning-geometry-collection_252",
+      "target": "paper-2605.14685",
+      "type": "contains"
+    },
+    {
       "source": "cat-graph-learning",
       "target": "graph-learning-graph-sampler-collection_110",
       "type": "hierarchy"
@@ -24822,6 +25471,26 @@
       "type": "contains"
     },
     {
+      "source": "graph-learning-implicit-gnn-collection_104",
+      "target": "paper-baker23a.html",
+      "type": "contains"
+    },
+    {
+      "source": "graph-learning-implicit-gnn-collection_104",
+      "target": "paper-20M1358517",
+      "type": "contains"
+    },
+    {
+      "source": "graph-learning-implicit-gnn-collection_104",
+      "target": "paper-1909.01377",
+      "type": "contains"
+    },
+    {
+      "source": "graph-learning-implicit-gnn-collection_104",
+      "target": "paper-3459637.3482225",
+      "type": "contains"
+    },
+    {
       "source": "cat-graph-learning",
       "target": "graph-learning-inference-collection_84",
       "type": "hierarchy"
@@ -24984,6 +25653,11 @@
     {
       "source": "graph-learning-llms-for-graph-collection_266",
       "target": "paper-urn:isbn:979-8-4007-2040-6",
+      "type": "contains"
+    },
+    {
+      "source": "graph-learning-llms-for-graph-collection_266",
+      "target": "paper-2604.00342",
       "type": "contains"
     },
     {
@@ -25169,6 +25843,11 @@
     {
       "source": "graph-learning-pooling-collection_100",
       "target": "paper-2506.11700",
+      "type": "contains"
+    },
+    {
+      "source": "graph-learning-pooling-collection_100",
+      "target": "paper-2605.06250",
       "type": "contains"
     },
     {
@@ -25407,6 +26086,26 @@
       "type": "contains"
     },
     {
+      "source": "graph-learning-sheaf-collection_285",
+      "target": "paper-gebhart23a.html",
+      "type": "contains"
+    },
+    {
+      "source": "graph-learning-sheaf-collection_285",
+      "target": "paper-2605.06395",
+      "type": "contains"
+    },
+    {
+      "source": "graph-learning-sheaf-collection_285",
+      "target": "paper-2605.21435",
+      "type": "contains"
+    },
+    {
+      "source": "graph-learning-sheaf-collection_285",
+      "target": "paper-2605.19021",
+      "type": "contains"
+    },
+    {
       "source": "cat-graph-learning",
       "target": "graph-learning-spectral-collection_299",
       "type": "hierarchy"
@@ -25589,6 +26288,21 @@
     {
       "source": "graph-learning-tabular-data-collection_78",
       "target": "paper-2602.04029",
+      "type": "contains"
+    },
+    {
+      "source": "graph-learning-tabular-data-collection_78",
+      "target": "paper-2602.12606",
+      "type": "contains"
+    },
+    {
+      "source": "graph-learning-tabular-data-collection_78",
+      "target": "paper-2604.12596",
+      "type": "contains"
+    },
+    {
+      "source": "graph-learning-tabular-data-collection_78",
+      "target": "paper-2605.07840",
       "type": "contains"
     },
     {
@@ -26037,6 +26751,16 @@
       "type": "contains"
     },
     {
+      "source": "graph-learning-cell-complexes-collection_113",
+      "target": "paper-2603.09466",
+      "type": "contains"
+    },
+    {
+      "source": "graph-learning-cell-complexes-collection_113",
+      "target": "paper-2605.10091",
+      "type": "contains"
+    },
+    {
       "source": "graph-learning-topological-deep-learning-collection_75",
       "target": "graph-learning-hypergraphs-collection_112",
       "type": "hierarchy"
@@ -26269,6 +26993,11 @@
     {
       "source": "graph-learning-topological-data-analysis-collection_170",
       "target": "paper-8567922",
+      "type": "contains"
+    },
+    {
+      "source": "graph-learning-topological-data-analysis-collection_170",
+      "target": "paper-2605.14824",
       "type": "contains"
     },
     {

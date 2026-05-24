@@ -37,4 +37,5 @@ supabase/.temp
 
 # Zotero source exports (not needed at runtime)
 scripts/zotero-exports/
+*.rdf
 cv/
