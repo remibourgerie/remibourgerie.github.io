@@ -52,7 +52,7 @@ const useForceLayout = (initialNodes: Node[], initialEdges: Edge[]) => {
       )
       .force('center', d3.forceCenter(400, 250)) // Center of the graph
       .force('collision', d3.forceCollide()
-        .radius(80) // Collision radius (node size / 2 + padding)
+        .radius(60) // Collision radius (node size / 2 + padding)
       )
       .alphaDecay(0.02) // How quickly the simulation cools down
       .velocityDecay(0.3); // Friction
@@ -87,8 +87,8 @@ const ResearchGraph = ({ onNodeClick, activeNodeId }: ResearchGraphProps) => {
         },
         className: isCenter ? 'research-node-center' : 'research-node',
         style: {
-          width: isCenter ? 140 : 120,
-          height: isCenter ? 140 : 120,
+          width: isCenter ? 110 : 90,
+          height: isCenter ? 110 : 90,
           borderRadius: '50%',
           display: 'flex',
           alignItems: 'center',
@@ -444,9 +444,6 @@ const ResearchGraph = ({ onNodeClick, activeNodeId }: ResearchGraphProps) => {
         preventScrolling={false}
         proOptions={{ hideAttribution: true }}
       >
-        <Panel position="top-right" className="text-xs text-muted-foreground bg-background/80 px-2 py-1 rounded">
-          Scroll to zoom • Drag nodes to reposition
-        </Panel>
       </ReactFlow>
     </div>
   );
