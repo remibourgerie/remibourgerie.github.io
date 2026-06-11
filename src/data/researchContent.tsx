@@ -18,6 +18,7 @@ export interface ResearchNode {
   content: {
     paragraphs: JSX.Element[];
     personalInsight?: JSX.Element;
+    paragraphsAfterInsight?: JSX.Element[];
     applications?: string | string[];
     communityLinks?: Array<{
       title: string;
@@ -65,7 +66,7 @@ export const researchNodes: Record<string, ResearchNode> = {
     content: {
       paragraphs: [
         <>
-          Think about your friends on social media. You know people who know people, forming a web of relationships. Or consider how molecules work—atoms bonded together in specific patterns that determine whether something is medicine or poison. These are <strong>graphs</strong>: data where connections matter as much as the data points themselves.
+          Think about your friends on social media. You know people who know people, forming a web of relationships. Or consider how molecules work: atoms bonded together in specific patterns that determine whether something is medicine or poison. These are <strong>graphs</strong>: data where connections matter as much as the data points themselves.
         </>,
         <>
           The challenge? The techniques behind breakthrough AI systems (vision models, language models) rely on data having regular, grid-like structure. These regularities let models exploit regular patterns efficiently. But graphs have no such structure. A single network can contain millions of irregular patterns overlapping and intertwining at different scales.
@@ -78,6 +79,14 @@ export const researchNodes: Record<string, ResearchNode> = {
           </p>
         </blockquote>
       ),
+      paragraphsAfterInsight: [
+        <>
+          Beyond the limitations of message passing, I am broadly interested in <strong>Graph Foundation Models</strong> — generalist models that can reason over graph-structured data and adapt to specific tasks through context, without retraining from scratch.
+        </>,
+        <>
+          Imagine an industrial IoT network monitoring a factory floor — sensors, machines, and maintenance logs all connected in a graph. Such a model could specialize to a specific factory simply by conditioning on its past maintenance history and the topology of its machine connections. The structure of the network <em>is</em> the context.
+        </>,
+      ],
       applications: [
         'Drug discovery through molecular structure analysis',
         'Fraud detection in financial networks',

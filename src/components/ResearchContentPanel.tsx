@@ -123,6 +123,10 @@ const ResearchContentPanel = ({ activeNodeId, onNavigate }: ResearchContentPanel
           </div>
         )}
 
+        {node.content.paragraphsAfterInsight?.map((paragraph, index) => (
+          <div key={index}>{paragraph}</div>
+        ))}
+
         {/* Applications - Compact Highlighted Section */}
         {node.content.applications && (
           <div className="rounded-lg p-5 bg-gradient-to-br from-primary/10 via-primary/5 to-accent/10 border-l-4 border-primary">
